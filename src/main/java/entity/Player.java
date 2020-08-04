@@ -1,9 +1,6 @@
 package entity;
 
-/**
- *
- * @author Arvin Ng
- */
 public class Player {
-    
+    String name ;
+    String id;
 }
