@@ -4,7 +4,7 @@ package entity;
  *
  * @author Arvin Ng
  */
-public class Hedgehogs extends Player{
+public class Hedgehogs{
     private int row;
     private int column;
 
@@ -30,9 +30,5 @@ public class Hedgehogs extends Player{
         this.column = column;
     }
 
-
-  
-    
-    
     
 }
