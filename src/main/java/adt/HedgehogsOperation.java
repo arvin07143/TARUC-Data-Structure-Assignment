@@ -1,15 +1,15 @@
 package adt;
 
-public class ArrayStack<T> implements StackInterface<T> {
+public class HedgehogsOperation<T> implements StackInterface<T> {
     private T[] array;
     private int topIndex; // index of top entry
     private static final int DEFAULT_CAPACITY = 40;
     
-    public ArrayStack(){
+    public HedgehogsOperation(){
         this(DEFAULT_CAPACITY);
     }
     
-    public ArrayStack(int initialCapacity){
+    public HedgehogsOperation(int initialCapacity){
         array = (T[]) new Object [initialCapacity];
         topIndex = -1;
     }
@@ -53,3 +53,4 @@ public class ArrayStack<T> implements StackInterface<T> {
     }
     
 }
+
