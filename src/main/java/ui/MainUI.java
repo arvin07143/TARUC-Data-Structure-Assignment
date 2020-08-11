@@ -1,12 +1,20 @@
 package ui;
 
+import entity.*;
+
 public class MainUI extends javax.swing.JFrame {
+
+    int hedgehogNumber;
+    int playerNumber;
+    int winningNumber;
 
     /**
      * Creates new form MainUI
      */
     public MainUI() {
         initComponents();
+        jDialog1.pack();
+        jDialog1.setVisible(true);
     }
 
     /**
@@ -19,6 +27,18 @@ public class MainUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
+        jDialog1 = new javax.swing.JDialog();
+        hedgehogCount = new javax.swing.JSpinner();
+        winHedgehog = new javax.swing.JSpinner();
+        obstacleType = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        startButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        playerCount = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         celll61 = new javax.swing.JButton();
@@ -56,6 +76,116 @@ public class MainUI extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         jButton2.setText("jButton2");
+
+        jDialog1.setAlwaysOnTop(true);
+        jDialog1.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jDialog1WindowClosed(evt);
+            }
+        });
+
+        hedgehogCount.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
+
+        winHedgehog.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
+
+        obstacleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Black Hole", "Deep Pit" }));
+        obstacleType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                obstacleTypeActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Number of Players");
+
+        jLabel3.setText("Hedgehogs Per Player");
+
+        jLabel4.setText("Hedgehog to Win");
+
+        jLabel6.setText("Obstacle Type");
+
+        startButton.setText("Start Game");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        playerCount.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(playerCount, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(winHedgehog, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(obstacleType, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(hedgehogCount, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(playerCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(10, 10, 10)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hedgehogCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(winHedgehog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(obstacleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(startButton))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -454,6 +584,30 @@ public class MainUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        jDialog1.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+
+        hedgehogNumber = (Integer) hedgehogCount.getValue();
+        playerNumber = (Integer) playerCount.getValue();
+        winningNumber = (Integer) winHedgehog.getValue();
+
+        Board gameBoard = new Board(playerNumber, hedgehogNumber, playerNumber);
+        jDialog1.setVisible(false);
+
+    }//GEN-LAST:event_startButtonActionPerformed
+
+    private void obstacleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obstacleTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_obstacleTypeActionPerformed
+
+    private void jDialog1WindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog1WindowClosed
+        this.dispose();
+    }//GEN-LAST:event_jDialog1WindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -487,9 +641,11 @@ public class MainUI extends javax.swing.JFrame {
                 new MainUI().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JButton cell11;
     private javax.swing.JButton cell12;
     private javax.swing.JButton cell13;
@@ -514,10 +670,16 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton cell64;
     private javax.swing.JButton celll61;
     private javax.swing.JButton celll63;
+    private javax.swing.JSpinner hedgehogCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -526,5 +688,10 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JComboBox<String> obstacleType;
+    private javax.swing.JSpinner playerCount;
+    private javax.swing.JButton startButton;
+    private javax.swing.JSpinner winHedgehog;
     // End of variables declaration//GEN-END:variables
 }
