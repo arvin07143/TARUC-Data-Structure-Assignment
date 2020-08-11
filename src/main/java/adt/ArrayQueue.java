@@ -49,7 +49,7 @@ public T dequeue(){
 }
 
 public boolean isEmpty(){
-    return frontIndes == ((backIndex  +1) % array.length);
+    return frontIndex == ((backIndex  +1) % array.length);
 }
 
 public void clear(){
