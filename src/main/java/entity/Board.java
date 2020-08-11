@@ -39,10 +39,7 @@ public class Board {
      * Worm hole pit. Token is transported to a random location on the board.
      */
     public final int WORM_HOLES = 2;
-    /**
-     * Origin pit. Transports the token to the first cell in that row.
-     */
-    public final int ORIGINS = 3;
+
 
     public int rowCount = 4;
     public int columnCount = 7;
@@ -67,7 +64,8 @@ public class Board {
         
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                if(pitGrid[i][j]) boardGrid[i][j] = new Cell(true, 0);
+                if(pitGrid[i][j]) boardGrid[i][j] = new Cell(true, 0); //true = pit
+                else boardGrid[i][j] = new Cell(false, 0);
             }
         }
     }
