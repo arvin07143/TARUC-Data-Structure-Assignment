@@ -25,16 +25,12 @@ public class OptionFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         startButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         playerCount = new javax.swing.JSpinner();
         hedgehogCount = new javax.swing.JSpinner();
         winHedgehog = new javax.swing.JSpinner();
-        RowCount = new javax.swing.JSpinner();
-        columnCount = new javax.swing.JSpinner();
         obstacleType = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -47,10 +43,6 @@ public class OptionFrame extends javax.swing.JFrame {
         jLabel2.setText("Hedgehogs Per Player");
 
         jLabel3.setText("Hedgehog to Win");
-
-        jLabel4.setText("Number of Rows");
-
-        jLabel5.setText("Number of Columns");
 
         jLabel6.setText("Obstacle Type");
 
@@ -73,10 +65,6 @@ public class OptionFrame extends javax.swing.JFrame {
         hedgehogCount.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
 
         winHedgehog.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
-
-        RowCount.setModel(new javax.swing.SpinnerNumberModel(4, 4, 7, 1));
-
-        columnCount.setModel(new javax.swing.SpinnerNumberModel(4, 4, 8, 1));
 
         obstacleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Black Hole", "Deep Pit" }));
         obstacleType.addActionListener(new java.awt.event.ActionListener() {
@@ -105,16 +93,10 @@ public class OptionFrame extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel6)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(columnCount, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obstacleType, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(obstacleType, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,15 +130,7 @@ public class OptionFrame extends javax.swing.JFrame {
                     .addComponent(winHedgehog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(RowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(columnCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(obstacleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,7 +138,7 @@ public class OptionFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(startButton))
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,15 +192,11 @@ public class OptionFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner RowCount;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JSpinner columnCount;
     private javax.swing.JSpinner hedgehogCount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox<String> obstacleType;
