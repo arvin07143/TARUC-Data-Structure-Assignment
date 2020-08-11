@@ -1,6 +1,7 @@
 package entity;
 
 public class Player {
+
     private String name ;
     private String id;
     private static int hedgehogCount;
@@ -46,6 +47,4 @@ public class Player {
         hedgehogs[hedgehogNo].setRow(row);
         hedgehogs[hedgehogNo].setColumn(row);
     }
-   
-   
 }

@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import client.*;
 
 import javax.imageio.ImageIO;
 import java.net.*;
