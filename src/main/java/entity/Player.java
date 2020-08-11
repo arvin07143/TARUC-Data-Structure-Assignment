@@ -45,6 +45,6 @@ public class Player {
     }
     public void setHedgeHogs(int hedgehogNo, int row, int column){
         hedgehogs[hedgehogNo].setRow(row);
-        hedgehogs[hedgehogNo].setColumn(row);
+        hedgehogs[hedgehogNo].setColumn(column);
     }
 }
