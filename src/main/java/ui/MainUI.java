@@ -65,8 +65,20 @@ public class MainUI extends javax.swing.JFrame {
         cell12 = new javax.swing.JButton();
         cell13 = new javax.swing.JButton();
         cell14 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cell55 = new javax.swing.JButton();
+        cell56 = new javax.swing.JButton();
+        cell57 = new javax.swing.JButton();
+        cell58 = new javax.swing.JButton();
+        cell59 = new javax.swing.JButton();
+        cell60 = new javax.swing.JButton();
+        cell61 = new javax.swing.JButton();
+        cell63 = new javax.swing.JButton();
+        cell65 = new javax.swing.JButton();
+        cell66 = new javax.swing.JButton();
+        cell67 = new javax.swing.JButton();
+        cell68 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -78,22 +90,12 @@ public class MainUI extends javax.swing.JFrame {
         jButton2.setText("jButton2");
 
         jDialog1.setAlwaysOnTop(true);
-        jDialog1.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                jDialog1WindowClosed(evt);
-            }
-        });
 
         hedgehogCount.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
 
         winHedgehog.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
 
         obstacleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Black Hole", "Deep Pit" }));
-        obstacleType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                obstacleTypeActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Number of Players");
 
@@ -195,9 +197,10 @@ public class MainUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, java.awt.BorderLayout.LINE_START);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new java.awt.GridLayout(6, 3));
+        jPanel1.setLayout(new java.awt.GridLayout(6, 5));
 
         celll61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         celll61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -428,6 +431,11 @@ public class MainUI extends javax.swing.JFrame {
         cell11.setMaximumSize(new java.awt.Dimension(104, 104));
         cell11.setMinimumSize(new java.awt.Dimension(104, 104));
         cell11.setPreferredSize(new java.awt.Dimension(104, 104));
+        cell11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cell11MouseClicked(evt);
+            }
+        });
         jPanel1.add(cell11);
 
         cell12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
@@ -463,17 +471,139 @@ public class MainUI extends javax.swing.JFrame {
         cell14.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell14);
 
-        jButton3.setText("Roll");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        cell55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell55.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell55.setContentAreaFilled(false);
+        cell55.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell55.setIconTextGap(0);
+        cell55.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell55.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell55.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell55.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell55);
+
+        cell56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell56.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell56.setContentAreaFilled(false);
+        cell56.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell56.setIconTextGap(0);
+        cell56.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell56.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell56.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell56.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell56);
+
+        cell57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell57.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell57.setContentAreaFilled(false);
+        cell57.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell57.setIconTextGap(0);
+        cell57.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell57.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell57.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell57.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell57);
+
+        cell58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell58.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell58.setContentAreaFilled(false);
+        cell58.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell58.setIconTextGap(0);
+        cell58.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell58.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell58.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell58.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell58);
+
+        cell59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell59.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell59.setContentAreaFilled(false);
+        cell59.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell59.setIconTextGap(0);
+        cell59.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell59.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell59.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell59.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell59);
+
+        cell60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell60.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell60.setContentAreaFilled(false);
+        cell60.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell60.setIconTextGap(0);
+        cell60.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell60.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell60.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell60.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell60);
+
+        cell61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell61.setContentAreaFilled(false);
+        cell61.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell61.setIconTextGap(0);
+        cell61.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell61.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell61.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell61.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell61);
+
+        cell63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell63.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell63.setContentAreaFilled(false);
+        cell63.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell63.setIconTextGap(0);
+        cell63.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell63.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell63.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell63.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell63);
+
+        cell65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell65.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell65.setContentAreaFilled(false);
+        cell65.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell65.setIconTextGap(0);
+        cell65.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell65.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell65.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell65.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell65);
+
+        cell66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell66.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell66.setContentAreaFilled(false);
+        cell66.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell66.setIconTextGap(0);
+        cell66.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell66.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell66.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell66.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell66);
+
+        cell67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell67.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell67.setContentAreaFilled(false);
+        cell67.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell67.setIconTextGap(0);
+        cell67.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell67.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell67.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell67.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell67);
+
+        cell68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell68.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell68.setContentAreaFilled(false);
+        cell68.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell68.setIconTextGap(0);
+        cell68.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell68.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell68.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell68.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell68);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arvin Ng\\Documents\\NetBeansProjects\\Assignment\\Assignment\\src\\main\\java\\images\\dice1.png")); // NOI18N
@@ -481,6 +611,10 @@ public class MainUI extends javax.swing.JFrame {
         jLabel2.setMaximumSize(new java.awt.Dimension(104, 104));
         jLabel2.setOpaque(true);
         jLabel2.setPreferredSize(new java.awt.Dimension(104, 104));
+        getContentPane().add(jLabel2, java.awt.BorderLayout.LINE_END);
+
+        jTextField1.setText("jTextField1");
+        getContentPane().add(jTextField1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Game");
 
@@ -509,41 +643,6 @@ public class MainUI extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(jButton3)))
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -554,35 +653,6 @@ public class MainUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int random = (int) (Math.random() * ((6 - 1) + 1)) + 1;
-
-        switch (random) {
-            case 1:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice1.png"));
-                break;
-            case 2:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice2.png"));
-                break;
-            case 3:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice3.png"));
-                break;
-            case 4:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice4.png"));
-                break;
-            case 5:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice5.png"));
-                break;
-            case 6:
-                jLabel2.setIcon(ImageLoader.loadIcon("dice6.png"));
-                break;
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
-    }//GEN-LAST:event_jButton3MouseClicked
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         jDialog1.setVisible(false);
@@ -600,13 +670,9 @@ public class MainUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_startButtonActionPerformed
 
-    private void obstacleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obstacleTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_obstacleTypeActionPerformed
+    private void cell11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cell11MouseClicked
 
-    private void jDialog1WindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog1WindowClosed
-        this.dispose();
-    }//GEN-LAST:event_jDialog1WindowClosed
+    }//GEN-LAST:event_cell11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -666,14 +732,25 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton cell52;
     private javax.swing.JButton cell53;
     private javax.swing.JButton cell54;
+    private javax.swing.JButton cell55;
+    private javax.swing.JButton cell56;
+    private javax.swing.JButton cell57;
+    private javax.swing.JButton cell58;
+    private javax.swing.JButton cell59;
+    private javax.swing.JButton cell60;
+    private javax.swing.JButton cell61;
     private javax.swing.JButton cell62;
+    private javax.swing.JButton cell63;
     private javax.swing.JButton cell64;
+    private javax.swing.JButton cell65;
+    private javax.swing.JButton cell66;
+    private javax.swing.JButton cell67;
+    private javax.swing.JButton cell68;
     private javax.swing.JButton celll61;
     private javax.swing.JButton celll63;
     private javax.swing.JSpinner hedgehogCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -689,6 +766,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> obstacleType;
     private javax.swing.JSpinner playerCount;
     private javax.swing.JButton startButton;
