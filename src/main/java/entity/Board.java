@@ -44,8 +44,8 @@ public class Board {
      */
     public final int ORIGINS = 3;
 
-    public int rowCount = 6;
-    public int columnCount = 4;
+    public int rowCount = 4;
+    public int columnCount = 7;
 
     public int playerCount;
     public int hedgehogCount;
@@ -62,11 +62,12 @@ public class Board {
         this.hedgehogCount = hedgehogCount;
         this.winCount = winCount;
 
-        boardGrid = new Cell[rowCount][columnCount];
-
+        PitGridGenerator pitGen = new PitGridGenerator();
+        boolean[][] pitGrid = pitGen.pitGridGeneration(rowCount, columnCount);
+        
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                boardGrid[i][j] = new Cell(false, 0);
+                if(pitGrid[i][j]) boardGrid[i][j] = new Cell(true, 0);
             }
         }
     }

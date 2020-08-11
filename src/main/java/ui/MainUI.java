@@ -56,27 +56,23 @@ public class MainUI extends javax.swing.JFrame {
         cell31 = new javax.swing.JButton();
         cell32 = new javax.swing.JButton();
         cell33 = new javax.swing.JButton();
-        cell34 = new javax.swing.JButton();
-        cell21 = new javax.swing.JButton();
-        cell22 = new javax.swing.JButton();
+        cell60 = new javax.swing.JButton();
         cell23 = new javax.swing.JButton();
         cell24 = new javax.swing.JButton();
         cell11 = new javax.swing.JButton();
         cell12 = new javax.swing.JButton();
         cell13 = new javax.swing.JButton();
         cell14 = new javax.swing.JButton();
-        cell55 = new javax.swing.JButton();
         cell56 = new javax.swing.JButton();
+        cell55 = new javax.swing.JButton();
         cell57 = new javax.swing.JButton();
         cell58 = new javax.swing.JButton();
         cell59 = new javax.swing.JButton();
-        cell60 = new javax.swing.JButton();
-        cell61 = new javax.swing.JButton();
-        cell63 = new javax.swing.JButton();
         cell65 = new javax.swing.JButton();
         cell66 = new javax.swing.JButton();
         cell67 = new javax.swing.JButton();
         cell68 = new javax.swing.JButton();
+        cell61 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -191,7 +187,7 @@ public class MainUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Next Player");
+        jButton1.setText("Pass Sideway Move");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -200,7 +196,7 @@ public class MainUI extends javax.swing.JFrame {
         getContentPane().add(jButton1, java.awt.BorderLayout.LINE_START);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new java.awt.GridLayout(6, 5));
+        jPanel1.setLayout(new java.awt.GridLayout(4, 8));
 
         celll61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         celll61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -279,7 +275,7 @@ public class MainUI extends javax.swing.JFrame {
         cell53.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell53);
 
-        cell54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
+        cell54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
         cell54.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         cell54.setContentAreaFilled(false);
         cell54.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -367,38 +363,16 @@ public class MainUI extends javax.swing.JFrame {
         cell33.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell33);
 
-        cell34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell34.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell34.setContentAreaFilled(false);
-        cell34.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell34.setIconTextGap(0);
-        cell34.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell34.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell34.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell34.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell34);
-
-        cell21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell21.setContentAreaFilled(false);
-        cell21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell21.setIconTextGap(0);
-        cell21.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell21.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell21.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell21.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell21);
-
-        cell22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell22.setContentAreaFilled(false);
-        cell22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell22.setIconTextGap(0);
-        cell22.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell22.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell22.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell22.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell22);
+        cell60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
+        cell60.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell60.setContentAreaFilled(false);
+        cell60.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell60.setIconTextGap(0);
+        cell60.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell60.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell60.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell60.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell60);
 
         cell23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         cell23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -471,17 +445,6 @@ public class MainUI extends javax.swing.JFrame {
         cell14.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell14);
 
-        cell55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell55.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell55.setContentAreaFilled(false);
-        cell55.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell55.setIconTextGap(0);
-        cell55.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell55.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell55.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell55.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell55);
-
         cell56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         cell56.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         cell56.setContentAreaFilled(false);
@@ -492,6 +455,17 @@ public class MainUI extends javax.swing.JFrame {
         cell56.setMinimumSize(new java.awt.Dimension(104, 104));
         cell56.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell56);
+
+        cell55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
+        cell55.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell55.setContentAreaFilled(false);
+        cell55.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell55.setIconTextGap(0);
+        cell55.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell55.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell55.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell55.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell55);
 
         cell57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         cell57.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -525,39 +499,6 @@ public class MainUI extends javax.swing.JFrame {
         cell59.setMinimumSize(new java.awt.Dimension(104, 104));
         cell59.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell59);
-
-        cell60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell60.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell60.setContentAreaFilled(false);
-        cell60.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell60.setIconTextGap(0);
-        cell60.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell60.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell60.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell60.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell60);
-
-        cell61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell61.setContentAreaFilled(false);
-        cell61.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell61.setIconTextGap(0);
-        cell61.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell61.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell61.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell61.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell61);
-
-        cell63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell63.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell63.setContentAreaFilled(false);
-        cell63.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell63.setIconTextGap(0);
-        cell63.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell63.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell63.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell63.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell63);
 
         cell65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
         cell65.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -603,6 +544,17 @@ public class MainUI extends javax.swing.JFrame {
         cell68.setPreferredSize(new java.awt.Dimension(104, 104));
         jPanel1.add(cell68);
 
+        cell61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
+        cell61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cell61.setContentAreaFilled(false);
+        cell61.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cell61.setIconTextGap(0);
+        cell61.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        cell61.setMaximumSize(new java.awt.Dimension(104, 104));
+        cell61.setMinimumSize(new java.awt.Dimension(104, 104));
+        cell61.setPreferredSize(new java.awt.Dimension(104, 104));
+        jPanel1.add(cell61);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -613,7 +565,13 @@ public class MainUI extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(104, 104));
         getContentPane().add(jLabel2, java.awt.BorderLayout.LINE_END);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Test");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Game");
@@ -674,6 +632,10 @@ public class MainUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cell11MouseClicked
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -716,14 +678,11 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton cell12;
     private javax.swing.JButton cell13;
     private javax.swing.JButton cell14;
-    private javax.swing.JButton cell21;
-    private javax.swing.JButton cell22;
     private javax.swing.JButton cell23;
     private javax.swing.JButton cell24;
     private javax.swing.JButton cell31;
     private javax.swing.JButton cell32;
     private javax.swing.JButton cell33;
-    private javax.swing.JButton cell34;
     private javax.swing.JButton cell41;
     private javax.swing.JButton cell42;
     private javax.swing.JButton cell43;
@@ -740,7 +699,6 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton cell60;
     private javax.swing.JButton cell61;
     private javax.swing.JButton cell62;
-    private javax.swing.JButton cell63;
     private javax.swing.JButton cell64;
     private javax.swing.JButton cell65;
     private javax.swing.JButton cell66;
