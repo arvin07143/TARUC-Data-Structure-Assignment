@@ -47,7 +47,7 @@ public class Board {
     public int hedgehogCount;
     public int winCount;
 
-    public Cell[][] boardGrid;
+    public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
     public int diceNumber;
     private boolean sideMoved;			//indicates whether a side move has been made
@@ -79,5 +79,11 @@ public class Board {
     public void setDiceNumber(int diceNumber) {
         this.diceNumber = (int) (Math.random() * ((6 - 1) + 1)) + 1;
     }
+
+    public Cell[][] getBoardGrid() {
+        return boardGrid;
+    }
+    
+    
 
 }

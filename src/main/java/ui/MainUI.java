@@ -1,4 +1,5 @@
 package ui;
+import javax.swing.*;
 
 import entity.*;
 
@@ -7,14 +8,31 @@ public class MainUI extends javax.swing.JFrame {
     int hedgehogNumber;
     int playerNumber;
     int winningNumber;
+    
+    JButton[][] playableArea;
+    
+    Board gameBoard;
 
     /**
      * Creates new form MainUI
      */
     public MainUI() {
         initComponents();
+        
+        this.playableArea = new JButton[4][8];
+        for(int i = 0 ; i < 4 ; i++){
+            for(int j = 0 ; j < 8 ; j++){
+                playableArea[i][j] = new JButton();
+                playableArea[i][j].setIcon(ImageLoader.loadIcon("standardEnabledCell.png"));
+                if(j == 7)playableArea[i][j].setIcon(ImageLoader.loadIcon("finishline.jpg"));
+                jPanel1.add(playableArea[i][j]);
+            }
+        }
+        jPanel1.revalidate();
         jDialog1.pack();
         jDialog1.setVisible(true);
+        
+        pack();
     }
 
     /**
@@ -41,38 +59,6 @@ public class MainUI extends javax.swing.JFrame {
         playerCount = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        celll61 = new javax.swing.JButton();
-        cell62 = new javax.swing.JButton();
-        celll63 = new javax.swing.JButton();
-        cell64 = new javax.swing.JButton();
-        cell51 = new javax.swing.JButton();
-        cell52 = new javax.swing.JButton();
-        cell53 = new javax.swing.JButton();
-        cell54 = new javax.swing.JButton();
-        cell41 = new javax.swing.JButton();
-        cell42 = new javax.swing.JButton();
-        cell43 = new javax.swing.JButton();
-        cell44 = new javax.swing.JButton();
-        cell31 = new javax.swing.JButton();
-        cell32 = new javax.swing.JButton();
-        cell33 = new javax.swing.JButton();
-        cell60 = new javax.swing.JButton();
-        cell23 = new javax.swing.JButton();
-        cell24 = new javax.swing.JButton();
-        cell11 = new javax.swing.JButton();
-        cell12 = new javax.swing.JButton();
-        cell13 = new javax.swing.JButton();
-        cell14 = new javax.swing.JButton();
-        cell56 = new javax.swing.JButton();
-        cell55 = new javax.swing.JButton();
-        cell57 = new javax.swing.JButton();
-        cell58 = new javax.swing.JButton();
-        cell59 = new javax.swing.JButton();
-        cell65 = new javax.swing.JButton();
-        cell66 = new javax.swing.JButton();
-        cell67 = new javax.swing.JButton();
-        cell68 = new javax.swing.JButton();
-        cell61 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -197,364 +183,6 @@ public class MainUI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new java.awt.GridLayout(4, 8));
-
-        celll61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        celll61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        celll61.setContentAreaFilled(false);
-        celll61.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        celll61.setIconTextGap(0);
-        celll61.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        celll61.setMaximumSize(new java.awt.Dimension(104, 104));
-        celll61.setMinimumSize(new java.awt.Dimension(104, 104));
-        celll61.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(celll61);
-
-        cell62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell62.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell62.setContentAreaFilled(false);
-        cell62.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell62.setIconTextGap(0);
-        cell62.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell62.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell62.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell62.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell62);
-
-        celll63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        celll63.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        celll63.setContentAreaFilled(false);
-        celll63.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        celll63.setIconTextGap(0);
-        celll63.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        celll63.setMaximumSize(new java.awt.Dimension(104, 104));
-        celll63.setMinimumSize(new java.awt.Dimension(104, 104));
-        celll63.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(celll63);
-
-        cell64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell64.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell64.setContentAreaFilled(false);
-        cell64.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell64.setIconTextGap(0);
-        cell64.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell64.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell64.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell64.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell64);
-
-        cell51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell51.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell51.setContentAreaFilled(false);
-        cell51.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell51.setIconTextGap(0);
-        cell51.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell51.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell51.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell51.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell51);
-
-        cell52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell52.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell52.setContentAreaFilled(false);
-        cell52.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell52.setIconTextGap(0);
-        cell52.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell52.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell52.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell52.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell52);
-
-        cell53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell53.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell53.setContentAreaFilled(false);
-        cell53.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell53.setIconTextGap(0);
-        cell53.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell53.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell53.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell53.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell53);
-
-        cell54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
-        cell54.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell54.setContentAreaFilled(false);
-        cell54.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell54.setIconTextGap(0);
-        cell54.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell54.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell54.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell54.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell54);
-
-        cell41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell41.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell41.setContentAreaFilled(false);
-        cell41.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell41.setIconTextGap(0);
-        cell41.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell41.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell41.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell41.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell41);
-
-        cell42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell42.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell42.setContentAreaFilled(false);
-        cell42.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell42.setIconTextGap(0);
-        cell42.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell42.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell42.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell42.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell42);
-
-        cell43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell43.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell43.setContentAreaFilled(false);
-        cell43.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell43.setIconTextGap(0);
-        cell43.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell43.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell43.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell43.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell43);
-
-        cell44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell44.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell44.setContentAreaFilled(false);
-        cell44.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell44.setIconTextGap(0);
-        cell44.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell44.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell44.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell44.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell44);
-
-        cell31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell31.setContentAreaFilled(false);
-        cell31.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell31.setIconTextGap(0);
-        cell31.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell31.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell31.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell31.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell31);
-
-        cell32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell32.setContentAreaFilled(false);
-        cell32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell32.setIconTextGap(0);
-        cell32.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell32.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell32.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell32.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell32);
-
-        cell33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell33.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell33.setContentAreaFilled(false);
-        cell33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell33.setIconTextGap(0);
-        cell33.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell33.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell33.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell33.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell33);
-
-        cell60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
-        cell60.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell60.setContentAreaFilled(false);
-        cell60.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell60.setIconTextGap(0);
-        cell60.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell60.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell60.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell60.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell60);
-
-        cell23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell23.setContentAreaFilled(false);
-        cell23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell23.setIconTextGap(0);
-        cell23.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell23.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell23.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell23.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell23);
-
-        cell24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell24.setContentAreaFilled(false);
-        cell24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell24.setIconTextGap(0);
-        cell24.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell24.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell24.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell24.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell24);
-
-        cell11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell11.setContentAreaFilled(false);
-        cell11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell11.setIconTextGap(0);
-        cell11.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell11.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell11.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell11.setPreferredSize(new java.awt.Dimension(104, 104));
-        cell11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cell11MouseClicked(evt);
-            }
-        });
-        jPanel1.add(cell11);
-
-        cell12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell12.setContentAreaFilled(false);
-        cell12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell12.setIconTextGap(0);
-        cell12.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell12.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell12.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell12.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell12);
-
-        cell13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell13.setContentAreaFilled(false);
-        cell13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell13.setIconTextGap(0);
-        cell13.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell13.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell13.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell13.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell13);
-
-        cell14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell14.setContentAreaFilled(false);
-        cell14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell14.setIconTextGap(0);
-        cell14.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell14.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell14.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell14.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell14);
-
-        cell56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell56.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell56.setContentAreaFilled(false);
-        cell56.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell56.setIconTextGap(0);
-        cell56.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell56.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell56.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell56.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell56);
-
-        cell55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
-        cell55.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell55.setContentAreaFilled(false);
-        cell55.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell55.setIconTextGap(0);
-        cell55.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell55.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell55.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell55.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell55);
-
-        cell57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell57.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell57.setContentAreaFilled(false);
-        cell57.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell57.setIconTextGap(0);
-        cell57.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell57.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell57.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell57.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell57);
-
-        cell58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell58.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell58.setContentAreaFilled(false);
-        cell58.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell58.setIconTextGap(0);
-        cell58.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell58.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell58.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell58.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell58);
-
-        cell59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell59.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell59.setContentAreaFilled(false);
-        cell59.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell59.setIconTextGap(0);
-        cell59.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell59.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell59.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell59.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell59);
-
-        cell65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell65.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell65.setContentAreaFilled(false);
-        cell65.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell65.setIconTextGap(0);
-        cell65.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell65.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell65.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell65.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell65);
-
-        cell66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell66.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell66.setContentAreaFilled(false);
-        cell66.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell66.setIconTextGap(0);
-        cell66.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell66.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell66.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell66.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell66);
-
-        cell67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell67.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell67.setContentAreaFilled(false);
-        cell67.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell67.setIconTextGap(0);
-        cell67.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell67.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell67.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell67.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell67);
-
-        cell68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/standardEnabledCell.png"))); // NOI18N
-        cell68.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell68.setContentAreaFilled(false);
-        cell68.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell68.setIconTextGap(0);
-        cell68.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell68.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell68.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell68.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell68);
-
-        cell61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/finishline.jpg"))); // NOI18N
-        cell61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cell61.setContentAreaFilled(false);
-        cell61.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cell61.setIconTextGap(0);
-        cell61.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        cell61.setMaximumSize(new java.awt.Dimension(104, 104));
-        cell61.setMinimumSize(new java.awt.Dimension(104, 104));
-        cell61.setPreferredSize(new java.awt.Dimension(104, 104));
-        jPanel1.add(cell61);
-
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -623,14 +251,21 @@ public class MainUI extends javax.swing.JFrame {
         playerNumber = (Integer) playerCount.getValue();
         winningNumber = (Integer) winHedgehog.getValue();
 
-        Board gameBoard = new Board(playerNumber, hedgehogNumber, playerNumber);
+        this.gameBoard = new Board(playerNumber, hedgehogNumber, playerNumber);
         jDialog1.setVisible(false);
+        
+        Cell[][] pits = new Cell[4][7];
+        pits = gameBoard.getBoardGrid();
+        
+        for(int i = 0 ; i < 4 ; i++){
+            for(int j = 0 ; j < 7 ; j++){
+                if(pits[i][j].isObstacleEnabled()){
+                    playableArea[i][j].setIcon(ImageLoader.loadIcon("standardPit.png"));
+                }
+            }
+        }
 
     }//GEN-LAST:event_startButtonActionPerformed
-
-    private void cell11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cell11MouseClicked
-
-    }//GEN-LAST:event_cell11MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -667,6 +302,7 @@ public class MainUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainUI().setVisible(true);
+                
             }
         });
 
@@ -674,38 +310,6 @@ public class MainUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton cell11;
-    private javax.swing.JButton cell12;
-    private javax.swing.JButton cell13;
-    private javax.swing.JButton cell14;
-    private javax.swing.JButton cell23;
-    private javax.swing.JButton cell24;
-    private javax.swing.JButton cell31;
-    private javax.swing.JButton cell32;
-    private javax.swing.JButton cell33;
-    private javax.swing.JButton cell41;
-    private javax.swing.JButton cell42;
-    private javax.swing.JButton cell43;
-    private javax.swing.JButton cell44;
-    private javax.swing.JButton cell51;
-    private javax.swing.JButton cell52;
-    private javax.swing.JButton cell53;
-    private javax.swing.JButton cell54;
-    private javax.swing.JButton cell55;
-    private javax.swing.JButton cell56;
-    private javax.swing.JButton cell57;
-    private javax.swing.JButton cell58;
-    private javax.swing.JButton cell59;
-    private javax.swing.JButton cell60;
-    private javax.swing.JButton cell61;
-    private javax.swing.JButton cell62;
-    private javax.swing.JButton cell64;
-    private javax.swing.JButton cell65;
-    private javax.swing.JButton cell66;
-    private javax.swing.JButton cell67;
-    private javax.swing.JButton cell68;
-    private javax.swing.JButton celll61;
-    private javax.swing.JButton celll63;
     private javax.swing.JSpinner hedgehogCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
