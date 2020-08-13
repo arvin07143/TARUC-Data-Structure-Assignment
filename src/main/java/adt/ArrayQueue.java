@@ -58,22 +58,4 @@ public T dequeue(){
     return front;
 }
 
-<<<<<<< Updated upstream
-public boolean isEmpty(){
-    return frontIndes == ((backIndex  +1) % array.length);
-}
-
-=======
->>>>>>> Stashed changes
-public void clear(){
-    if(!isEmpty()){
-        for(int i = frontIndex; i != backIndex; i = (i + 1) % array.length){
-            array[i] = null;
-        }
-        array[backIndex] = null;
-    }
-    
-    frontIndex = 0;
-    backIndex = array.length-1;
-}
 }
