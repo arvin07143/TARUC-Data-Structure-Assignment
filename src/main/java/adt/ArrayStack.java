@@ -1,66 +1,57 @@
 package adt;
 
-public class ArrayStack<T> implements StackInterface<T> {
+public class HedgehogsOperation<T> implements StackInterface<T> {
+
     private T[] array;
     private int topIndex; // index of top entry
-    private static final int DEFAULT_CAPACITY = 100;
-    
-    public ArrayStack(){
+    private static final int DEFAULT_CAPACITY = 40;
+
+    public HedgehogsOperation() {
         this(DEFAULT_CAPACITY);
     }
-    
-    public ArrayStack(int initialCapacity){
-        array = (T[]) new Object [initialCapacity];
+
+    public HedgehogsOperation(int initialCapacity) {
+        array = (T[]) new Object[initialCapacity];
         topIndex = -1;
     }
-    
-    public void push(T newMovement){
-        if(!isEmpty()){
+
+    public void push(T newEntry) {
+        if (!isEmpty()) {
             topIndex++;
-            array[topIndex] = newMovement;
+            array[topIndex] = newEntry;
+        } else {
+            array[0] = newEntry; //record all the movement of hedgehogs
         }
-        else array[0] = newMovement; //record all the movement of hedgehogs
     }
-    
-    public T pop(){
+
+    public T pop() {
         T popNum = null;
-        
-        if(!isEmpty()){
+
+        if (!isEmpty()) {
             popNum = array[topIndex];
-            
             array[topIndex] = null;
             topIndex--;
         }
-        
+
         return popNum; // return the last movement and remove it(undo)
     }
-    
-    public T peek(){
+
+    public T peek() {
         T topNum = null;
-        
-        if (!isEmpty()){
-            topNum = array[topIndex]; 
+
+        if (!isEmpty()) {
+            topNum = array[topIndex]; // assign the 
         }
-        
+
         return topNum; // used to show the last movement of the player
     }
-    
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         return topIndex < 0; // we assume topIndex as negative value when array is empty
     }
-    
-    public void clear(){
+
+    public void clear() {
         topIndex = -1; //assign to negative value and clear it.
     }
-    
-    /*public void showMovement(T newMovement){
-        push(newMovement);
-        peek(); // after push in then show the movement
-    }
-    
-    public void undo(){
-        pop(); // pop then reverse the operation
-        
-    }*/
-}
 
+}

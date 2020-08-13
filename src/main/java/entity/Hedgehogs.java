@@ -4,10 +4,10 @@ package entity;
  *
  * @author Arvin Ng
  */
-public class Hedgehogs{
+public class Hedgehogs {
+
     private int row;
     private int column;
-
 
     public Hedgehogs() {
         this.row = -1;
@@ -30,5 +30,4 @@ public class Hedgehogs{
         this.column = column;
     }
 
-    
 }

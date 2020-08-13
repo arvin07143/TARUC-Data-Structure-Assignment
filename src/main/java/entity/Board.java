@@ -40,7 +40,6 @@ public class Board {
      */
     public final int WORM_HOLES = 2;
 
-
     public int rowCount = 4;
     public int columnCount = 7;
 
@@ -48,7 +47,7 @@ public class Board {
     public int hedgehogCount;
     public int winCount;
 
-    public Cell[][] boardGrid;
+    public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
     public int diceNumber;
     private boolean sideMoved;			//indicates whether a side move has been made
@@ -61,11 +60,14 @@ public class Board {
 
         PitGridGenerator pitGen = new PitGridGenerator();
         boolean[][] pitGrid = pitGen.pitGridGeneration(rowCount, columnCount);
-        
+
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                if(pitGrid[i][j]) boardGrid[i][j] = new Cell(true, 0); //true = pit
-                else boardGrid[i][j] = new Cell(false, 0);
+                if (pitGrid[i][j]) {
+                    boardGrid[i][j] = new Cell(true, 0); //true = pit
+                } else {
+                    boardGrid[i][j] = new Cell(false, 0);
+                }
             }
         }
     }
@@ -77,5 +79,11 @@ public class Board {
     public void setDiceNumber(int diceNumber) {
         this.diceNumber = (int) (Math.random() * ((6 - 1) + 1)) + 1;
     }
+
+    public Cell[][] getBoardGrid() {
+        return boardGrid;
+    }
+    
+    
 
 }
