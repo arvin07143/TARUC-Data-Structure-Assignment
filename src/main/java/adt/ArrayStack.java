@@ -1,25 +1,25 @@
 package adt;
 
-public class HedgehogsOperation<T> implements StackInterface<T> {
+public class ArrayStack<T> implements StackInterface<T> {
     private T[] array;
     private int topIndex; // index of top entry
-    private static final int DEFAULT_CAPACITY = 40;
+    private static final int DEFAULT_CAPACITY = 100;
     
-    public HedgehogsOperation(){
+    public ArrayStack(){
         this(DEFAULT_CAPACITY);
     }
     
-    public HedgehogsOperation(int initialCapacity){
+    public ArrayStack(int initialCapacity){
         array = (T[]) new Object [initialCapacity];
         topIndex = -1;
     }
     
-    public void push(T newEntry){
+    public void push(T newMovement){
         if(!isEmpty()){
             topIndex++;
-            array[topIndex] = newEntry;
+            array[topIndex] = newMovement;
         }
-        else array[0] = newEntry; //record all the movement of hedgehogs
+        else array[0] = newMovement; //record all the movement of hedgehogs
     }
     
     public T pop(){
@@ -27,6 +27,7 @@ public class HedgehogsOperation<T> implements StackInterface<T> {
         
         if(!isEmpty()){
             popNum = array[topIndex];
+            
             array[topIndex] = null;
             topIndex--;
         }
@@ -38,7 +39,7 @@ public class HedgehogsOperation<T> implements StackInterface<T> {
         T topNum = null;
         
         if (!isEmpty()){
-            topNum = array[topIndex]; // assign the 
+            topNum = array[topIndex]; 
         }
         
         return topNum; // used to show the last movement of the player
@@ -52,5 +53,14 @@ public class HedgehogsOperation<T> implements StackInterface<T> {
         topIndex = -1; //assign to negative value and clear it.
     }
     
+    /*public void showMovement(T newMovement){
+        push(newMovement);
+        peek(); // after push in then show the movement
+    }
+    
+    public void undo(){
+        pop(); // pop then reverse the operation
+        
+    }*/
 }
 
