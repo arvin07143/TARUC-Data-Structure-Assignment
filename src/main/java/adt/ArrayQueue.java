@@ -21,11 +21,19 @@ public ArrayQueue(int initialCapacity){
     backIndex = initialCapacity;
 }
 
+ private boolean isArrayFull() {
+    return frontIndex == ((backIndex + 2) % array.length);
+  }
+ 
 public void enqueue(T newEntry){
     if (!isArrayFull()){
         backIndex = (backIndex + 1) % array.length;
         array[backIndex] = newEntry;
     }
+}
+
+public boolean isEmpty(){
+    return frontIndex == ((backIndex  +1) % array.length);
 }
 
 public T getFront(){
@@ -48,13 +56,9 @@ public T dequeue(){
     return front;
 }
 
-public boolean isEmpty(){
-    return frontIndex == ((backIndex  +1) % array.length);
-}
-
 public void clear(){
-    if (!isEmpty()){for (int index = frontIndex; index != backIndex; index = (index + 1) % array.length) {
-        array[index] = null;
+    if (!isEmpty()){for (int i = frontIndex; i != backIndex; i = (i + 1) % array.length) {
+        array[i] = null;
       }
       array[backIndex] = null;
     }
@@ -63,8 +67,6 @@ public void clear(){
     backIndex = array.length - 1;
   }
 
-  private boolean isArrayFull() {
-    return frontIndex == ((backIndex + 2) % array.length);
-  }
+ 
 }
 
