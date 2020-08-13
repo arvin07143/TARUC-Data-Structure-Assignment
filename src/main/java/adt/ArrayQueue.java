@@ -21,19 +21,29 @@ public ArrayQueue(int initialCapacity){
     backIndex = initialCapacity;
 }
 
-public void enqueue(T newEntry){
-    if (!isArrayFull()){
-        backIndex = (backIndex + 1) % array.length;
-        array[backIndex] = newEntry;
-    }
+public boolean isArrayFull(){
+    return frontIndex == ((backIndex + 2) % array.length);
 }
 
-public T getFront(){
-    T front = null;
+
+public void enqueue(T newEntry){
+    if (!isArrayFull()){
+        backIndex = (backIndex + 1 % array.length);
+        array[backIndex] = newEntry;
+}
+}
+
+@Override
+public boolean isEmpty(){
+    return frontIndex == ((backIndex + 1) % array.length);
+}
+
+public T peek(){
+    T front  = null;
     
     if (!isEmpty()){
-        front = array[frontIndex];
-    }
+       front = array[frontIndex];
+}
     return front;
 }
 
@@ -43,28 +53,8 @@ public T dequeue(){
     if (!isEmpty()){
         front = array[frontIndex];
         array[frontIndex] = null;
-        frontIndex = (frontIndex + 1) % array.length;
+        frontIndex = (backIndex + 1) % array.length;
     }
     return front;
 }
-
-public boolean isEmpty(){
-    return frontIndex == ((backIndex  +1) % array.length);
 }
-
-public void clear(){
-    if (!isEmpty()){for (int index = frontIndex; index != backIndex; index = (index + 1) % array.length) {
-        array[index] = null;
-      }
-      array[backIndex] = null;
-    }
-
-    frontIndex = 0;
-    backIndex = array.length - 1;
-  }
-
-  private boolean isArrayFull() {
-    return frontIndex == ((backIndex + 2) % array.length);
-  }
-}
-
