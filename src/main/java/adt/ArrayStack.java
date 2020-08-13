@@ -4,7 +4,7 @@ public class ArrayStack<T> implements StackInterface<T> {
 
     private T[] array;
     private int topIndex; // index of top entry
-    private static final int DEFAULT_CAPACITY = 40;
+    private static final int DEFAULT_CAPACITY = 100;
 
     public ArrayStack() {
         this(DEFAULT_CAPACITY);
