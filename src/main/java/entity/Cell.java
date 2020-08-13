@@ -39,9 +39,10 @@ public class Cell {
                 default:
                     break;
             }
+        } else {
+            cellStack.push(pushedHedgehog);
         }
-        else cellStack.push(pushedHedgehog);
-        
+
         return true;
     }
 }

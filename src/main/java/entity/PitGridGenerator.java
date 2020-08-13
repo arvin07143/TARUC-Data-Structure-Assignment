@@ -25,7 +25,7 @@ public class PitGridGenerator {
         while (pitCount < rows) {
             boolean failToAdd = false;
             int row = random.nextInt(rows); //generate rand from 0 - number of columns
-            int col = random.nextInt(columns-1)+1; // 1-7 to prevent first column from being a pit
+            int col = random.nextInt(columns - 1) + 1; // 1-7 to prevent first column from being a pit
 
             for (int i = 0; i < rows; i++) {
                 if (pitGrid[i][col]) {
@@ -41,7 +41,7 @@ public class PitGridGenerator {
 
             if (!failToAdd) {
                 pitGrid[row][col] = true;
-                pitCount ++;
+                pitCount++;
             }
         }
 
@@ -52,6 +52,6 @@ public class PitGridGenerator {
             System.out.println("");
         }
 
-       return pitGrid;
+        return pitGrid;
     }
 }
