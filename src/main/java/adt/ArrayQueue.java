@@ -21,10 +21,10 @@ public abstract class ArrayQueue<T> implements QueueInterface<T> {
         return frontIndex == ((backIndex + 2) % array.length);
     }
 
-    public void enqueue(T newEntry) {
+    public void enqueue(T newPlayer) {
         if (!isArrayFull()) {
             backIndex = (backIndex + 1) % array.length;
-            array[backIndex] = newEntry;
+            array[backIndex] = newPlayer;
         }
     }
 
