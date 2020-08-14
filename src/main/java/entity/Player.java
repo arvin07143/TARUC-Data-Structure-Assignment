@@ -59,4 +59,14 @@ public class Player {
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
     }
+    
+    //toString
+    public String toString(){
+        String outputStr = "";
+        for (int i = 0; i < hedgehogCount; i++) {
+            
+            outputStr += "Hedgehog " + (i + 1) + ":" + hedgehogs[i] + "\n\n";
+        }
+        return outputStr;
+    }
 }
