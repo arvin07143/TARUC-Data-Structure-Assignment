@@ -72,6 +72,24 @@ public class Board {
         }
     }
 
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public int getColumnCount() {
+        return columnCount;
+    }
+    
+    
+    
     public int getDiceNumber() {
         return diceNumber;
     }
