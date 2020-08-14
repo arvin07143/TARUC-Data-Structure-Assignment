@@ -8,7 +8,7 @@ import java.util.Stack;
  */
 public class Cell {
 
-    Stack<Hedgehogs> cellStack = new Stack<>();
+    Stack<Hedgehog> cellStack = new Stack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
     private int obstacleMode;
 
@@ -33,7 +33,7 @@ public class Cell {
         this.obstacleMode = obstacleMode;
     }
 
-    public boolean pushHedgehog(Hedgehogs pushedHedgehog) {
+    public boolean pushHedgehog(Hedgehog pushedHedgehog) {
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
                 default:
