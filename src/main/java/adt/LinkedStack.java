@@ -45,7 +45,7 @@ public class LinkedStack<T> implements StackInterface<T> {
 
     @Override
     public boolean isEmpty() {
-        return topNode == null || size == 0;
+        return topNode == null && size == 0;
     }
 
     @Override
