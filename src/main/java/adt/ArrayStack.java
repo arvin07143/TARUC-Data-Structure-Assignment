@@ -1,5 +1,6 @@
 package adt;
-
+import entity.Player;
+import entity.Hedgehogs;
 public class ArrayStack<T> implements StackInterface<T> {
 
     private T[] array;
@@ -20,7 +21,8 @@ public class ArrayStack<T> implements StackInterface<T> {
             topIndex++;
             array[topIndex] = newEntry;
         } else {
-            array[0] = newEntry; //record all the movement of hedgehogs
+            topIndex = 0;
+            array[topIndex] = newEntry; //record all the movement of hedgehogs
         }
     }
 
@@ -52,6 +54,20 @@ public class ArrayStack<T> implements StackInterface<T> {
 
     public void clear() {
         topIndex = -1; //assign to negative value and clear it.
+    }
+    
+    public void undoX(Player playerID, int i){
+        pop();
+        Hedgehogs[] x ;
+        x = playerID.getHedgehogs(); 
+        x[i].setRow((int)array[topIndex]);       
+    }
+    
+    public void undoY(Player playerID, int i){
+        pop();
+        Hedgehogs[] y ;
+        y = playerID.getHedgehogs(); 
+        y[i].setRow((int)array[topIndex]);       
     }
 
 }
