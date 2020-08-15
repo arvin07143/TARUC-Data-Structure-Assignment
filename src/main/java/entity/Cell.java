@@ -9,16 +9,18 @@ public class Cell {
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //1.Wall 2.Pit 3.Wormhole
+    private static int obstacleMode; //-1.Normal 1.Wall 2.Pit 3.Wormhole
 
-    //Constructor
+    //Constructors
+    public Cell(){
+        this(false, 0);
+    }
     public Cell(boolean obstacleEnabled, int obstacleMode) {
         this.obstacleEnabled = obstacleEnabled;
         this.obstacleMode = obstacleMode;
     }
    
     //Setter
-    
     public void setCellStack(StackInterface<Hedgehog> cellStack) {
         this.cellStack = cellStack;
     }
@@ -30,7 +32,6 @@ public class Cell {
     }
     
     //Getter
-    
     public StackInterface<Hedgehog> getCellStack() {
         return cellStack;
     }
@@ -80,13 +81,12 @@ public class Cell {
                     }     
                     break;
         
-                default: // case 1 just returns null; case 3 will not allow any hedgehog to leave, thus returning null also
+                default: //case 1 just returns null; case 3 will not allow any hedgehog to leave, thus returning null also
                     break;
             }
         } else {
             poppedHedgehog = cellStack.pop();
         }
-
         return poppedHedgehog;
     }
 }

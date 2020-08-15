@@ -10,9 +10,9 @@ public class PitTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PitGridGenerator grid = new PitGridGenerator();
+        ObstacleGridGenerator grid = new ObstacleGridGenerator();
         
-        grid.pitGridGeneration(5, 7);
+        grid.obstacleGridGeneration(5, 7);
     }
     
 }
