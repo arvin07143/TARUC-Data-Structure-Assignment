@@ -46,4 +46,18 @@ public class Hedgehog {
     public String toString(){
         return "\nRow: " + row + "\nColumn: " + column;
     }
+    
+    public void undo (Player player, int i, Hedgehog store){
+        int x = store.getRow();
+        int y = store.getColumn();
+        player.setHedgeHog(i, x, y);
+    }
+    
+    public Hedgehog chg(Hedgehog x){
+        Hedgehog y = new Hedgehog();
+        y.setColumn(x.getColumn());
+        y.setRow(x.getRow());
+        
+        return y;
+    }
 }

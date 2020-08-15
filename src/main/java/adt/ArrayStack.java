@@ -56,23 +56,8 @@ public class ArrayStack<T> implements StackInterface<T> {
         topIndex = -1; //assign to negative value and clear it.
     }
 
-    @Override
-    public int getSize() {
-        return 0;
-    }
-
-    public void undoX(Player playerID, int i){
-        pop();
-        Hedgehog[] x ;
-        x = playerID.getHedgehogs(); 
-        x[i].setRow((int)array[topIndex]);       
-    }
-    
-    public void undoY(Player playerID, int i){
-        pop();
-        Hedgehog[] y ;
-        y = playerID.getHedgehogs(); 
-        y[i].setRow((int)array[topIndex]);       
+    public int getSize(){
+        return array.length;
     }
 
 }
