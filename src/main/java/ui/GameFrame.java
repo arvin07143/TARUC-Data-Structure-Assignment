@@ -24,10 +24,12 @@ public class GameFrame extends JFrame  {
     private JButton passSideways;
 
     private Board gameBoard ;
+    private String modeSelect;
 
-    public GameFrame(int numPlayer , int numHedge , int winHedge) {
+    public GameFrame(int numPlayer , int numHedge , int winHedge , String modeSelect) {
         super("The Hedgehog Race");
-
+        this.modeSelect = modeSelect;
+        
         JMenuBar frameMenu = new JMenuBar();
         setJMenuBar(frameMenu);
         JMenu gameMenu = new JMenu("Game");
@@ -204,7 +206,15 @@ public class GameFrame extends JFrame  {
     public void drawCells(){
         for(int i = 0 ; i < 4 ; i++){
             for(int j = 0 ; j < 7 ; j++){
-                if(gameBoard.getBoardGrid()[i][j].isObstacleEnabled())playBoard[i][j].setBackgroundImage(0);
+                if(gameBoard.getBoardGrid()[i][j].isObstacleEnabled()){
+                    if (modeSelect.equals("Walls"))
+                        playBoard[i][j].setBackgroundImage(0);
+                    else if (modeSelect.equals("Pits"))
+                        playBoard[i][j].setBackgroundImage(1);
+                    else if (modeSelect.equals("Black Holes"))
+                        playBoard[i][j].setBackgroundImage(2);
+                }
+                    
                 playBoard[i][7].setBackgroundImage(-2);
             }
         }
@@ -231,7 +241,7 @@ public class GameFrame extends JFrame  {
 
 
     public static void main(String[] args) {
-        GameFrame game = new GameFrame(1,1,1); //testing conditions
+        GameFrame game = new GameFrame(1,1,1,""); //testing conditions
         game.setLeaderText();
     }
 
