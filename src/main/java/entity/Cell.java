@@ -1,24 +1,29 @@
 package entity;
 import adt.*;
-import java.util.Random;
 
 /**
  *
- * @author Arvin Ng
+ * @author GV62 7RC
  */
 public class Cell {
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //1.Wall 2.Pit 3.Wormhole
+    private static int obstacleMode; //-1.Normal 1.Wall 2.Pit 3.Wormhole
 
-    //Constructor
+    //Constructors
+    public Cell(){
+        this(false, 0);
+    }
     public Cell(boolean obstacleEnabled, int obstacleMode) {
         this.obstacleEnabled = obstacleEnabled;
         this.obstacleMode = obstacleMode;
     }
    
     //Setter
+    public void setCellStack(StackInterface<Hedgehog> cellStack) {
+        this.cellStack = cellStack;
+    }
     public void setObstacleEnabled(boolean obstacleEnabled) {
         this.obstacleEnabled = obstacleEnabled;
     }
@@ -27,6 +32,9 @@ public class Cell {
     }
     
     //Getter
+    public StackInterface<Hedgehog> getCellStack() {
+        return cellStack;
+    }
     public int getObstacleMode() {
         return obstacleMode;
     }
@@ -35,6 +43,10 @@ public class Cell {
     }
        
     //methods
+    public int getCellStackSize(){
+        return cellStack.getSize();
+    }
+    
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
@@ -47,10 +59,8 @@ public class Cell {
                     }
                     break;
                     
-                case 3: //wormhole (not finished)
-                    obstacleEnabled = false;
-                    Random random = new Random();
-                    pushingHedgehog.setRow(1); // <<<< still figuring out
+                case 3: //blackhole (not finished)
+;                   pushingHedgehog.setStuck(true); 
                     break;
                                   
                 default:
@@ -65,26 +75,18 @@ public class Cell {
         Hedgehog poppedHedgehog = null;
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
-                case 1: //wall (done)
-                    break;
-                    
                 case 2: //pit (done)
-                    if (cellStack.getSize() > 1){
+                    if (!poppingHedgehog.isStuck()){
                         poppedHedgehog = cellStack.pop();
-                        break;
                     }     
                     break;
-                            
-                case 3: //wormhole (not finished)
-                    break;
-                                  
-                default:
+        
+                default: //case 1 just returns null; case 3 will not allow any hedgehog to leave, thus returning null also
                     break;
             }
         } else {
             poppedHedgehog = cellStack.pop();
         }
-
         return poppedHedgehog;
     }
 }

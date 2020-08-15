@@ -55,8 +55,9 @@ public class ArrayStack<T> implements StackInterface<T> {
     public void clear() {
         topIndex = -1; //assign to negative value and clear it.
     }
-    
+
     public int getSize(){
         return array.length;
     }
+
 }
