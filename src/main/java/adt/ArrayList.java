@@ -23,7 +23,7 @@ public class ArrayList<T> implements ListInterface<T> {
     }
 
     @Override
-    public boolean add(T newObject, int index) {
+    public void add(T newObject, int index) {
         if(index == arraySize) add(newObject);
 
         else if (index > -1 && index < arraySize){
@@ -37,11 +37,6 @@ public class ArrayList<T> implements ListInterface<T> {
             currentArray = tempArray;
 
         }
-
-        else return false;
-
-        return true;
-
     }
 
     @Override
@@ -52,25 +47,21 @@ public class ArrayList<T> implements ListInterface<T> {
     }
 
     @Override
-    public boolean remove(int index) {
+    public void remove(int index) {
         if(index > -1 && index < arraySize){
             currentArray[index] = null;
             reduceSpace(index);
-            return true;
         }
-        else return false;
     }
 
     @Override
-    public boolean remove(T removedObject) {
+    public void remove(T removedObject) {
         for (int i = 0 ; i < arraySize ; i++){
             if (currentArray[i].equals(removedObject)){
                 currentArray[i] = null;
                 reduceSpace(i);
-                return true;
             }
         }
-        return false;
     }
 
     @Override
