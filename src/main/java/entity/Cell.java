@@ -1,10 +1,9 @@
 package entity;
 import adt.*;
-import java.util.Random;
 
 /**
  *
- * @author Arvin Ng
+ * @author GV62 7RC
  */
 public class Cell {
     //Attributes
@@ -19,6 +18,10 @@ public class Cell {
     }
    
     //Setter
+    
+    public void setCellStack(StackInterface<Hedgehog> cellStack) {
+        this.cellStack = cellStack;
+    }
     public void setObstacleEnabled(boolean obstacleEnabled) {
         this.obstacleEnabled = obstacleEnabled;
     }
@@ -27,6 +30,10 @@ public class Cell {
     }
     
     //Getter
+    
+    public StackInterface<Hedgehog> getCellStack() {
+        return cellStack;
+    }
     public int getObstacleMode() {
         return obstacleMode;
     }
