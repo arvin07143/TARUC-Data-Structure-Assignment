@@ -76,13 +76,9 @@ public class Player {
         return outputStr;
     }
     
-    
-    public void pass(QueueInterface<Player> player){
-        if (!(player.isEmpty())){
-            Player currentPlayer = player.peek();
-            System.out.print(currentPlayer);
-        }
-       /* boolean isPass = true;
+    public void pass(Player p1){
+        p1 = player.peek();
+        boolean isPass = true;
         System.out.println("Pls choose ur movement");
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
@@ -101,9 +97,9 @@ public class Player {
              case 1 : 
                  yes = true;
                  player.dequeue();
-                 player.enqueue(currentPlayer);
-                 currentPlayer = player.peek();
-                 System.out.println(currentPlayer);
-         }*/
+                 player.enqueue(p1);
+                 p1 = player.peek();
+                 System.out.println(p1);
+         }
     }
 }
