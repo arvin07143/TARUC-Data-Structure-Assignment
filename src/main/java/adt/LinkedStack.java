@@ -17,6 +17,15 @@ public class LinkedStack<T> implements StackInterface<T> {
         this.size = 0;
     }
 
+    //Setter and getter
+    public void setSize(int size) {
+        this.size = size;
+    }
+    public int getSize() {
+        return size;
+    }
+
+    //Methods
     @Override
     public void push(T newEntry) {
         Node oldTop = topNode;
@@ -55,19 +64,23 @@ public class LinkedStack<T> implements StackInterface<T> {
         size = 0;
     }
 
+    //toString
     public String toString() {
         String outputStr = "";
         Node currentNode = topNode;
         for (int i = 0; i < size; i++) {
+            /*
             if (currentNode.data.getClass().equals(Player.class)){
                 outputStr += "Player " + (i+1) + "\n";
             }
+            */
             outputStr += currentNode.data + "\n";;
             currentNode = currentNode.next;
         }
         return outputStr;
     }
 
+    //Private node class
     private class Node {
 
         private T data;

@@ -11,4 +11,6 @@ public interface StackInterface<T> {
     public boolean isEmpty();
 
     public void clear();
+    
+    public int getSize();
 }
