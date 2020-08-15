@@ -32,7 +32,7 @@ public abstract class ArrayQueue<T> implements QueueInterface<T> {
         return frontIndex == ((backIndex + 1) % array.length);
     }
 
-    public T getFront() {
+    public T peek() {
         T front = null;
 
         if (!isEmpty()) {

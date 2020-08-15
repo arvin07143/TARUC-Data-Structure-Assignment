@@ -1,6 +1,6 @@
 package adt;
 import entity.Player;
-import entity.Hedgehogs;
+import entity.Hedgehog;
 public class ArrayStack<T> implements StackInterface<T> {
 
     private T[] array;
@@ -58,14 +58,14 @@ public class ArrayStack<T> implements StackInterface<T> {
     
     public void undoX(Player playerID, int i){
         pop();
-        Hedgehogs[] x ;
+        Hedgehog[] x ;
         x = playerID.getHedgehogs(); 
         x[i].setRow((int)array[topIndex]);       
     }
     
     public void undoY(Player playerID, int i){
         pop();
-        Hedgehogs[] y ;
+        Hedgehog[] y ;
         y = playerID.getHedgehogs(); 
         y[i].setRow((int)array[topIndex]);       
     }
