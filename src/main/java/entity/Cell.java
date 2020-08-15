@@ -1,5 +1,6 @@
 package entity;
 import adt.*;
+import java.util.Random;
 
 /**
  *
@@ -9,7 +10,7 @@ public class Cell {
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //-1.Normal 1.Wall 2.Pit 3.Wormhole
+    private static int obstacleMode; //-1.Normal 1.Wall 2.Pit 3.Blackhole
 
     //Constructors
     public Cell(){
@@ -50,19 +51,19 @@ public class Cell {
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
-                case 1: //wall (done)
+                case 1: //wall 
                     return false;
                     
-                case 2: //pit (done)
+                case 2: //pit 
                     if (cellStack.getSize() == 0){
                         pushingHedgehog.setStuck(true); 
                     }
                     break;
                     
-                case 3: //blackhole (not finished)
+                case 3: //blackhole 
 ;                   pushingHedgehog.setStuck(true); 
                     break;
-                                  
+                      
                 default:
                     break;
             }
@@ -75,7 +76,7 @@ public class Cell {
         Hedgehog poppedHedgehog = null;
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
-                case 2: //pit (done)
+                case 2: //pit 
                     if (!poppingHedgehog.isStuck()){
                         poppedHedgehog = cellStack.pop();
                     }     
