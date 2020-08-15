@@ -9,6 +9,6 @@ public class Test {
         Player p1 = new Player("Loke","0001",4);
         Player p2 = new Player("Jeff","0002",4);
         
-        p1.turn(p1,p2);
+        p1.pass(p1);
     }
 }

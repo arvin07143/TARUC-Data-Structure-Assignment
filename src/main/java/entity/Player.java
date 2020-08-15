@@ -27,7 +27,7 @@ public class Player {
     }
 
     //Get methods
-    public String getName() {
+    public String getColor() {
         return color;
     }
 
@@ -48,7 +48,7 @@ public class Player {
     }
     
     //Set methods
-    public void SetName(String name) {
+    public void SetColor(String color) {
         this.color = color;
     }
 
@@ -77,27 +77,33 @@ public class Player {
     }
     
     
-    public void turn(Player currentPlayer, Player nextPlayer){
-        boolean isPass = true ;
+    public void pass(QueueInterface<Player> player){
         if (!(player.isEmpty())){
-            currentPlayer = player.peek();
-        }
-        System.out.println("Pls chose ur movement.");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        if (choice == 1){
-            isPass = true;
-        }
-        else {
-            isPass = false;
-        }
-        System.out.println("Pls choose ur next movement");
-        int choice1 = input.nextInt();
-        if(choice1 == 1){
-            player.dequeue();
-            player.enqueue(currentPlayer);
-            currentPlayer = player.peek();
+            Player currentPlayer = player.peek();
             System.out.print(currentPlayer);
         }
+       /* boolean isPass = true;
+        System.out.println("Pls choose ur movement");
+        Scanner input = new Scanner(System.in);
+        int choice = input.nextInt();
+        switch(choice){
+            case 1 : 
+                 isPass = true;
+                 System.out.println("You have pass ur movement.");
+            case 2 : 
+                isPass = false; 
+                System.out.println("Pls choose ur next movement");
+        }
+         System.out.println("Pls choose ur last movement");
+         boolean yes = true;
+         int choice1 = input.nextInt();
+         switch(choice1){
+             case 1 : 
+                 yes = true;
+                 player.dequeue();
+                 player.enqueue(currentPlayer);
+                 currentPlayer = player.peek();
+                 System.out.println(currentPlayer);
+         }*/
     }
 }
