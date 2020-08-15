@@ -42,6 +42,10 @@ public class Cell {
     }
        
     //methods
+    public int getCellStackSize(){
+        return cellStack.getSize();
+    }
+    
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
