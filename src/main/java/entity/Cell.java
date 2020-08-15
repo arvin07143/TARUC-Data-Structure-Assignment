@@ -47,10 +47,8 @@ public class Cell {
                     }
                     break;
                     
-                case 3: //wormhole (not finished)
-                    obstacleEnabled = false;
-                    Random random = new Random();
-                    pushingHedgehog.setRow(1); // <<<< still figuring out
+                case 3: //blackhole (not finished)
+;                   pushingHedgehog.setStuck(true); 
                     break;
                                   
                 default:
@@ -65,20 +63,13 @@ public class Cell {
         Hedgehog poppedHedgehog = null;
         if (this.obstacleEnabled == true) {
             switch (obstacleMode) {
-                case 1: //wall (done)
-                    break;
-                    
                 case 2: //pit (done)
-                    if (cellStack.getSize() > 1){
+                    if (!poppingHedgehog.isStuck()){
                         poppedHedgehog = cellStack.pop();
-                        break;
                     }     
                     break;
-                            
-                case 3: //wormhole (not finished)
-                    break;
-                                  
-                default:
+        
+                default: // case 1 just returns null; case 3 will not allow any hedgehog to leave, thus returning null also
                     break;
             }
         } else {
