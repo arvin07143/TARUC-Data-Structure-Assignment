@@ -1,4 +1,7 @@
 package entity;
+import entity.*;
+
+import adt.StackInterface;
 
 /**
  *
@@ -60,4 +63,16 @@ public class Hedgehog {
         
         return y;
     }
+    
+    public void viewAllMovement(StackInterface<Hedgehog> playerMovement){
+        for(int i = playerMovement.getSize()-1 ; i >= 0 ; i--){
+            System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());
+        }
+    }
+    
+    public void showPreviousMovement(StackInterface<Hedgehog> playerMovement){
+        System.out.print("Move " + playerMovement.getSize());
+        System.out.println(playerMovement.peek());
+    }
+    
 }
