@@ -18,11 +18,11 @@ public class StartPanel extends JFrame{
 
     private JLabel winningCountLabel;
     private JComboBox winningCount;
-    private Integer[] winningChoices = {2,3,4};
+    private Integer[] winningChoices = {1,2,3,4};
 
-    private JLabel pitModeLabel;								//pit mode
+    private JLabel obstacleModeLabel;								//pit mode
     private JComboBox modeSelect;								//drop down menu for pit mode
-    private String[] modes = { "Pits", "Black Holes", "Worm Holes", "Origin" };	//content of drop down menu
+    private String[] modes = { "None", "Walls", "Pits", "Black Holes" };	//content of drop down menu
 
     private JButton startButton;			//Start Game or New Game
     private JButton cancelButton;			//Skip Side Step
@@ -62,9 +62,9 @@ public class StartPanel extends JFrame{
 
         JPanel field4 = new JPanel();
         field4.setLayout(new BorderLayout());
-        pitModeLabel = new JLabel("Pit Type : ",JLabel.TRAILING);
+        obstacleModeLabel = new JLabel("Pit Type : ",JLabel.TRAILING);
         modeSelect = new JComboBox(modes);
-        field4.add(pitModeLabel,BorderLayout.WEST);
+        field4.add(obstacleModeLabel,BorderLayout.WEST);
         field4.add(modeSelect,BorderLayout.EAST);
 
         JPanel field5 = new JPanel();
