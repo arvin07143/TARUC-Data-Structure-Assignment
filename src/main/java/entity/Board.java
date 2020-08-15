@@ -28,18 +28,19 @@ public class Board {
      */
     public final int NORMAL = -1;
     /**
-     * Standard pit. No token contained can move until tied for last
+     * Wall. No token contained can move into the cell.
      */
-    public final int PITS = 0;
+    public final int WALLS = 1;
     /**
-     * Black hole pit. No token contained can move. Ever.
+     * Pit. 1st token to fall into the pit will be trapped forever. Other tokens can then move through it normally
      */
-    public final int BLACK_HOLES = 1;
+    public final int PITS = 2;
     /**
-     * Worm hole pit. Token is transported to a random location on the board.
+     * Black hole. No token contained can move. Ever.
      */
-    public final int WORM_HOLES = 2;
+    public final int BLACK_HOLES = 3;
 
+    
     public int rowCount = 4;
     public int columnCount = 7;
 
@@ -58,12 +59,12 @@ public class Board {
         this.hedgehogCount = hedgehogCount;
         this.winCount = winCount;
 
-        PitGridGenerator pitGen = new PitGridGenerator();
-        boolean[][] pitGrid = pitGen.pitGridGeneration(rowCount, columnCount);
+        ObstacleGridGenerator obstacleGen = new ObstacleGridGenerator();
+        boolean[][] obstacleGrid = obstacleGen.obstacleGridGeneration(rowCount, columnCount);
 
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                if (pitGrid[i][j]) {
+                if (obstacleGrid[i][j]) {
                     boardGrid[i][j] = new Cell(true, 0); //true = pit
                 } else {
                     boardGrid[i][j] = new Cell(false, 0);
@@ -72,6 +73,24 @@ public class Board {
         }
     }
 
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public int getColumnCount() {
+        return columnCount;
+    }
+    
+    
+    
     public int getDiceNumber() {
         return diceNumber;
     }
