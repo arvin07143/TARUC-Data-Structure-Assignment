@@ -1,27 +1,42 @@
 package entity;
+<<<<<<< Updated upstream
 import adt.ArrayQueue;
 import adt.QueueInterface;
 import java.util.Scanner;
+=======
+
+import adt.ArrayQueue;
+import adt.QueueInterface;
+import java.util.Scanner;
+
+>>>>>>> Stashed changes
 public class Player {
 
     private String color;
     private String id;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
+<<<<<<< Updated upstream
     private QueueInterface<Player> player;
     private static int MAX_PLAYER = 4;
+=======
+    private ArrayQueue<Player> player;
+    private static int MAX_PLAYER = 10;
+>>>>>>> Stashed changes
 
     //Constructors
     public Player() {
         player = new ArrayQueue<Player>(MAX_PLAYER) {};
+<<<<<<< Updated upstream
         reset();
+=======
+>>>>>>> Stashed changes
     }
 
     public Player(String color, String id, int hedgehogCount) {
         this.color = color;
         this.id = id;
         this.hedgehogCount = hedgehogCount;
-        hedgehogs = new Hedgehog[hedgehogCount];
         for (int i = 0; i < hedgehogCount; i++) {
             hedgehogs[i] = new Hedgehog();
         }
@@ -44,10 +59,6 @@ public class Player {
         return hedgehogs;
     }
 
-    public Hedgehog getHedgehogs(int hedgehogNo){
-        return hedgehogs[hedgehogNo-1];
-    }
-    
     //Set methods
     public void SetPlayerColor(String color) {
         this.color = color;
@@ -61,11 +72,12 @@ public class Player {
         this.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int hedgehogNo, int row, int column) {
-        hedgehogs[hedgehogNo-1].setRow(row);
-        hedgehogs[hedgehogNo-1].setColumn(column);
+    public void setHedgeHogs(int hedgehogNo, int row, int column) {
+        hedgehogs[hedgehogNo].setRow(row);
+        hedgehogs[hedgehogNo].setColumn(column);
     }
     
+<<<<<<< Updated upstream
     //toString
     @Override
     public String toString(){
@@ -129,4 +141,46 @@ public class Player {
     player.clear();
     }
 
+=======
+   public void addPlayer(Player Player){
+           player.enqueue(Player);
+    }
+   
+   public void turn(){
+        Scanner input = new Scanner(System.in);
+        Player currentPlayer = null;
+      if(!(player.isEmpty())){
+       currentPlayer = player.peek();
+      }
+      
+      System.out.print("Pls do ur action(pass/continue)");
+      int choice = input.nextInt();
+      boolean isPass = true;
+      if(choice == 1){
+      isPass = true;
+      }
+      else {
+          isPass = false ;
+      }
+      if (isPass){
+          player.dequeue();
+      }
+      else {
+          System.out.println("Pls continue the game");
+          System.out.println("Pls choose ur next movement.");
+          int choice1 = input.nextInt();
+          if (choice1 == 1){
+              System.out.println("ur turn has end"); 
+              player.dequeue();
+              player.enqueue(currentPlayer);
+          }
+      }
+      
+      
+      
+   }    
+   
+   
+>>>>>>> Stashed changes
 }
+    
