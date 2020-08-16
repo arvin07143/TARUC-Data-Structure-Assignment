@@ -1,8 +1,8 @@
 package entity;
+
 import entity.*;
-
 import adt.StackInterface;
-
+import java.util.Scanner;
 /**
  *
  * @author Arvin Ng
@@ -75,26 +75,101 @@ public class Hedgehog {
         System.out.println(playerMovement.peek());
     }
     
-    public boolean moveX(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid){
+    public boolean moveForward(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid){
         int x = player.getHedgehogs(i).getRow();
         int y = player.getHedgehogs(i).getColumn();
-        Player temp = new Player("temp","0000",i);
-        temp.setHedgeHog(i, (x+1), y);
+        Player temp = new Player(1,i);
+        temp.setHedgeHog(i, x, (y+1));
      
-        System.out.println(boardGrid[x+1][y].isObstacleEnabled());
-        /*boolean obstacle = boardGrid[x+1][y].pushHedgehog(temp.getHedgehogs(i));
+        boolean checkObstacle = boardGrid[x-1][y].isObstacleEnabled();
+        boolean obstacle = boardGrid[x-1][y].pushHedgehog(temp.getHedgehogs(i));
         if(checkObstacle == true){
             if (obstacle == true){
-            player.setHedgeHog(i, (x+1), y);
-            return true;
+                player.setHedgeHog(i, x, (y+1));
+                return true;
             }
             else{}
-           
+        }
+        else{
+            player.setHedgeHog(i, x, (y+1));
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean moveVertical(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid){
+        boolean checkObstacle;
+        boolean obstacle;
+        Scanner sc = new Scanner(System.in);
+        Hedgehog move = new Hedgehog();
+        int x = player.getHedgehogs(i).getRow(); // 
+        int y = player.getHedgehogs(i).getColumn(); 
+        Player temp = new Player(1,i);
+        
+        if (x == 4){
+            return move.moveUp(i,x,y,temp,player,boardGrid);   
+        }
+        
+        else if (x == 1){
+            return move.moveDown(i,x,y,temp,player,boardGrid);  
+        }
+        
+        else if (x == 2 || x == 3){
+            System.out.print("Move up or down (1.Up , 2.Down) : ");
+            int movement = sc.nextInt();
+            while (movement != 1 || movement != 2)
+                switch (movement) {
+                    case 1:{
+                        return move.moveUp(i,x,y,temp,player,boardGrid);
+                    }
+                    case 2:{
+                        return move.moveDown(i,x,y,temp,player,boardGrid);    
+                    }
+                    default:{
+                        System.out.println("Invalid Input!! Please Enter 1 or 2");
+                        System.out.print("Move up or down (1.Up , 2.Down) : ");
+                        movement = sc.nextInt();
+                        break;
+                    }
+                }
+        }
+        return false;
+    }
+    
+    public boolean moveUp(int i, int x, int y, Player temp,Player player, Cell[][] boardGrid ){
+        temp.setHedgeHog(i, (x-1), y);
+        boolean checkObstacle = boardGrid[x-2][y-1].isObstacleEnabled();
+        boolean obstacle = boardGrid[x-2][y-1].pushHedgehog(temp.getHedgehogs(i));
+        if(checkObstacle == true){
+            if (obstacle == true){
+                player.setHedgeHog(i, (x-1), y);
+                return true;
+            }
+            else{}
+        }
+        else{
+            player.setHedgeHog(i, (x-1), y);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean moveDown(int i, int x, int y, Player temp,Player player, Cell[][] boardGrid){
+        temp.setHedgeHog(i, (x+1), y); // 2+1
+        boolean checkObstacle = boardGrid[x][y-1].isObstacleEnabled();
+        boolean obstacle = boardGrid[x][y-1].pushHedgehog(temp.getHedgehogs(i));
+        if(checkObstacle == true){
+            if (obstacle == true){
+                player.setHedgeHog(i, (x+1), y);
+                return true;
+            }
+            else{}
         }
         else{
             player.setHedgeHog(i, (x+1), y);
             return true;
-        }*/
+        }
         return false;
     }
 }
