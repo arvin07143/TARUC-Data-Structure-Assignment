@@ -14,7 +14,7 @@ public class CellView extends JPanel{
     /** transparent .png that defines the size of a cell */
     private ImageIcon standardBackgroundImage = ImageLoader.loadIcon("standardEnabledCell.png");
     private ImageIcon standardFinishedBackgroundImage = ImageLoader.loadIcon("finishline.jpg");
-    private ImageIcon[] backgroundImage = { ImageLoader.loadIcon("wall.png"), ImageLoader.loadIcon("pit.png"),
+    private ImageIcon[] backgroundImage = { ImageLoader.loadIcon("standardEnabledCell.png") , ImageLoader.loadIcon("wall.png"), ImageLoader.loadIcon("pit.png"),
             ImageLoader.loadIcon("blackHole.png") };
 
     /** holds the hidden stack indicators */

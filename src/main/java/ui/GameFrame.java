@@ -2,7 +2,6 @@ package ui;
 
 import entity.Board;
 import entity.Hedgehog;
-import entity.Player;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -26,9 +25,9 @@ public class GameFrame extends JFrame {
     private JButton passSideways;
 
     private Board gameBoard;
-    private String modeSelect;
+    private int modeSelect;
 
-    public GameFrame(int numPlayer, int numHedge, int winHedge, String modeSelect) {
+    public GameFrame(int numPlayer, int numHedge, int winHedge, Integer modeSelect) {
         super("The Hedgehog Race");
         this.modeSelect = modeSelect;
 
@@ -105,7 +104,7 @@ public class GameFrame extends JFrame {
         frameMenu.add(gameMenu);
         frameMenu.add(helpMenu);
 
-        gameBoard = new Board(numPlayer, numHedge, winHedge);
+        gameBoard = new Board(numPlayer, numHedge, winHedge, modeSelect);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         playArea = new JPanel();
@@ -146,7 +145,7 @@ public class GameFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        GameFrame game = new GameFrame(2, 2, 2, ""); //testing conditions
+        GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
     }
 
     public void initPlayArea() {
@@ -225,14 +224,8 @@ public class GameFrame extends JFrame {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 7; j++) {
                 if (gameBoard.getBoardGrid()[i][j].isObstacleEnabled()) {
-                    if (modeSelect.equals("Walls"))
-                        playBoard[i][j].setBackgroundImage(0);
-                    else if (modeSelect.equals("Pits"))
-                        playBoard[i][j].setBackgroundImage(1);
-                    else if (modeSelect.equals("Black Holes"))
-                        playBoard[i][j].setBackgroundImage(2);
+                    playBoard[i][j].setBackgroundImage(modeSelect);
                 }
-
                 playBoard[i][7].setBackgroundImage(-2);
             }
         }
@@ -244,20 +237,20 @@ public class GameFrame extends JFrame {
             playBoard[iniRow][iniCol].setCellImage(null);
             playBoard[iniRow][iniCol].repaint();
         } else {
-            playBoard[iniRow][iniCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
+            //playBoard[iniRow][iniCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
             playBoard[iniRow][iniCol].repaint();
         }
 
-        playBoard[finalRow][finalCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
+        //playBoard[finalRow][finalCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
         playBoard[finalRow][finalCol].repaint();
 
-        setHiddenColor(finalRow,finalCol);
+        setHiddenColor(finalRow, finalCol);
 
     }
 
     private void setHiddenColor(int row, int col) {
         if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
-            playBoard[row][col].setHiddenColor(gameBoard.getBoardGrid()[row][col].getCellStack().peek().getPlayerColor());
+            //playBoard[row][col].setHiddenColor(gameBoard.getBoardGrid()[row][col].getCellStack().peek().getPlayerColor());
         }
         playBoard[row][col].repaint();
     }
@@ -287,11 +280,11 @@ public class GameFrame extends JFrame {
                 playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        for(int i = 0 ; i < gameBoard.rowCount ; i++){
-                            for(int j = 0 ; j < gameBoard.columnCount ; j++){
-                                if(e.getSource() == playBoard[i][j].getDownButton()){
+                        for (int i = 0; i < gameBoard.rowCount; i++) {
+                            for (int j = 0; j < gameBoard.columnCount; j++) {
+                                if (e.getSource() == playBoard[i][j].getDownButton()) {
                                     // code to handle movement downward
-                                    updateCellStatus(i,j,i-1,j);
+                                    updateCellStatus(i, j, i - 1, j);
                                 }
                             }
                         }
@@ -304,11 +297,11 @@ public class GameFrame extends JFrame {
                 playBoard[row][col].getUpButton().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        for(int i = 0 ; i < gameBoard.rowCount ; i++){
-                            for(int j = 0 ; j < gameBoard.columnCount ; j++){
-                                if(e.getSource() == playBoard[i][j].getDownButton()){
+                        for (int i = 0; i < gameBoard.rowCount; i++) {
+                            for (int j = 0; j < gameBoard.columnCount; j++) {
+                                if (e.getSource() == playBoard[i][j].getDownButton()) {
                                     // code to handle movement downward
-                                    updateCellStatus(i,j,i+1,j);
+                                    updateCellStatus(i, j, i + 1, j);
                                 }
                             }
                         }
@@ -344,11 +337,11 @@ public class GameFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         gameBoard.setSideMoved(true);
-                        for(int i = 0 ; i < gameBoard.rowCount ; i++){
-                            for(int j = 0 ; j < gameBoard.columnCount ; j++){
-                                if(e.getSource() == playBoard[i][j].getForwardButton()){
+                        for (int i = 0; i < gameBoard.rowCount; i++) {
+                            for (int j = 0; j < gameBoard.columnCount; j++) {
+                                if (e.getSource() == playBoard[i][j].getForwardButton()) {
                                     //code for handling moving in board
-                                    updateCellStatus(i,j,i,j+1);
+                                    updateCellStatus(i, j, i, j + 1);
                                 }
                             }
                         }

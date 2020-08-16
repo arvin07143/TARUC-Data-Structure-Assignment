@@ -61,7 +61,7 @@ public class Board {
     private boolean forwardMoved;		//indicates whether a forward move has been made
     private int stage;					//placement, play, or game over
 
-    public Board(int playerCount, int hedgehogCount, int winCount) {
+    public Board(int playerCount, int hedgehogCount, int winCount , int modeSelect) {
         this.playerCount = playerCount;
         this.hedgehogCount = hedgehogCount;
         this.winCount = winCount;
@@ -77,18 +77,18 @@ public class Board {
 
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                if (obstacleGrid[i][j]) {
-                    boardGrid[i][j] = new Cell(true, 0); //true = pit
+                if (obstacleGrid[i][j] && modeSelect != 0) {
+                    boardGrid[i][j] = new Cell(true, modeSelect); //true = pit
                 } else {
-                    boardGrid[i][j] = new Cell(false, 0);
+                    boardGrid[i][j] = new Cell(); //default cell no obstacles
                 }
             }
         }
 
         stage = PLACEMENT; //set mode to placement mode for players to place tokens
-
-
     }
+
+
 
     public void setRowCount(int rowCount) {
         this.rowCount = rowCount;
@@ -123,12 +123,9 @@ public class Board {
     }
 
     public void moveToken(int startRow , int startColumn , int endRow , int endColumn){
-        try{
-            if(true){
-                //
-            }
-        }catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("Coordinate parameters out of bounds");
+        if(boardGrid[startRow][startColumn].getCellStack().peek() != null && boardGrid[startRow][startColumn].getCellStack().peek().isStuck()){
+            Hedgehog tempHedge = boardGrid[startRow][startColumn].getCellStack().pop();
+            boardGrid[endRow][endColumn].getCellStack().push(tempHedge);
         }
     }
 
@@ -166,7 +163,7 @@ public class Board {
     public Hedgehog[] getHedgehogInRow(int row){
         ArrayList<Hedgehog> hedgehogList = new ArrayList();
         for(int j = 0 ; j < columnCount ; j++){
-            if(boardGrid[row][j].cellStack.peek() != null){
+            if(boardGrid[row][j].cellStack.peek() != null && boardGrid[row][j].getCellStack().peek().isStuck()){
                 hedgehogList.add(boardGrid[row][j].cellStack.peek());
             }
         }
