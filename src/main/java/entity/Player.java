@@ -86,6 +86,10 @@ public class Player {
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
     }
+
+    public String getColorName(){
+        return colorNames[id];
+    }
     
     //toString
     @Override

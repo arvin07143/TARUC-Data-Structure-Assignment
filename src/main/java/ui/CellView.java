@@ -97,6 +97,14 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
+    public void removeTopHidden(){
+        if (hiddenColor.size() >= 1){
+            leftPanel.remove(hiddenColor.get(hiddenColor.size()-1));
+            hiddenColor.remove(hiddenColor.size()-1);
+            this.repaint();
+        }
+    }
+
     public void enableMoveUp() {
         upButton.setVisible(true);
         setComponentZOrder(upButton, 0);
@@ -123,8 +131,17 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
+    public JButton getUpButton() {
+        return upButton;
+    }
 
+    public JButton getDownButton() {
+        return downButton;
+    }
 
+    public JButton getForwardButton() {
+        return forwardButton;
+    }
 
 
 }
