@@ -55,13 +55,13 @@ public class Cell {
                     return false;
                     
                 case 2: //pit 
-                    if (cellStack.getSize() == 0){
-                        pushingHedgehog.setStuck(true); 
+                    if (cellStack.getSize() == 0){ 
+                        pushingHedgehog.setStuck(true); //1st hedgehog that enters will get stuck
                     }
                     break;
                     
                 case 3: //blackhole 
-;                   pushingHedgehog.setStuck(true); 
+;                   pushingHedgehog.setStuck(true); //all hedgehogs that enter will get stuck
                     break;
                       
                 default:
