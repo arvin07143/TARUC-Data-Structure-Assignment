@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -115,6 +116,11 @@ public class CellView extends JPanel{
     public void enableMoveForward() {
         forwardButton.setVisible(true);
         setComponentZOrder(forwardButton, 0);
+    }
+
+    public void resetBorder() {
+        setBorder(stdBorder);
+        this.repaint();
     }
 
 
