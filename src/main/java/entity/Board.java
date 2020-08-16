@@ -1,5 +1,6 @@
 package entity;
 
+import adt.ArrayList;
 import adt.ArrayQueue;
 import adt.QueueInterface;
 
@@ -160,6 +161,36 @@ public class Board {
             forwardMoved = false;
             newDiceNumber();
         }
+    }
+
+    public Hedgehog[] getHedgehogInRow(int row){
+        ArrayList<Hedgehog> hedgehogList = new ArrayList();
+        for(int j = 0 ; j < columnCount ; j++){
+            if(boardGrid[row][j].cellStack.peek() != null){
+                hedgehogList.add(boardGrid[row][j].cellStack.peek());
+            }
+        }
+
+        Hedgehog[] returnArray = new Hedgehog[hedgehogList.getArraySize()];
+        returnArray = hedgehogList.getCurrentArray();
+
+        return returnArray;
+    }
+
+    public void setSideMoved(boolean sideMoved) {
+        this.sideMoved = sideMoved;
+    }
+
+    public void setForwardMoved(boolean forwardMoved) {
+        this.forwardMoved = forwardMoved;
+    }
+
+    public boolean isSideMoved() {
+        return sideMoved;
+    }
+
+    public void skipSideways(){
+        sideMoved = true;
     }
 
 }
