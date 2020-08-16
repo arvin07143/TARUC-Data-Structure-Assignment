@@ -78,7 +78,7 @@ public class Hedgehog {
     public boolean moveForward(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid){
         int x = player.getHedgehogs(i).getRow();
         int y = player.getHedgehogs(i).getColumn();
-        Player temp = new Player("temp","0000",i);
+        Player temp = new Player(1,i);
         temp.setHedgeHog(i, x, (y+1));
      
         boolean checkObstacle = boardGrid[x-1][y].isObstacleEnabled();
@@ -105,7 +105,7 @@ public class Hedgehog {
         Hedgehog move = new Hedgehog();
         int x = player.getHedgehogs(i).getRow(); // 
         int y = player.getHedgehogs(i).getColumn(); 
-        Player temp = new Player("temp","0000",i);
+        Player temp = new Player(1,i);
         
         if (x == 4){
             return move.moveUp(i,x,y,temp,player,boardGrid);   
