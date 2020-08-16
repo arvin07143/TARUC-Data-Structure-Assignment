@@ -14,6 +14,7 @@ public class Player {
     //Constructors
     public Player() {
         player = new ArrayQueue<Player>(MAX_PLAYER) {};
+        reset();
     }
 
     public Player(String color, String id, int hedgehogCount) {
@@ -94,15 +95,36 @@ public class Player {
         }
     }
     
-    public void afterLastMovement(Player currentPlayer,Player nextPlayer,Player lastPlayer,QueueInterface<Player> player){
-        player.enqueue(currentPlayer);
-        player.enqueue(nextPlayer);
-        player.enqueue(lastPlayer);
-        System.out.print(player.peek());
-        lastPlayer = player.dequeue();
-        player.enqueue(lastPlayer);
-        System.out.print(lastPlayer);
-        currentPlayer = player.peek();
-        System.out.print(currentPlayer);
+    public void afterLastMovement(Player currentPlayer,Player nextPlayer,QueueInterface<Player> player){
+        player.enqueue(currentPlayer); 
+        player.enqueue(nextPlayer); 
+        Player p1 = player.peek();
+        System.out.print(p1);
+        boolean isWon = true;
+        if (!isWon){
+        player.dequeue();
+        player.enqueue(player.dequeue());
+        }
+        else{
+            player.dequeue();
+        }
     }
+    
+    public void leftLastPlayer(QueueInterface<Player> player){
+       if(player.getSize() == 1){
+           reset();
+        }
+       
+    }
+    
+    public void addPlayer(Player playerArr[]){
+        for (int i = 0; i < player.getSize();i++){
+            player.enqueue(playerArr[i]);
+        }
+    }
+    
+    public final void reset() {
+    player.clear();
+    }
+
 }

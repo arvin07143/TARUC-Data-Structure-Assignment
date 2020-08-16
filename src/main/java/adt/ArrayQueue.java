@@ -63,5 +63,13 @@ public abstract class ArrayQueue<T> implements QueueInterface<T> {
         frontIndex = 0;
         backIndex = array.length - 1;
     }
+    
+    public int getSize(){
+        return (backIndex + 1);
+    }
+    
+    public int getFrontIndex(){
+        return frontIndex;
+    }
 
 }
