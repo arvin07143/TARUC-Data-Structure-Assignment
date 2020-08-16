@@ -3,14 +3,7 @@ package entity;
 import adt.ArrayQueue;
 import adt.QueueInterface;
 import java.util.Scanner;
-public class Player {
-
-    private String color;
-    private String id;
-
-
 import ui.ImageLoader;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,9 +27,9 @@ public class Player {
     }
 
 
-    public Player(String color, String id, int hedgehogCount) {
-        this.color = color;
-
+    public Player(Color color, String id, int hedgehogCount) {
+        this.playerColor = color;
+    }
     public Player(int id, int hedgehogCount) {
 
         this.id = id;
@@ -53,8 +46,8 @@ public class Player {
 
     //Get methods
 
-    public String getColor() {
-        return color;
+    public Color getPlayerColor() {
+        return playerColor;
     }
 
 
@@ -76,13 +69,8 @@ public class Player {
 
     
     //Set methods
-    public void SetColor(String color) {
-        this.color = color;
-
-
-    public Color getPlayerColor() {
-        return playerColor;
-
+    public void SetPlayerColor(Color color) {
+        this.playerColor = color;
     }
 
     public ImageIcon getPlayerImage() {
