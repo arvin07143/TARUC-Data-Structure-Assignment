@@ -3,44 +3,62 @@ package entity;
 import adt.ArrayQueue;
 import adt.QueueInterface;
 import java.util.Scanner;
-
-
-import adt.ArrayQueue;
-import adt.QueueInterface;
-import java.util.Scanner;
-
-
 public class Player {
 
     private String color;
     private String id;
+
+
+import ui.ImageLoader;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Player {
+
+    private int id;
+    private Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
+    private String[] colorNames = { "Red", "Green", "Blue", "Orange"};
+    private Color playerColor;
+    private String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
+    private ImageIcon playerImage;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
-
     private QueueInterface<Player> player;
     private static int MAX_PLAYER = 4;
-
 
     //Constructors
     public Player() {
         player = new ArrayQueue<Player>(MAX_PLAYER) {};
+        reset();
     }
+
 
     public Player(String color, String id, int hedgehogCount) {
         this.color = color;
+
+    public Player(int id, int hedgehogCount) {
+
         this.id = id;
         this.hedgehogCount = hedgehogCount;
+
+        playerColor = colorOptions[id]; //setting color based on id
+        playerImage = ImageLoader.loadIcon(playerImageName[id]);
+
+        hedgehogs = new Hedgehog[hedgehogCount];
         for (int i = 0; i < hedgehogCount; i++) {
             hedgehogs[i] = new Hedgehog();
         }
     }
 
     //Get methods
-    public String getPlayerColor() {
+
+    public String getColor() {
         return color;
     }
 
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -52,12 +70,27 @@ public class Player {
         return hedgehogs;
     }
 
-    //Set methods
-    public void SetPlayerColor(String color) {
-        this.color = color;
+    public Hedgehog getHedgehogs(int hedgehogNo){
+        return hedgehogs[hedgehogNo-1];
     }
 
-    public void setId(String id) {
+    
+    //Set methods
+    public void SetColor(String color) {
+        this.color = color;
+
+
+    public Color getPlayerColor() {
+        return playerColor;
+
+    }
+
+    public ImageIcon getPlayerImage() {
+        return playerImage;
+    }
+
+    //Set methods
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -65,12 +98,11 @@ public class Player {
         this.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHogs(int hedgehogNo, int row, int column) {
-        hedgehogs[hedgehogNo].setRow(row);
-        hedgehogs[hedgehogNo].setColumn(column);
+    public void setHedgeHog(int hedgehogNo, int row, int column) {
+        hedgehogs[hedgehogNo-1].setRow(row);
+        hedgehogs[hedgehogNo-1].setColumn(column);
     }
     
-
     //toString
     @Override
     public String toString(){
@@ -109,11 +141,9 @@ public class Player {
         if (!isWon){
         player.dequeue();
         player.enqueue(player.dequeue());
-        leftLastPlayer(player);
         }
         else{
             player.dequeue();
-            leftLastPlayer(player);
         }
     }
     
@@ -134,17 +164,4 @@ public class Player {
     player.clear();
     }
 
-
-   public void addPlayer(Player Player){
-           player.enqueue(Player);
-    }
-   
-   
-      
-      
-      
-   
-   
-
 }
-    
