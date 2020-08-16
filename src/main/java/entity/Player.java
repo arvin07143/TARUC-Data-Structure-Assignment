@@ -26,10 +26,6 @@ public class Player {
         reset();
     }
 
-
-    public Player(Color color, String id, int hedgehogCount) {
-        this.playerColor = color;
-    }
     public Player(int id, int hedgehogCount) {
 
         this.id = id;
@@ -40,7 +36,7 @@ public class Player {
 
         hedgehogs = new Hedgehog[hedgehogCount];
         for (int i = 0; i < hedgehogCount; i++) {
-            hedgehogs[i] = new Hedgehog();
+            hedgehogs[i] = new Hedgehog(id);
         }
     }
 

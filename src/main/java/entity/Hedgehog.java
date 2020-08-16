@@ -12,11 +12,13 @@ public class Hedgehog {
     private int row;
     private int column;
     private boolean stuck;
+    private int id;
 
-    public Hedgehog() {
+    public Hedgehog(int id) {
         this.row = -1;
         this.column = -1;
         this.stuck = false;
+        this.id = id;
     }
     
     //Setters
@@ -31,6 +33,11 @@ public class Hedgehog {
     public void setStuck(boolean stuck){
         this.stuck = stuck;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     //Getters
     public int getRow() {
@@ -44,6 +51,11 @@ public class Hedgehog {
     public boolean isStuck(){
         return stuck;
     }
+
+    public int getId() {
+        return id;
+    }
+    
     
     //toString
     public String toString(){
@@ -57,7 +69,7 @@ public class Hedgehog {
     }
     
     public Hedgehog chg(Hedgehog x){
-        Hedgehog y = new Hedgehog();
+        Hedgehog y = new Hedgehog(x.getId());
         y.setColumn(x.getColumn());
         y.setRow(x.getRow());
         
@@ -102,7 +114,7 @@ public class Hedgehog {
         boolean checkObstacle;
         boolean obstacle;
         Scanner sc = new Scanner(System.in);
-        Hedgehog move = new Hedgehog();
+        Hedgehog move = new Hedgehog(player.getHedgehogs()[i].getId());
         int x = player.getHedgehogs(i).getRow(); // 
         int y = player.getHedgehogs(i).getColumn(); 
         Player temp = new Player(1,i);
