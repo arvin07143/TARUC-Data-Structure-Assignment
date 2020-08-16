@@ -161,8 +161,7 @@ public class GameFrame extends JFrame {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             for (int i = 0; i < 4; i++) {
-                                if (e.getSource() == playBoard[i][0]) {
-                                    playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
+                                if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT) {
                                     playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
                                     gameBoard.newTurn();
                                     setStatusBar();
