@@ -141,11 +141,13 @@ public class GameFrame extends JFrame  {
         add(infoPanel,BorderLayout.SOUTH);
         initPlayArea();
         setVisible(true);
-
-
-
     }
 
+    
+    public Board getGameBoard(){
+        return gameBoard;
+    }
+    
     public void initPlayArea(){
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4,8));
@@ -161,7 +163,7 @@ public class GameFrame extends JFrame  {
                             for(int i = 0 ; i < 4 ; i++){
                                 if(e.getSource() == playBoard[i][0]){
                                     playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
-                                    playBoard[i][0].setHiddenColor(Color.black);
+                                    playBoard[i][0].setHiddenColor(Color.red);
                                     revalidate();
                                 }
                             }

@@ -27,12 +27,12 @@ public class CellView extends JPanel{
     /** borders */
     private Border availableMoveBorder, stdBorder;
 
-    public CellView(int pitMode) {
+    public CellView(int obstacleMode) {
 
         super.setLayout(new BorderLayout());
 
         backgroundCell = new JLabel();
-        setBackgroundImage(pitMode);
+        setBackgroundImage(obstacleMode);
         add(backgroundCell, BorderLayout.CENTER);
         this.setComponentZOrder(backgroundCell, 0);
 
