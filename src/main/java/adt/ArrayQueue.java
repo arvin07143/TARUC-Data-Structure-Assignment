@@ -36,15 +36,6 @@ public class ArrayQueue<T> implements QueueInterface<T> {
         return frontIndex == ((backIndex + 1) % array.length);
     }
 
-    public T peek() {
-        T front = null;
-
-        if (!isEmpty()) {
-            front = array[frontIndex];
-        }
-        return front;
-    }
-
     public T dequeue() {
         T front = null;
 
