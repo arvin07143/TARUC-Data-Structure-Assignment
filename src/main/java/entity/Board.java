@@ -1,5 +1,8 @@
 package entity;
 
+import adt.ArrayQueue;
+import adt.QueueInterface;
+
 /**
  *
  * @author Arvin Ng
@@ -50,14 +53,23 @@ public class Board {
 
     public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
+
+    public QueueInterface<Player> playerQueue;
     public int diceNumber;
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
+    private int stage;					//placement, play, or game over
 
     public Board(int playerCount, int hedgehogCount, int winCount) {
         this.playerCount = playerCount;
         this.hedgehogCount = hedgehogCount;
         this.winCount = winCount;
+
+        currentPlayer = new Player(0,hedgehogCount);
+        playerQueue = new ArrayQueue(playerCount);
+        for(int i = 1 ; i < playerCount ; i++){
+            playerQueue.enqueue(new Player(i,hedgehogCount));
+        }
 
         ObstacleGridGenerator obstacleGen = new ObstacleGridGenerator();
         boolean[][] obstacleGrid = obstacleGen.obstacleGridGeneration(rowCount, columnCount);
@@ -71,6 +83,10 @@ public class Board {
                 }
             }
         }
+
+        stage = PLACEMENT; //set mode to placement mode for players to place tokens
+
+
     }
 
     public void setRowCount(int rowCount) {
@@ -88,21 +104,62 @@ public class Board {
     public int getColumnCount() {
         return columnCount;
     }
-    
-    
-    
+
+    public int getStage() {
+        return stage;
+    }
+
     public int getDiceNumber() {
         return diceNumber;
     }
 
-    public void setDiceNumber(int diceNumber) {
-        this.diceNumber = (int) (Math.random() * ((6 - 1) + 1)) + 1;
+    public void newDiceNumber() {
+        this.diceNumber = (int) (Math.random() * ((rowCount - 1) + 1)) + 1;
     }
 
     public Cell[][] getBoardGrid() {
         return boardGrid;
     }
-    
-    
+
+    public void moveToken(int startRow , int startColumn , int endRow , int endColumn){
+        try{
+            if(true){
+                //
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Coordinate parameters out of bounds");
+        }
+    }
+
+    public void moveTokenUp(int startRow , int startColumn){
+        if(!sideMoved){
+            moveToken(startRow,startColumn,startRow-1,startColumn);
+            sideMoved = true;
+        }
+    }
+
+    public void moveTokenDown(int startRow , int startColumn){
+        if(!sideMoved){
+            moveToken(startRow,startColumn,startRow+1,startColumn);
+            sideMoved = true;
+        }
+    }
+
+    public void moveTokenForward(int startRow , int startColumn){
+        if(!forwardMoved){
+            moveToken(startRow,startColumn,startRow,startColumn+1);
+            forwardMoved = true;
+        }
+    }
+
+    public void newTurn(){
+        if(forwardMoved || stage == PLACEMENT){
+            playerQueue.enqueue(currentPlayer);
+            currentPlayer = playerQueue.dequeue();
+            sideMoved = false;
+            forwardMoved = false;
+            newDiceNumber();
+        }
+    }
 
 }

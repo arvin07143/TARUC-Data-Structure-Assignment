@@ -1,6 +1,6 @@
 package adt;
 
-public abstract class ArrayQueue<T> implements QueueInterface<T> {
+public class ArrayQueue<T> implements QueueInterface<T> {
 
     private T[] array;
     private int frontIndex;
@@ -26,6 +26,10 @@ public abstract class ArrayQueue<T> implements QueueInterface<T> {
             backIndex = (backIndex + 1) % array.length;
             array[backIndex] = newPlayer;
         }
+    }
+
+    public T peek(){
+        return array[frontIndex];
     }
 
     public boolean isEmpty() {

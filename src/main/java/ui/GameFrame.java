@@ -1,6 +1,7 @@
 package ui;
 
 import entity.Board;
+import entity.Player;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -24,10 +25,12 @@ public class GameFrame extends JFrame  {
     private JButton passSideways;
 
     private Board gameBoard ;
+    private String modeSelect;
 
-    public GameFrame(int numPlayer , int numHedge , int winHedge) {
+    public GameFrame(int numPlayer , int numHedge , int winHedge , String modeSelect) {
         super("The Hedgehog Race");
-
+        this.modeSelect = modeSelect;
+        
         JMenuBar frameMenu = new JMenuBar();
         setJMenuBar(frameMenu);
         JMenu gameMenu = new JMenu("Game");
@@ -139,11 +142,13 @@ public class GameFrame extends JFrame  {
         add(infoPanel,BorderLayout.SOUTH);
         initPlayArea();
         setVisible(true);
-
-
-
     }
 
+    
+    public Board getGameBoard(){
+        return gameBoard;
+    }
+    
     public void initPlayArea(){
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4,8));
@@ -159,7 +164,9 @@ public class GameFrame extends JFrame  {
                             for(int i = 0 ; i < 4 ; i++){
                                 if(e.getSource() == playBoard[i][0]){
                                     playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
-                                    playBoard[i][0].setHiddenColor(Color.black);
+                                    playBoard[i][0].setHiddenColor(Color.red);
+                                    playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
+                                    gameBoard.newTurn();
                                     revalidate();
                                 }
                             }
@@ -177,12 +184,24 @@ public class GameFrame extends JFrame  {
 
                         @Override
                         public void mouseEntered(MouseEvent e) {
-
+                            if(gameBoard.getStage() == gameBoard.PLACEMENT){
+                                for(int i = 0 ; i < gameBoard.rowCount ; i++){
+                                    if(e.getSource() == playBoard[i][0]){
+                                        playBoard[i][0].setBorder(gameBoard.currentPlayer.getPlayerColor());
+                                    }
+                                }
+                            }
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
-
+                            if(gameBoard.getStage() == gameBoard.PLACEMENT){
+                                for(int i = 0 ; i < gameBoard.rowCount ; i++){
+                                    if(e.getSource() == playBoard[i][0]){
+                                        playBoard[i][0].resetBorder();
+                                    }
+                                }
+                            }
                         }
                     });
                 }
@@ -204,7 +223,15 @@ public class GameFrame extends JFrame  {
     public void drawCells(){
         for(int i = 0 ; i < 4 ; i++){
             for(int j = 0 ; j < 7 ; j++){
-                if(gameBoard.getBoardGrid()[i][j].isObstacleEnabled())playBoard[i][j].setBackgroundImage(0);
+                if(gameBoard.getBoardGrid()[i][j].isObstacleEnabled()){
+                    if (modeSelect.equals("Walls"))
+                        playBoard[i][j].setBackgroundImage(0);
+                    else if (modeSelect.equals("Pits"))
+                        playBoard[i][j].setBackgroundImage(1);
+                    else if (modeSelect.equals("Black Holes"))
+                        playBoard[i][j].setBackgroundImage(2);
+                }
+                    
                 playBoard[i][7].setBackgroundImage(-2);
             }
         }
@@ -229,9 +256,13 @@ public class GameFrame extends JFrame  {
         playerRemainingList.setText("    Player             Hedgehogs To Win \n");
     }
 
+    public void showPlayerMoves(){
+        Player currentPlayer = gameBoard.currentPlayer;
+    }
+
 
     public static void main(String[] args) {
-        GameFrame game = new GameFrame(1,1,1); //testing conditions
+        GameFrame game = new GameFrame(1,1,1,""); //testing conditions
         game.setLeaderText();
     }
 

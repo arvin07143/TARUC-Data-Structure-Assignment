@@ -28,7 +28,7 @@ public class Player {
     }
 
     //Get methods
-    public String getColor() {
+    public String getPlayerColor() {
         return color;
     }
 
@@ -49,7 +49,7 @@ public class Player {
     }
     
     //Set methods
-    public void SetColor(String color) {
+    public void SetPlayerColor(String color) {
         this.color = color;
     }
 
@@ -104,9 +104,11 @@ public class Player {
         if (!isWon){
         player.dequeue();
         player.enqueue(player.dequeue());
+        leftLastPlayer(player);
         }
         else{
             player.dequeue();
+            leftLastPlayer(player);
         }
     }
     

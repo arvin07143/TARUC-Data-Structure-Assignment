@@ -62,7 +62,7 @@ public class StartPanel extends JFrame{
 
         JPanel field4 = new JPanel();
         field4.setLayout(new BorderLayout());
-        obstacleModeLabel = new JLabel("Pit Type : ",JLabel.TRAILING);
+        obstacleModeLabel = new JLabel("Obstacle Type : ",JLabel.TRAILING);
         modeSelect = new JComboBox(modes);
         field4.add(obstacleModeLabel,BorderLayout.WEST);
         field4.add(modeSelect,BorderLayout.EAST);
@@ -111,7 +111,7 @@ public class StartPanel extends JFrame{
 
     private void startGame() {
         GameFrame game = new GameFrame((Integer)playerCount.getSelectedItem(),(Integer)hedgehogCount.getSelectedItem()
-                ,(Integer)winningCount.getSelectedItem());
+                ,(Integer)winningCount.getSelectedItem(), (String)modeSelect.getSelectedItem());
     }
 
     public static void main(String[] args){
