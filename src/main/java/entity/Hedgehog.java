@@ -75,4 +75,26 @@ public class Hedgehog {
         System.out.println(playerMovement.peek());
     }
     
+    public boolean moveX(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid){
+        int x = player.getHedgehogs(i).getRow();
+        int y = player.getHedgehogs(i).getColumn();
+        Player temp = new Player("temp","0000",i);
+        temp.setHedgeHog(i, (x+1), y);
+     
+        System.out.println(boardGrid[x+1][y].isObstacleEnabled());
+        /*boolean obstacle = boardGrid[x+1][y].pushHedgehog(temp.getHedgehogs(i));
+        if(checkObstacle == true){
+            if (obstacle == true){
+            player.setHedgeHog(i, (x+1), y);
+            return true;
+            }
+            else{}
+           
+        }
+        else{
+            player.setHedgeHog(i, (x+1), y);
+            return true;
+        }*/
+        return false;
+    }
 }
