@@ -1,6 +1,7 @@
 package ui;
 
 import entity.Board;
+import entity.Player;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -141,11 +142,13 @@ public class GameFrame extends JFrame  {
         add(infoPanel,BorderLayout.SOUTH);
         initPlayArea();
         setVisible(true);
-
-
-
     }
 
+    
+    public Board getGameBoard(){
+        return gameBoard;
+    }
+    
     public void initPlayArea(){
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4,8));
@@ -161,7 +164,9 @@ public class GameFrame extends JFrame  {
                             for(int i = 0 ; i < 4 ; i++){
                                 if(e.getSource() == playBoard[i][0]){
                                     playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
-                                    playBoard[i][0].setHiddenColor(Color.black);
+                                    playBoard[i][0].setHiddenColor(Color.red);
+                                    playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
+                                    gameBoard.newTurn();
                                     revalidate();
                                 }
                             }
@@ -179,12 +184,24 @@ public class GameFrame extends JFrame  {
 
                         @Override
                         public void mouseEntered(MouseEvent e) {
-
+                            if(gameBoard.getStage() == gameBoard.PLACEMENT){
+                                for(int i = 0 ; i < gameBoard.rowCount ; i++){
+                                    if(e.getSource() == playBoard[i][0]){
+                                        playBoard[i][0].setBorder(gameBoard.currentPlayer.getPlayerColor());
+                                    }
+                                }
+                            }
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
-
+                            if(gameBoard.getStage() == gameBoard.PLACEMENT){
+                                for(int i = 0 ; i < gameBoard.rowCount ; i++){
+                                    if(e.getSource() == playBoard[i][0]){
+                                        playBoard[i][0].resetBorder();
+                                    }
+                                }
+                            }
                         }
                     });
                 }
@@ -237,6 +254,10 @@ public class GameFrame extends JFrame  {
 
     private void setLeaderText(){
         playerRemainingList.setText("    Player             Hedgehogs To Win \n");
+    }
+
+    public void showPlayerMoves(){
+        Player currentPlayer = gameBoard.currentPlayer;
     }
 
 
