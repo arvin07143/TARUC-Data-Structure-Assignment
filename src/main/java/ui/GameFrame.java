@@ -24,13 +24,22 @@ public class GameFrame extends JFrame  {
     private JLabel currentDice;
     private JButton passSideways;
 
-    private Board gameBoard ;
+    private Board gameBoard ; 
+    private int numPlayer; 
+    private int numHedge;
+    private int winHegde;
     private String modeSelect;
+   
+    private int columnAllowedHeight = 0;
 
     public GameFrame(int numPlayer , int numHedge , int winHedge , String modeSelect) {
         super("The Hedgehog Race");
-        this.modeSelect = modeSelect;
         
+        this.numPlayer = numPlayer;
+        this.numHedge = numHedge;
+        this.winHegde = winHedge;
+        this.modeSelect = modeSelect;
+           
         JMenuBar frameMenu = new JMenuBar();
         setJMenuBar(frameMenu);
         JMenu gameMenu = new JMenu("Game");
@@ -153,7 +162,6 @@ public class GameFrame extends JFrame  {
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4,8));
 
-
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 8; j++) {
                 playBoard[i][j] = new CellView(-1);
@@ -163,13 +171,14 @@ public class GameFrame extends JFrame  {
                         public void mouseClicked(MouseEvent e) {
                             for(int i = 0 ; i < 4 ; i++){
                                 if(e.getSource() == playBoard[i][0]){
-                                    playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
-                                    playBoard[i][0].setHiddenColor(Color.red);
-                                    playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
-                                    gameBoard.newTurn();
-                                    revalidate();
+                                            playBoard[i][0].setCellImage(ImageLoader.loadIcon("pI1.png"));
+                                            playBoard[i][0].setHiddenColor(Color.red);
+                                            playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
+                                            gameBoard.newTurn();
+                                            revalidate();
                                 }
                             }
+                            
                         }
 
                         @Override
