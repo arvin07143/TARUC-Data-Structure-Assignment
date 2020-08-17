@@ -4,6 +4,7 @@ import ui.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import adt.StackInterface;
 
 public class Player {
 
@@ -66,15 +67,17 @@ public class Player {
     }
 
     public void setHedgehogCount(int hedgehogCount) {
-        this.hedgehogCount = hedgehogCount;
+        Player.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int hedgehogNo, int row, int column) {
+    public void setHedgeHog(int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
+        playerMovement.push(hedgehogs[hedgehogNo-1]);
     }
     
     //toString
+    @Override
     public String toString(){
         String outputStr = "";
         for (int i = 0; i < hedgehogCount; i++) {
