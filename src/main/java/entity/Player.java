@@ -17,12 +17,12 @@ public class Player {
     private ImageIcon playerImage;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
-    private QueueInterface<Player> player;
+    private QueueInterface<Player> playerQueue;
     private static int MAX_PLAYER = 4;
 
     //Constructors
     public Player() {
-        player = new ArrayQueue<Player>(MAX_PLAYER) {};
+        playerQueue = new ArrayQueue<Player>(MAX_PLAYER);
         reset();
     }
 
@@ -143,13 +143,13 @@ public class Player {
     }
     
     public void addPlayer(Player playerArr[]){
-        for (int i = 0; i < player.getSize();i++){
-            player.enqueue(playerArr[i]);
+        for (int i = 0; i < playerQueue.getSize();i++){
+            playerQueue.enqueue(playerArr[i]);
         }
     }
     
     public final void reset() {
-    player.clear();
+    playerQueue.clear();
     }
 
 }
