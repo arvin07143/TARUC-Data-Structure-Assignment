@@ -83,6 +83,14 @@ public class Hedgehog {
 
     }
 	
+    public Hedgehog chg(Hedgehog hedgehog, int hedgehogNo){
+        Hedgehog newHedgehog = new Hedgehog();
+        newHedgehog.setRow(hedgehog.getRow());
+        newHedgehog.setColumn(hedgehog.getColumn());       
+        return newHedgehog;
+
+    }
+    
     public void viewAllMovement(StackInterface<Hedgehog> playerMovement){
         for(int i = playerMovement.getSize() ; i >= 0 ; i--){
             System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());

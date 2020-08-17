@@ -84,9 +84,11 @@ public class Player {
     }
 
     public void setHedgeHog(int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
+        Hedgehog temp = new Hedgehog();
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
-        playerMovement.push(hedgehogs[hedgehogNo-1]);
+        temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
+        playerMovement.push(temp);
     }
 
     public String getColorName(){
