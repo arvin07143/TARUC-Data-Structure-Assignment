@@ -11,4 +11,8 @@ public interface QueueInterface<T> {
     public void clear();
 
     public boolean isEmpty();
+
+    public int getSize();
+
+    public int getFrontIndex();
 }

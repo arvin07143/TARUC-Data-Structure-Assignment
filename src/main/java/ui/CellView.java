@@ -14,7 +14,7 @@ public class CellView extends JPanel{
     /** transparent .png that defines the size of a cell */
     private ImageIcon standardBackgroundImage = ImageLoader.loadIcon("standardEnabledCell.png");
     private ImageIcon standardFinishedBackgroundImage = ImageLoader.loadIcon("finishline.jpg");
-    private ImageIcon[] backgroundImage = { ImageLoader.loadIcon("wall.png"), ImageLoader.loadIcon("pit.png"),
+    private ImageIcon[] backgroundImage = { ImageLoader.loadIcon("standardEnabledCell.png") , ImageLoader.loadIcon("wall.png"), ImageLoader.loadIcon("pit.png"),
             ImageLoader.loadIcon("blackHole.png") };
 
     /** holds the hidden stack indicators */
@@ -97,6 +97,14 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
+    public void removeTopHidden(){
+        if (hiddenColor.size() >= 1){
+            leftPanel.remove(hiddenColor.get(hiddenColor.size()-1));
+            hiddenColor.remove(hiddenColor.size()-1);
+            this.repaint();
+        }
+    }
+
     public void enableMoveUp() {
         upButton.setVisible(true);
         setComponentZOrder(upButton, 0);
@@ -123,8 +131,17 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
+    public JButton getUpButton() {
+        return upButton;
+    }
 
+    public JButton getDownButton() {
+        return downButton;
+    }
 
+    public JButton getForwardButton() {
+        return forwardButton;
+    }
 
 
 }

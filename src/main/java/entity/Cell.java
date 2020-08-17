@@ -10,7 +10,7 @@ public class Cell {
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //-1.Normal 1.Wall 2.Pit 3.Blackhole
+    private static int obstacleMode; //-1.Normal 0.Normal 1.Wall 2.Pit 3.Blackhole
 
     //Constructors
     public Cell(){

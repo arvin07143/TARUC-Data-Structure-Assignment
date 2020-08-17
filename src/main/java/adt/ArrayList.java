@@ -64,6 +64,14 @@ public class ArrayList<T> implements ListInterface<T> {
         }
     }
 
+    public int getArraySize() {
+        return arraySize;
+    }
+
+    public T[] getCurrentArray() {
+        return currentArray;
+    }
+
     @Override
     public T get(int index) {
         return currentArray[index];

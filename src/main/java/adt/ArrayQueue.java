@@ -21,10 +21,10 @@ public class ArrayQueue<T> implements QueueInterface<T> {
         return frontIndex == ((backIndex + 2) % array.length);
     }
 
-    public void enqueue(T newEntry) {
+    public void enqueue(T newPlayer) {
         if (!isArrayFull()) {
             backIndex = (backIndex + 1) % array.length;
-            array[backIndex] = newEntry;
+            array[backIndex] = newPlayer;
         }
     }
 
@@ -34,15 +34,6 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 
     public boolean isEmpty() {
         return frontIndex == ((backIndex + 1) % array.length);
-    }
-
-    public T getFront() {
-        T front = null;
-
-        if (!isEmpty()) {
-            front = array[frontIndex];
-        }
-        return front;
     }
 
     public T dequeue() {
@@ -66,6 +57,14 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 
         frontIndex = 0;
         backIndex = array.length - 1;
+    }
+    
+    public int getSize(){
+        return (backIndex + 1);
+    }
+    
+    public int getFrontIndex(){
+        return frontIndex;
     }
 
 }
