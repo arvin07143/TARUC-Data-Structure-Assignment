@@ -6,6 +6,7 @@ import java.util.Scanner;
 import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
+import adt.StackInterface;
 
 public class Player {
 
@@ -79,12 +80,15 @@ public class Player {
     }
 
     public void setHedgehogCount(int hedgehogCount) {
-        this.hedgehogCount = hedgehogCount;
+        Player.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int hedgehogNo, int row, int column) {
+    public void setHedgeHog(int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
+        Hedgehog temp = new Hedgehog();
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
+        temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
+        playerMovement.push(temp);
     }
 
     public String getColorName(){

@@ -9,33 +9,7 @@ public class Test {
 
 
 
-        QueueInterface<Player> player;
-        player = new ArrayQueue<>() {};
-        Player p1 = new Player("Loke","0001",4);
-          p1.setHedgeHog(1, 1, 1);
-          p1.setHedgeHog(2, 2, 2);
-          p1.setHedgeHog(3, 3, 3);
-          p1.setHedgeHog(4, 4, 4);
-              
-        Player p2 = new Player("Jeff","0002",4);
-         p2.setHedgeHog(4, 4, 4);
-         p2.setHedgeHog(3, 3, 3);
-         p2.setHedgeHog(2, 2, 2);
-         p2.setHedgeHog(1, 1, 1);
-          
-                 
-        Player p3 = new Player("Cch","0002",4);
-         p3.setHedgeHog(3, 4, 4);
-         p3.setHedgeHog(4, 3, 3);
-         p3.setHedgeHog(1, 2, 2);
-         p3.setHedgeHog(2, 1, 1);
-
-       p3.afterLastMovement(p1,p3,player);
-        
-
-        
-
-
+        QueueInterface<Player> player = new ArrayQueue<>() {};       
         StackInterface<Hedgehog> playerMovement = new ArrayStack<>();
         Hedgehog store = new Hedgehog();
         
@@ -51,24 +25,16 @@ public class Test {
         boardGrid[3][6].setObstacleEnabled(true);
         
         Player p1 = new Player(0,4);
-        p1.setHedgeHog(1, 1, 1);
-        playerMovement.push(p1.getHedgehogs(1));
-        p1.setHedgeHog(2, 2, 2);
-        playerMovement.push(p1.getHedgehogs(2));
-        p1.setHedgeHog(3, 3, 3);
-        playerMovement.push(p1.getHedgehogs(3));
-        p1.setHedgeHog(4, 4, 4);
-        playerMovement.push(p1.getHedgehogs(4));
+        p1.setHedgeHog(1, 1, 1,playerMovement);
+        p1.setHedgeHog(2, 2, 2,playerMovement);
+        p1.setHedgeHog(3, 3, 3,playerMovement);
+        p1.setHedgeHog(4, 4, 4,playerMovement);
         
         Player p2 = new Player(1,4);
-        p2.setHedgeHog(1, 1, 1);
-        playerMovement.push(p2.getHedgehogs(1));
-        p2.setHedgeHog(2, 2, 2);
-        playerMovement.push(p2.getHedgehogs(2));
-        p2.setHedgeHog(3, 3, 3);
-        playerMovement.push(p2.getHedgehogs(3));
-        p2.setHedgeHog(4, 4, 5);
-        playerMovement.push(p2.getHedgehogs(4));
+        p2.setHedgeHog(1, 1, 1,playerMovement);
+        p2.setHedgeHog(2, 2, 2,playerMovement);
+        p2.setHedgeHog(3, 3, 3,playerMovement);
+        p2.setHedgeHog(4, 4, 5,playerMovement);
         //store = store.chg(playerMovement.peek());
         
         //p2.setHedgeHog(4, 4, 4);
@@ -81,7 +47,8 @@ public class Test {
         //store.moveForward(p2, 4, playerMovement, boardGrid);
         //System.out.println(p2.getHedgehogs(4).getColumn());
         //System.out.println(p2.getHedgehogs(4).getRow());
-        store.moveVertical(p2, 1, playerMovement, boardGrid); // 2 2
+        store = store.moveVertical(p2, 1, playerMovement, boardGrid,store); // 2 2
+        store = store.moveVertical(p2, 1, playerMovement, boardGrid,store);
         System.out.println(p2.getHedgehogs(1).getRow() + " " + p2.getHedgehogs(1).getColumn());
         store.showPreviousMovement(playerMovement);
         store.viewAllMovement(playerMovement);
