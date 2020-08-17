@@ -56,10 +56,13 @@ public class Board {
     public Player currentPlayer;
 
     public QueueInterface<Player> playerQueue;
-    public int diceNumber;
+    public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
     private int stage;					//placement, play, or game over
+
+    private int currentHedge = 0;
+    private int turnCounter ;
 
     public Board(int playerCount, int hedgehogCount, int winCount , int modeSelect) {
         this.playerCount = playerCount;
@@ -86,9 +89,14 @@ public class Board {
         }
 
         stage = PLACEMENT; //set mode to placement mode for players to place tokens
+        turnCounter = 0;
     }
 
-
+    public void initPlacement(int row , int col){
+        boardGrid[row][col].pushHedgehog(currentPlayer.getHedgehogs()[currentHedge]);
+        currentPlayer.getHedgehogs()[currentHedge].setRow(row);
+        currentPlayer.getHedgehogs()[currentHedge].setColumn(col);
+    }
 
     public void setRowCount(int rowCount) {
         this.rowCount = rowCount;
@@ -115,61 +123,87 @@ public class Board {
     }
 
     public void newDiceNumber() {
-        this.diceNumber = (int) (Math.random() * ((rowCount - 1) + 1)) + 1;
+        this.diceNumber = (int) (Math.random() * (rowCount - 1) + 1);
     }
 
     public Cell[][] getBoardGrid() {
         return boardGrid;
     }
 
-    public void moveToken(int startRow , int startColumn , int endRow , int endColumn){
-        if(boardGrid[startRow][startColumn].getCellStack().peek() != null && boardGrid[startRow][startColumn].getCellStack().peek().isStuck()){
+    public boolean moveToken(int startRow , int startColumn , int endRow , int endColumn){
+        System.out.println(toString());
+        if(boardGrid[startRow][startColumn].getCellStack().peek() != null && !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
             Hedgehog tempHedge = boardGrid[startRow][startColumn].getCellStack().pop();
+            if(boardGrid[startRow][startColumn].getCellStack().getSize() >= 1){
+                boardGrid[startRow][startColumn].getCellStack().peek().setDisabled(false);
+            }
+            if(boardGrid[endRow][endColumn].getCellStack().peek() != null) {
+                boardGrid[endRow][endColumn].getCellStack().peek().setDisabled(true);
+            }
+            tempHedge.setRow(endRow);
+            tempHedge.setColumn(endColumn);
             boardGrid[endRow][endColumn].getCellStack().push(tempHedge);
+            System.out.println(toString());
+            return true;
         }
+        return false;
     }
 
-    public void moveTokenUp(int startRow , int startColumn){
-        if(!sideMoved){
-            moveToken(startRow,startColumn,startRow-1,startColumn);
+    public boolean moveTokenUp(int startRow , int startColumn){
+        if(moveToken(startRow,startColumn,startRow-1,startColumn)){
             sideMoved = true;
+            return true;
         }
+        return false;
     }
 
-    public void moveTokenDown(int startRow , int startColumn){
-        if(!sideMoved){
-            moveToken(startRow,startColumn,startRow+1,startColumn);
+    public boolean moveTokenDown(int startRow , int startColumn){
+        if(moveToken(startRow,startColumn,startRow+1,startColumn)){
             sideMoved = true;
+            return true;
         }
+        return false;
     }
 
-    public void moveTokenForward(int startRow , int startColumn){
-        if(!forwardMoved){
-            moveToken(startRow,startColumn,startRow,startColumn+1);
+    public boolean moveTokenForward(int startRow , int startColumn){
+        if(!forwardMoved && moveToken(startRow,startColumn,startRow,startColumn+1)){
             forwardMoved = true;
+            return true;
         }
+        return false;
     }
 
     public void newTurn(){
-        if(forwardMoved || stage == PLACEMENT){
+        turnCounter++;
+        if(stage == PLACEMENT || forwardMoved){
+            if(turnCounter % playerCount == 0){
+                currentHedge++;
+                if(currentHedge == hedgehogCount){
+                    stage = PLAY;
+                }
+            }
             playerQueue.enqueue(currentPlayer);
             currentPlayer = playerQueue.dequeue();
             sideMoved = false;
             forwardMoved = false;
             newDiceNumber();
         }
+
+        //System.out.println("Current Turn : " + turnCounter + "Current Player : " + currentPlayer.getId() + "Dice : " + getDiceNumber());
     }
 
     public Hedgehog[] getHedgehogInRow(int row){
         ArrayList<Hedgehog> hedgehogList = new ArrayList();
         for(int j = 0 ; j < columnCount ; j++){
-            if(boardGrid[row][j].cellStack.peek() != null && boardGrid[row][j].getCellStack().peek().isStuck()){
+            if(boardGrid[row][j].cellStack.peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck()) && !(boardGrid[row][j].getCellStack().peek().isDisabled())){
                 hedgehogList.add(boardGrid[row][j].cellStack.peek());
             }
         }
 
         Hedgehog[] returnArray = new Hedgehog[hedgehogList.getArraySize()];
-        returnArray = hedgehogList.getCurrentArray();
+        for(int i = 0 ; i < hedgehogList.getArraySize() ; i++){
+            returnArray[i] = hedgehogList.get(i);
+        }
 
         return returnArray;
     }
@@ -188,6 +222,18 @@ public class Board {
 
     public void skipSideways(){
         sideMoved = true;
+    }
+
+    public String toString(){
+        String str = "";
+        for(int i = 0 ; i < rowCount ; i++){
+            for(int j = 0 ; j < columnCount ; j++){
+                str += boardGrid[i][j].getCellStack().peek() != null;
+                str += "  ";
+            }
+            str += "\n";
+        }
+        return str;
     }
 
 }

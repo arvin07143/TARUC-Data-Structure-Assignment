@@ -10,10 +10,10 @@ import java.awt.*;
 public class Player {
 
     private int id;
-    private Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
+    public Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
     private String[] colorNames = { "Red", "Green", "Blue", "Orange"};
     private Color playerColor;
-    private String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
+    public String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
     private ImageIcon playerImage;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
@@ -96,7 +96,6 @@ public class Player {
     public String toString(){
         String outputStr = "";
         for (int i = 0; i < hedgehogCount; i++) {
-            
             outputStr += "Hedgehog " + (i + 1) + ":" + hedgehogs[i] + "\n\n";
         }
         return outputStr;

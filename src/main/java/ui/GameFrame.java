@@ -18,6 +18,8 @@ public class GameFrame extends JFrame {
     private JTextArea statusBar;
     private JTextArea playerRemainingList;
 
+    private Color topColor;
+
     private ImageIcon[] diceIcon = {ImageLoader.loadIcon("dice1.png"), ImageLoader.loadIcon("dice2.png")
             , ImageLoader.loadIcon("dice3.png"), ImageLoader.loadIcon("dice4.png")};
 
@@ -118,7 +120,10 @@ public class GameFrame extends JFrame {
         passSideways.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameBoard.skipSideways();
+                if (gameBoard.getStage() == gameBoard.PLACEMENT && gameBoard.isSideMoved() != true) {
+                    showFrontMoves(gameBoard.diceNumber);
+                    gameBoard.setSideMoved(true);
+                }
             }
         });
         currentDice = new JLabel(ImageLoader.loadIcon("dice1.png"));
@@ -145,7 +150,12 @@ public class GameFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
+            }
+        });
+
     }
 
     public void initPlayArea() {
@@ -162,10 +172,20 @@ public class GameFrame extends JFrame {
                         public void mouseClicked(MouseEvent e) {
                             for (int i = 0; i < 4; i++) {
                                 if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT) {
+                                    setHiddenColor(i, 0);
+                                    gameBoard.initPlacement(i, 0);
                                     playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
                                     gameBoard.newTurn();
                                     setStatusBar();
-                                    revalidate();
+                                    if (gameBoard.getStage() == gameBoard.PLAY) {
+                                        for (int a = 0; a < gameBoard.rowCount; a++) {
+                                            for (int b = 0; b < gameBoard.columnCount; b++) {
+                                                playBoard[a][b].resetBorder();
+                                            }
+                                        }
+                                        System.out.println(gameBoard.toString());
+                                        beginTurn();
+                                    }
                                 }
                             }
                         }
@@ -232,84 +252,103 @@ public class GameFrame extends JFrame {
 
     public void updateCellStatus(int iniRow, int iniCol, int finalRow, int finalCol) {
         if (gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek() == null) {
-            playBoard[iniRow][iniCol].removeTopHidden();
             playBoard[iniRow][iniCol].setCellImage(null);
-            playBoard[iniRow][iniCol].repaint();
         } else {
-            //playBoard[iniRow][iniCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
-            playBoard[iniRow][iniCol].repaint();
+            playBoard[iniRow][iniCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getId()]));
         }
+        playBoard[iniRow][iniCol].removeTopHidden();
+        playBoard[iniRow][iniCol].repaint();
 
-        //playBoard[finalRow][finalCol].setCellImage(gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getPlayerImage());
-        playBoard[finalRow][finalCol].repaint();
+
+        playBoard[finalRow][finalCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[finalRow][finalCol].getCellStack().peek().getId()]));
 
         setHiddenColor(finalRow, finalCol);
+        playBoard[finalRow][finalCol].repaint();
 
     }
 
     private void setHiddenColor(int row, int col) {
-        if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
-            //playBoard[row][col].setHiddenColor(gameBoard.getBoardGrid()[row][col].getCellStack().peek().getPlayerColor());
+        try {
+            if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
+                playBoard[row][col].setHiddenColor(gameBoard.currentPlayer.colorOptions[gameBoard.getBoardGrid()[row][col].getCellStack().peek().getId()]);
+            }
+        }
+        catch (Exception dse) {
+            playBoard[row][col].setHiddenColor(Color.lightGray);
         }
         playBoard[row][col].repaint();
     }
 
+
     public void beginTurn() {
 
+        for(int i = 0 ; i < gameBoard.rowCount ; i++){
+            for(int j = 0 ; j < gameBoard.columnCount ; j++){
+                playBoard[i][j].disableAllMoves();
+            }
+        }
         setCurrentDiceImage(gameBoard.getDiceNumber());
-
         showUpDownButtons();
-
-        showFrontMoves(gameBoard.diceNumber);
     }
 
     public void showUpDownButtons() {
-        int id = gameBoard.currentPlayer.getId();
         Hedgehog[] playerHedgehogs = gameBoard.currentPlayer.getHedgehogs();
 
         int row;
         int col;
 
-        for (int i = 0; i < gameBoard.hedgehogCount; i++) {
-            row = playerHedgehogs[i].getRow();
-            col = playerHedgehogs[i].getColumn();
-
-            if (row > 0) {
-                playBoard[row][col].enableMoveDown();
-                playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 0; i < gameBoard.rowCount; i++) {
-                            for (int j = 0; j < gameBoard.columnCount; j++) {
-                                if (e.getSource() == playBoard[i][j].getDownButton()) {
-                                    // code to handle movement downward
-                                    updateCellStatus(i, j, i - 1, j);
+        for (int i = 0; i < playerHedgehogs.length; i++) {
+            if (!playerHedgehogs[i].isDisabled()) {
+                row = playerHedgehogs[i].getRow();
+                col = playerHedgehogs[i].getColumn();
+                if (row < gameBoard.rowCount) {
+                    playBoard[row][col].enableMoveDown();
+                    playBoard[row][col].revalidate();
+                    playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            for (int i = 0; i < gameBoard.rowCount; i++) {
+                                for (int j = 0; j < gameBoard.columnCount; j++) {
+                                    if (e.getSource() == playBoard[i][j].getDownButton()) {
+                                        getTopColor(i + 1, j);
+                                        if(gameBoard.moveTokenDown(i,j)) System.out.println("CALLED");
+                                        updateCellStatus(i,j,i+1,j);
+                                        showFrontMoves(gameBoard.diceNumber);
+                                    }
                                 }
                             }
+                            gameBoard.setSideMoved(true);
                         }
-                        gameBoard.setSideMoved(true);
-                    }
-                });
-            }
-            if (row < gameBoard.rowCount) {
-                playBoard[row][col].enableMoveUp();
-                playBoard[row][col].getUpButton().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 0; i < gameBoard.rowCount; i++) {
-                            for (int j = 0; j < gameBoard.columnCount; j++) {
-                                if (e.getSource() == playBoard[i][j].getDownButton()) {
-                                    // code to handle movement downward
-                                    updateCellStatus(i, j, i + 1, j);
+                    });
+
+                }
+                if (row > 0) {
+                    playBoard[row][col].enableMoveUp();
+                    playBoard[row][col].getUpButton().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            for (int i = 0; i < gameBoard.rowCount; i++) {
+                                for (int j = 0; j < gameBoard.columnCount; j++) {
+                                    if (e.getSource() == playBoard[i][j].getUpButton()) {
+                                        getTopColor(i - 1, j);
+                                        if(gameBoard.moveTokenUp(i,j)) System.out.println("CALLED");
+                                        updateCellStatus(i,j,i-1,j);
+                                        showFrontMoves(gameBoard.diceNumber);
+                                    }
                                 }
                             }
+                            gameBoard.setSideMoved(true);
                         }
-                        gameBoard.setSideMoved(true);
-                    }
-                });
+                    });
+                }
             }
-
         }
+    }
+
+    public void getTopColor(int targetRow, int targetCol) {
+        if (gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek() == null) topColor = null;
+        else
+            topColor = gameBoard.currentPlayer.colorOptions[gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek().getId()];
     }
 
     public void showFrontMoves(int diceNumber) {
@@ -319,28 +358,32 @@ public class GameFrame extends JFrame {
                 playBoard[i][j].disableAllMoves();
             }
         }
-        playArea.repaint();
 
-        Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber);
-
+        Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
         if (hedgehogsInRow.length != 0) {
-            int rows;
-            int cols;
 
             for (int i = 0; i < hedgehogsInRow.length; i++) {
-                rows = hedgehogsInRow[i].getRow();
-                cols = hedgehogsInRow[i].getColumn();
+                int cols = hedgehogsInRow[i].getColumn();
 
-                playBoard[rows][cols].enableMoveForward();
-                playBoard[rows][cols].getForwardButton().addActionListener(new ActionListener() {
+                playBoard[diceNumber - 1][cols].enableMoveForward();
+                playBoard[diceNumber - 1][cols].getForwardButton().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        gameBoard.setSideMoved(true);
                         for (int i = 0; i < gameBoard.rowCount; i++) {
                             for (int j = 0; j < gameBoard.columnCount; j++) {
                                 if (e.getSource() == playBoard[i][j].getForwardButton()) {
-                                    //code for handling moving in board
-                                    updateCellStatus(i, j, i, j + 1);
+                                    getTopColor(i,j+1);
+                                    if(gameBoard.moveTokenForward(i,j)){
+                                        updateCellStatus(i,j,i,j+1);
+                                    }
+                                    gameBoard.setForwardMoved(true);
+
+                                    for (int a = 0; a < gameBoard.columnCount; a++) {
+                                        playBoard[diceNumber - 1][a].resetBorder();
+                                        playBoard[diceNumber - 1][a].disableAllMoves();
+                                    }
+                                    gameBoard.newTurn();
+                                    beginTurn();
                                 }
                             }
                         }
@@ -349,10 +392,17 @@ public class GameFrame extends JFrame {
             }
 
             for (int j = 0; j < gameBoard.columnCount; j++) {
-                playBoard[diceNumber][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
+                playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
             }
         } else {
+            gameBoard.setForwardMoved(true);
             gameBoard.newTurn();
+            for (int i = 0; i < gameBoard.rowCount; i++) {
+                for (int j = 0; j < gameBoard.columnCount; j++) {
+                    playBoard[i][j].disableAllMoves();
+                }
+            }
+            beginTurn();
         }
         playArea.repaint();
     }
@@ -372,6 +422,6 @@ public class GameFrame extends JFrame {
     }
 
     public void setCurrentDiceImage(int x) {
-        currentDice.setIcon(diceIcon[x]);
+        currentDice.setIcon(diceIcon[x - 1]);
     }
 }

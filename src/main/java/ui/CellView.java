@@ -108,6 +108,7 @@ public class CellView extends JPanel{
     public void enableMoveUp() {
         upButton.setVisible(true);
         setComponentZOrder(upButton, 0);
+        repaint();
     }
 
     /** Method enableMoveDown: <br />
@@ -116,6 +117,7 @@ public class CellView extends JPanel{
     public void enableMoveDown() {
         downButton.setVisible(true);
         setComponentZOrder(downButton, 0);
+        this.repaint();
     }
 
     /** Method enableMoveForward: <br />
@@ -124,6 +126,7 @@ public class CellView extends JPanel{
     public void enableMoveForward() {
         forwardButton.setVisible(true);
         setComponentZOrder(forwardButton, 0);
+        this.repaint();
     }
 
     public void resetBorder() {

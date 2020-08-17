@@ -68,8 +68,8 @@ public class ArrayList<T> implements ListInterface<T> {
         return arraySize;
     }
 
-    public T[] getCurrentArray() {
-        return currentArray;
+    public T[] toArray() {
+        return (T[])currentArray;
     }
 
     @Override

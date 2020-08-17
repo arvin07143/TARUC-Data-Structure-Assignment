@@ -12,12 +12,14 @@ public class Hedgehog {
     private int row;
     private int column;
     private boolean stuck;
+    private boolean disabled;
     private int id;
 
     public Hedgehog(int id) {
         this.row = -1;
         this.column = -1;
         this.stuck = false;
+        this.disabled = false;
         this.id = id;
     }
     
@@ -37,8 +39,15 @@ public class Hedgehog {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
     //Getters
     public int getRow() {
         return row;
@@ -59,7 +68,7 @@ public class Hedgehog {
     
     //toString
     public String toString(){
-        return "\nRow: " + row + "\nColumn: " + column;
+        return "\nRow: " + row + "\nColumn: " + column + "\nDisabled" + isDisabled() + "\nID" + id;
     }
     
     public void undo (Player player, int i, Hedgehog store){

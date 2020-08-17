@@ -15,7 +15,6 @@ public class ImageLoader {
 	public static final ImageIcon loadIcon(String iconName) {
 		try {
 			URL url = GameFrame.class.getResource("/resources/" + iconName);
-                        System.out.println(url);
 			if (url != null) {
 				Image img = ImageIO.read(url);
 				return new ImageIcon(img);
