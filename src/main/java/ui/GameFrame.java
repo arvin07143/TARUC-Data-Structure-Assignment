@@ -292,7 +292,7 @@ public class GameFrame extends JFrame {
 
     public void showUpDownButtons() {
         Hedgehog[] playerHedgehogs = gameBoard.currentPlayer.getHedgehogs();
-        int invalidHedgehogs = 0;
+        boolean movable = false;
         int row;
         int col;
         
@@ -302,6 +302,7 @@ public class GameFrame extends JFrame {
                 col = playerHedgehogs[i].getColumn();
                 if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
                     playBoard[row][col].enableMoveDown();
+                    movable = true;
                     playBoard[row][col].revalidate();
                     if(playBoard[row][col].getDownButton().getActionListeners().length == 0) {
                         playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
@@ -322,11 +323,9 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
-                else {
-                    invalidHedgehogs++;
-                }
                 if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row-1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
                     playBoard[row][col].enableMoveUp();
+                    movable = true;
                     if (playBoard[row][col].getUpButton().getActionListeners().length == 0) {
                         playBoard[row][col].getUpButton().addActionListener(new ActionListener() {
                             @Override
@@ -346,13 +345,10 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
-                else {
-                    invalidHedgehogs++;
-                }
             }
         }
-        if (invalidHedgehogs == playerHedgehogs.length * 2){
-            // proceed with forward move @fishhavelegs
+        if (!movable){
+            showFrontMoves(gameBoard.diceNumber);
         }
     }
 
