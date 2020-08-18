@@ -371,34 +371,39 @@ public class GameFrame extends JFrame {
         Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
         if (hedgehogsInRow.length != 0) {
             for (int i = 0; i < hedgehogsInRow.length; i++) {
-                if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
-                    int cols = hedgehogsInRow[i].getColumn();
+                if (!(hedgehogsInRow[i].getColumn() == 7)){
+                    if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
+                        int cols = hedgehogsInRow[i].getColumn();
 
-                    playBoard[diceNumber - 1][cols].enableMoveForward();
-                    if (playBoard[diceNumber - 1][cols].getForwardButton().getActionListeners().length == 0) {
-                        playBoard[diceNumber - 1][cols].getForwardButton().addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                for (int i = 0; i < gameBoard.rowCount; i++) {
-                                    for (int j = 0; j < gameBoard.columnCount; j++) {
-                                        if (e.getSource() == playBoard[i][j].getForwardButton()) {
-                                            getTopColor(i, j + 1);
-                                            if (gameBoard.moveTokenForward(i, j)) {
-                                                updateCellStatus(i, j, i, j + 1);
-                                            }
-                                            gameBoard.setForwardMoved(true);
+                        playBoard[diceNumber - 1][cols].enableMoveForward();
+                        if (playBoard[diceNumber - 1][cols].getForwardButton().getActionListeners().length == 0) {
+                            playBoard[diceNumber - 1][cols].getForwardButton().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    for (int i = 0; i < gameBoard.rowCount; i++) {
+                                        for (int j = 0; j < gameBoard.columnCount; j++) {
+                                            if (e.getSource() == playBoard[i][j].getForwardButton()) {
+                                                getTopColor(i, j + 1);
+                                                if (gameBoard.moveTokenForward(i, j)) {
+                                                    updateCellStatus(i, j, i, j + 1);
+                                                }
+                                                gameBoard.setForwardMoved(true);
 
-                                            for (int a = 0; a < gameBoard.columnCount; a++) {
-                                                playBoard[diceNumber - 1][a].resetBorder();
-                                                playBoard[diceNumber - 1][a].disableAllMoves();
+                                                for (int a = 0; a < gameBoard.columnCount; a++) {
+                                                    playBoard[diceNumber - 1][a].resetBorder();
+                                                    playBoard[diceNumber - 1][a].disableAllMoves();
+                                                }
+                                                gameBoard.newTurn();
+                                                beginTurn();
                                             }
-                                            gameBoard.newTurn();
-                                            beginTurn();
                                         }
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
+                    }
+                    else {
+                        invalidHedgehogs++;
                     }
                 }
                 else {
