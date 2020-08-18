@@ -246,6 +246,10 @@ public class GameFrame extends JFrame {
                     playBoard[i][j].setBackgroundImage(modeSelect);
                 }
                 playBoard[i][7].setBackgroundImage(-2);
+
+                playBoard[i][j].disableAllMoves();
+                playBoard[i][j].resetBorder();
+                playBoard[i][j].repaint();
             }
         }
     } //draw cells according to the cell status in actual board
@@ -259,7 +263,6 @@ public class GameFrame extends JFrame {
         playBoard[iniRow][iniCol].removeTopHidden();
         playBoard[iniRow][iniCol].repaint();
 
-
         playBoard[finalRow][finalCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[finalRow][finalCol].getCellStack().peek().getId()]));
 
         setHiddenColor(finalRow, finalCol);
@@ -270,7 +273,7 @@ public class GameFrame extends JFrame {
     private void setHiddenColor(int row, int col) {
         try {
             if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
-                playBoard[row][col].setHiddenColor(gameBoard.currentPlayer.colorOptions[gameBoard.getBoardGrid()[row][col].getCellStack().peek().getId()]);
+                playBoard[row][col].setHiddenColor(topColor);
             }
         }
         catch (Exception dse) {
@@ -282,11 +285,7 @@ public class GameFrame extends JFrame {
 
     public void beginTurn() {
 
-        for(int i = 0 ; i < gameBoard.rowCount ; i++){
-            for(int j = 0 ; j < gameBoard.columnCount ; j++){
-                playBoard[i][j].disableAllMoves();
-            }
-        }
+        drawCells();
         setCurrentDiceImage(gameBoard.getDiceNumber());
         showUpDownButtons();
     }
@@ -408,10 +407,7 @@ public class GameFrame extends JFrame {
     }
 
     //Miscellaneous Setters
-
-    private void setStackColor() {
-        playBoard[1][1].setHiddenColor(Color.black); //testing
-    }
+    
 
     private void setLeaderText() {
         playerRemainingList.setText("    Player             Hedgehogs To Win \n");

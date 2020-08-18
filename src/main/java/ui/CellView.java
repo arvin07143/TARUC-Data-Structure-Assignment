@@ -98,11 +98,12 @@ public class CellView extends JPanel{
     }
 
     public void removeTopHidden(){
-        if (hiddenColor.size() >= 1){
-            leftPanel.remove(hiddenColor.get(hiddenColor.size()-1));
-            hiddenColor.remove(hiddenColor.size()-1);
+        if (hiddenColor.size() >= 1) {
+            leftPanel.remove(hiddenColor.get(hiddenColor.size() - 1));
+            hiddenColor.remove(hiddenColor.size() - 1);
             this.repaint();
         }
+        System.out.println("ArrayList hiddenColor count: " + hiddenColor.size());
     }
 
     public void enableMoveUp() {
