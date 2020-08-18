@@ -270,7 +270,7 @@ public class GameFrame extends JFrame {
     private void setHiddenColor(int row, int col) {
         try {
             if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
-                playBoard[row][col].setHiddenColor(gameBoard.currentPlayer.colorOptions[gameBoard.getBoardGrid()[row][col].getCellStack().peek().getId()]);
+                playBoard[row][col].setHiddenColor(topColor);
             }
         }
         catch (Exception dse) {
@@ -363,32 +363,33 @@ public class GameFrame extends JFrame {
         if (hedgehogsInRow.length != 0) {
 
             for (int i = 0; i < hedgehogsInRow.length; i++) {
-                int cols = hedgehogsInRow[i].getColumn();
+                if (!hedgehogsInRow[i].isDisabled()) {
+                    int cols = hedgehogsInRow[i].getColumn();
+                    playBoard[diceNumber - 1][cols].enableMoveForward();
+                    playBoard[diceNumber - 1][cols].getForwardButton().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            for (int i = 0; i < gameBoard.rowCount; i++) {
+                                for (int j = 0; j < gameBoard.columnCount; j++) {
+                                    if (e.getSource() == playBoard[i][j].getForwardButton()) {
+                                        getTopColor(i, j + 1);
+                                        if (gameBoard.moveTokenForward(i, j)) {
+                                            updateCellStatus(i, j, i, j + 1);
+                                        }
+                                        gameBoard.setForwardMoved(true);
 
-                playBoard[diceNumber - 1][cols].enableMoveForward();
-                playBoard[diceNumber - 1][cols].getForwardButton().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 0; i < gameBoard.rowCount; i++) {
-                            for (int j = 0; j < gameBoard.columnCount; j++) {
-                                if (e.getSource() == playBoard[i][j].getForwardButton()) {
-                                    getTopColor(i,j+1);
-                                    if(gameBoard.moveTokenForward(i,j)){
-                                        updateCellStatus(i,j,i,j+1);
+                                        for (int a = 0; a < gameBoard.columnCount; a++) {
+                                            playBoard[diceNumber - 1][a].resetBorder();
+                                            playBoard[diceNumber - 1][a].disableAllMoves();
+                                        }
+                                        gameBoard.newTurn();
+                                        beginTurn();
                                     }
-                                    gameBoard.setForwardMoved(true);
-
-                                    for (int a = 0; a < gameBoard.columnCount; a++) {
-                                        playBoard[diceNumber - 1][a].resetBorder();
-                                        playBoard[diceNumber - 1][a].disableAllMoves();
-                                    }
-                                    gameBoard.newTurn();
-                                    beginTurn();
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
 
             for (int j = 0; j < gameBoard.columnCount; j++) {
