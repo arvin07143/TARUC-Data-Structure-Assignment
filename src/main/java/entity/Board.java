@@ -46,7 +46,7 @@ public class Board {
 
     
     public int rowCount = 4;
-    public int columnCount = 7;
+    public int columnCount = 8;
 
     public int playerCount;
     public int hedgehogCount;

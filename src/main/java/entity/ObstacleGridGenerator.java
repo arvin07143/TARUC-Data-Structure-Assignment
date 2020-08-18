@@ -26,7 +26,7 @@ public class ObstacleGridGenerator {
         while (obstacleCount < rows) {
             boolean failToAdd = false;
             int row = random.nextInt(rows); //generate rand from 0 - 3
-            int col = random.nextInt(columns - 1) + 1; // 1 - 6 to prevent first column from being an obstacle
+            int col = random.nextInt(columns - 2) + 1; // 1 - 6 to prevent first column from being an obstacle
 
             for (int i = 0; i < columns; i++) {
                 if (obstacleGrid[row][i]) {
