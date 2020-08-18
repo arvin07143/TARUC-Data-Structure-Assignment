@@ -101,52 +101,6 @@ public class Player {
         return outputStr;
     }
     
-    public void pass(Player currentPlayer,QueueInterface<Player> player){
-        currentPlayer = player.peek();
-        boolean isPass = true;
-        System.out.println("Pls choose ur movement");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        switch(choice){
-            case 1 : 
-                 isPass = true;
-                 System.out.println("You have pass ur movement.");
-                 break;
-            case 2 : 
-                isPass = false; 
-                System.out.println("Pls choose ur next movement");
-                break;
-        }
-    }
-    
-    public void afterLastMovement(Player currentPlayer,Player nextPlayer,QueueInterface<Player> player){
-        player.enqueue(currentPlayer); 
-        player.enqueue(nextPlayer); 
-        Player p1 = player.peek();
-        System.out.print(p1);
-        boolean isWon = true;
-        if (!isWon){
-        player.dequeue();
-        player.enqueue(player.dequeue());
-        }
-        else{
-            player.dequeue();
-        }
-    }
-    
-    public void leftLastPlayer(QueueInterface<Player> player){
-       if(player.getSize() == 1){
-           reset();
-        }
-       
-    }
-    
-    public void addPlayer(Player playerArr[]){
-        for (int i = 0; i < player.getSize();i++){
-            player.enqueue(playerArr[i]);
-        }
-    }
-    
     public final void reset() {
     player.clear();
     }
