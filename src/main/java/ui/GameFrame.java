@@ -251,7 +251,7 @@ public class GameFrame extends JFrame {
     } //draw cells according to the cell status in actual board
 
     public void updateCellStatus(int iniRow, int iniCol, int finalRow, int finalCol) {
-        if (gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek() == null) {
+        if (gameBoard.getBoardGrid()[iniRow][iniCol].getCellStackSize() == 0) {
             playBoard[iniRow][iniCol].setCellImage(null);
         } else {
             playBoard[iniRow][iniCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getId()]));
