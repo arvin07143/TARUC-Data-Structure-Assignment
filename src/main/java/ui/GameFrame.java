@@ -292,15 +292,15 @@ public class GameFrame extends JFrame {
 
     public void showUpDownButtons() {
         Hedgehog[] playerHedgehogs = gameBoard.currentPlayer.getHedgehogs();
-
+        int invalidHedgehogs = 0;
         int row;
         int col;
-
+        
         for (int i = 0; i < playerHedgehogs.length; i++) {
             if (!playerHedgehogs[i].isDisabled()) {
                 row = playerHedgehogs[i].getRow();
                 col = playerHedgehogs[i].getColumn();
-                if (row < gameBoard.rowCount - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && modeSelect == 1))) {
+                if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
                     playBoard[row][col].enableMoveDown();
                     playBoard[row][col].revalidate();
                     if(playBoard[row][col].getDownButton().getActionListeners().length == 0) {
@@ -322,7 +322,10 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
-                if (row > 0) {
+                else {
+                    invalidHedgehogs++;
+                }
+                if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row-1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
                     playBoard[row][col].enableMoveUp();
                     if (playBoard[row][col].getUpButton().getActionListeners().length == 0) {
                         playBoard[row][col].getUpButton().addActionListener(new ActionListener() {
@@ -343,7 +346,13 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
+                else {
+                    invalidHedgehogs++;
+                }
             }
+        }
+        if (invalidHedgehogs == playerHedgehogs.length * 2){
+            // proceed with forward move @fishhavelegs
         }
     }
 
@@ -354,6 +363,7 @@ public class GameFrame extends JFrame {
     }
 
     public void showFrontMoves(int diceNumber) {
+        int invalidHedgehogs = 0;
 
         for (int i = 0; i < gameBoard.rowCount; i++) {
             for (int j = 0; j < gameBoard.columnCount; j++) {
@@ -363,7 +373,6 @@ public class GameFrame extends JFrame {
 
         Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
         if (hedgehogsInRow.length != 0) {
-
             for (int i = 0; i < hedgehogsInRow.length; i++) {
                 if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
                     int cols = hedgehogsInRow[i].getColumn();
@@ -395,10 +404,22 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
+                else {
+                    invalidHedgehogs++;
+                }
             }
-
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
+            }
+            if (invalidHedgehogs == hedgehogsInRow.length){
+                gameBoard.setForwardMoved(true);
+                gameBoard.newTurn();
+                for (int i = 0; i < gameBoard.rowCount; i++) {
+                    for (int j = 0; j < gameBoard.columnCount; j++) {
+                        playBoard[i][j].disableAllMoves();
+                    }
+                }
+                beginTurn();
             }
         } else {
             gameBoard.setForwardMoved(true);
