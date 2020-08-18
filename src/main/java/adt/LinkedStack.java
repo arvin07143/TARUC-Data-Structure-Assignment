@@ -52,6 +52,18 @@ public class LinkedStack<T> implements StackInterface<T> {
         }
         return top;
     }
+    
+    public T find(int index){ //index 0 = top, index 1 = 2nd top, index 2 = 3rd top......
+        Node currentNode = topNode;
+        T data = null;
+        if (!isEmpty() && index < size){
+            for (int i = 0; i < index; i++){
+                data = currentNode.data;
+                currentNode = currentNode.next;
+            }
+        }
+        return data;
+    }
 
     @Override
     public boolean isEmpty() {
@@ -63,7 +75,7 @@ public class LinkedStack<T> implements StackInterface<T> {
         topNode = null;
         size = 0;
     }
-
+    
     //toString
     public String toString() {
         String outputStr = "";

@@ -251,7 +251,7 @@ public class GameFrame extends JFrame {
     } //draw cells according to the cell status in actual board
 
     public void updateCellStatus(int iniRow, int iniCol, int finalRow, int finalCol) {
-        if (gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek() == null) {
+        if (gameBoard.getBoardGrid()[iniRow][iniCol].getCellStackSize() == 0) {
             playBoard[iniRow][iniCol].setCellImage(null);
         } else {
             playBoard[iniRow][iniCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getId()]));
@@ -301,7 +301,7 @@ public class GameFrame extends JFrame {
             if (!playerHedgehogs[i].isDisabled()) {
                 row = playerHedgehogs[i].getRow();
                 col = playerHedgehogs[i].getColumn();
-                if (row < gameBoard.rowCount - 1 && !gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled()) {
+                if (row < gameBoard.rowCount - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && modeSelect == 1))) {
                     playBoard[row][col].enableMoveDown();
                     playBoard[row][col].revalidate();
                     playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
@@ -346,7 +346,8 @@ public class GameFrame extends JFrame {
     }
 
     public void getTopColor(int targetRow, int targetCol) {
-        if (gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek() == null) topColor = null;
+        if (gameBoard.boardGrid[targetRow][targetCol].getCellStackSize() == 0) 
+            topColor = null;
         else
             topColor = gameBoard.currentPlayer.colorOptions[gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek().getId()];
     }
@@ -363,7 +364,7 @@ public class GameFrame extends JFrame {
         if (hedgehogsInRow.length != 0) {
 
             for (int i = 0; i < hedgehogsInRow.length; i++) {
-                if (!gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled()){
+                if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)){
                     int cols = hedgehogsInRow[i].getColumn();
 
                     playBoard[diceNumber - 1][cols].enableMoveForward();

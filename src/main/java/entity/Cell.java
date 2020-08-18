@@ -6,7 +6,7 @@ import java.util.Random;
  *
  * @author GV62 7RC
  */
-public class Cell {
+public class Cell{
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
@@ -46,6 +46,14 @@ public class Cell {
     //methods
     public int getCellStackSize(){
         return cellStack.getSize();
+    }
+    
+    public StackInterface<Hedgehog> getReversedCellStack(){
+        StackInterface<Hedgehog> reversedCellStack = new LinkedStack<>();
+        for (int i = getCellStackSize() - 1; i >= 0; i--){
+            reversedCellStack.push(this.cellStack.find(i));        
+        }
+        return reversedCellStack;
     }
     
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
