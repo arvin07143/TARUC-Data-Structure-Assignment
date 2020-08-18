@@ -365,6 +365,7 @@ public class GameFrame extends JFrame {
     public void showFrontMoves(int diceNumber) {
         int invalidHedgehogs = 0;
 
+        statusBar.setText("\nPlease move the hedgehog on row " + currentDice+1);
         for (int i = 0; i < gameBoard.rowCount; i++) {
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[i][j].disableAllMoves();
