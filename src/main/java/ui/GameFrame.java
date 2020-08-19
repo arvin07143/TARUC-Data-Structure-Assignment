@@ -33,6 +33,25 @@ public class GameFrame extends JFrame {
     private int modeSelect;
     private int columnAllowedHeight = 1;
     private int columnHeightCounter = 0;
+
+    String ruleListing =
+            "Rules of the HedgeHog Race:" +
+                    "\n\nBeginning Stage:" +
+                    "\n   Each player places a hedgehog in the first row until all their hedgehogs are placed." +
+                    "\n   Hedgehogs can't be stacked until all other rows are filled." +
+
+                    "\n\nMovement Stage:" +
+                    "\n   Each player has the opportunity to make a sideways move before moving a hedgehog forward." +
+                    "\n   A hedgehog in the highlighted row MUST move forward, even if it doesn't belong to the current player." +
+                    "\n   If you don't want to move sideways, move a token forward or click the 'Skip Sideways Move' button." +
+                    "\n   The goal is to reach the cake, but watch out for obstacles!" +
+
+                    "\n\nObstacles:" +
+                    "\n   None : hedgehogs can just run through this green field . " +
+                    "\n   Wall : hedgehogs cant pass them . No , hedgehogs can't climb walls" +
+                    "\n   Pits : the first hedgehog that enters the pit is stuck forever . Subsequent hedgehogs can pass normally" +
+                    "\n   Black Holes: a hedgehog in a black hole is stuck there forever.  Be extra careful around them." +
+                    "\n\nHave Fun!";
     
 
     public GameFrame(int numPlayer, int numHedge, int winHedge, Integer modeSelect) {
@@ -66,25 +85,6 @@ public class GameFrame extends JFrame {
         rules.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ruleListing =
-                        "Rules of the HedgeHog Race:" +
-                                "\n\nBeginning Stage:" +
-                                "\n   Each player places a hedgehog in the first row until all their hedgehogs are placed." +
-                                "\n   Hedgehogs can't be stacked until all other rows are filled." +
-
-                                "\n\nMovement Stage:" +
-                                "\n   Each player has the opportunity to make a sideways move before moving a hedgehog forward." +
-                                "\n   A hedgehog in the highlighted row MUST move forward, even if it doesn't belong to the current player." +
-                                "\n   If you don't want to move sideways, move a token forward or click the 'Skip Sideways Move' button." +
-                                "\n   The goal is to reach the cake, but watch out for obstacles!" +
-
-                                "\n\nObstacles:" +
-                                "\n   Pits: a hedgehog in a pit can't move until it's tied for last place." +
-                                "\n   Black Holes: a hedgehog in a black hole is stuck there forever.  Be extra careful around them." +
-                                "\n   Worm Holes: a wormhole will randomly transport a hedgehog to another location on the board." +
-                                "\n   Origins: an origin pit will bounce a hedgehog back to the beginning of the board." +
-
-                                "\n\nHave Fun!";
                 JOptionPane.showMessageDialog(null, ruleListing, "Rules", JOptionPane.PLAIN_MESSAGE);
             }
         });
@@ -165,6 +165,7 @@ public class GameFrame extends JFrame {
 
         add(infoPanel, BorderLayout.SOUTH);
         initPlayArea();
+        JOptionPane.showMessageDialog(this, ruleListing, "Rules", JOptionPane.PLAIN_MESSAGE);
         setVisible(true);
     }
 

@@ -74,6 +74,7 @@ public class StartPanel extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 startGame();
+                setVisible(false);
             }
         });
         field5.add(startButton,BorderLayout.WEST);
