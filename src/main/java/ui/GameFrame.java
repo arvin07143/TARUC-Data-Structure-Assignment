@@ -27,6 +27,7 @@ public class GameFrame extends JFrame {
 
     private JLabel currentDice;
     private JButton passSideways;
+    private JButton undoBtn;
 
     private Board gameBoard;
     private int modeSelect;
@@ -121,6 +122,8 @@ public class GameFrame extends JFrame {
         add(playArea, BorderLayout.CENTER);
 
         JPanel infoPanel = new JPanel();
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new BorderLayout());
         passSideways = new JButton("Pass Sideways Move");
         passSideways.addActionListener(new ActionListener() {
             @Override
@@ -129,6 +132,13 @@ public class GameFrame extends JFrame {
                     showFrontMoves(gameBoard.diceNumber);
                     gameBoard.setSideMoved(true);
                 }
+            }
+        });
+        undoBtn = new JButton("Undo Move");
+        undoBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
         currentDice = new JLabel(ImageLoader.loadIcon("dice1.png"));
@@ -144,7 +154,11 @@ public class GameFrame extends JFrame {
         playerRemainingList.setBorder(new LineBorder(Color.black, 1));
         playerRemainingList.setPreferredSize(new Dimension(200, 80));
 
-        infoPanel.add(passSideways);
+        btnPanel.add(passSideways,BorderLayout.NORTH);
+        btnPanel.add(Box.createRigidArea(new Dimension(0,20)),BorderLayout.CENTER);
+        btnPanel.add(undoBtn,BorderLayout.SOUTH);
+
+        infoPanel.add(btnPanel);
         infoPanel.add(statusBar);
         infoPanel.add(playerRemainingList);
         infoPanel.add(currentDice);
