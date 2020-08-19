@@ -373,7 +373,7 @@ public class GameFrame extends JFrame {
     public void showFrontMoves(int diceNumber) {
         int invalidHedgehogs = 0;
 
-        statusBar.setText("\n\nPlease move the hedgehog on row " + gameBoard.getDiceNumber()+1);
+        statusBar.setText("\n\nPlease move the hedgehog on row " + (gameBoard.getDiceNumber()+1));
         for (int i = 0; i < gameBoard.rowCount; i++) {
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[i][j].disableAllMoves();
@@ -454,12 +454,12 @@ public class GameFrame extends JFrame {
     private void setLeaderText() {
         ListInterface<Player> playerList = gameBoard.getPlayerList();
         String str = "";
-        str += "    Player             Hedgehogs To Win \n";
+        str += "    Player \tHedgehogs To Win \n";
         for(int i = 0 ; i < gameBoard.playerCount ; i++){
             if(playerList.get(i).isWinnable()){
-                str += "    " + playerList.get(i).getColorName() + "                " + (gameBoard.hedgehogCount - playerList.get(i).getFinishedHedgehogs()) + "\n";
+                str += "    " + String.format("%-10s",playerList.get(i).getColorName()) + "\t" + String.format("%17d\n",(gameBoard.winCount - playerList.get(i).getFinishedHedgehogs()));
             }
-            else str += "    " + playerList.get(i).getColorName() + "                " + "Not Winnable" + "\n";
+            else str += "    " +String.format("%-10s",playerList.get(i).getColorName()) + "\t" + "Not Winnable" + "\n";
         }
         playerRemainingList.setText(str);
     }
