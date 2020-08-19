@@ -1,7 +1,9 @@
 package ui;
 
+import adt.ListInterface;
 import entity.Board;
 import entity.Hedgehog;
+import entity.Player;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -120,7 +122,7 @@ public class GameFrame extends JFrame {
         passSideways.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (gameBoard.getStage() == gameBoard.PLACEMENT && gameBoard.isSideMoved() != true) {
+                if (gameBoard.getStage() == gameBoard.PLAY && gameBoard.isSideMoved() != true) {
                     showFrontMoves(gameBoard.diceNumber);
                     gameBoard.setSideMoved(true);
                 }
@@ -285,6 +287,7 @@ public class GameFrame extends JFrame {
 
     public void beginTurn() {
 
+        setLeaderText();
         drawCells();
         setCurrentDiceImage(gameBoard.getDiceNumber());
         showUpDownButtons();
@@ -314,11 +317,11 @@ public class GameFrame extends JFrame {
                                             getTopColor(i + 1, j);
                                             if (gameBoard.moveTokenDown(i, j)) System.out.println("CALLED");
                                             updateCellStatus(i, j, i + 1, j);
+                                            gameBoard.setSideMoved(true);
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
                                 }
-                                gameBoard.setSideMoved(true);
                             }
                         });
                     }
@@ -336,11 +339,11 @@ public class GameFrame extends JFrame {
                                             getTopColor(i - 1, j);
                                             if (gameBoard.moveTokenUp(i, j)) System.out.println("CALLED");
                                             updateCellStatus(i, j, i - 1, j);
+                                            gameBoard.setSideMoved(true);
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
                                 }
-                                gameBoard.setSideMoved(true);
                             }
                         });
                     }
@@ -349,6 +352,7 @@ public class GameFrame extends JFrame {
         }
         if (!movable){
             showFrontMoves(gameBoard.diceNumber);
+            JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
         }
     }
 
@@ -361,7 +365,7 @@ public class GameFrame extends JFrame {
     public void showFrontMoves(int diceNumber) {
         int invalidHedgehogs = 0;
 
-        statusBar.setText("\nPlease move the hedgehog on row " + currentDice+1);
+        statusBar.setText("\n\nPlease move the hedgehog on row " + gameBoard.getDiceNumber()+1);
         for (int i = 0; i < gameBoard.rowCount; i++) {
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[i][j].disableAllMoves();
@@ -440,7 +444,16 @@ public class GameFrame extends JFrame {
     
 
     private void setLeaderText() {
-        playerRemainingList.setText("    Player             Hedgehogs To Win \n");
+        ListInterface<Player> playerList = gameBoard.getPlayerList();
+        String str = "";
+        str += "    Player             Hedgehogs To Win \n";
+        for(int i = 0 ; i < gameBoard.playerCount ; i++){
+            if(playerList.get(i).isWinnable()){
+                str += "    " + playerList.get(i).getColorName() + "                " + (gameBoard.hedgehogCount - playerList.get(i).getFinishedHedgehogs()) + "\n";
+            }
+            else str += "    " + playerList.get(i).getColorName() + "                " + "Not Winnable" + "\n";
+        }
+        playerRemainingList.setText(str);
     }
 
     public void setStatusBar() {

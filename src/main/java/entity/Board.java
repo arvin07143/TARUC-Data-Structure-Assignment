@@ -2,6 +2,7 @@ package entity;
 
 import adt.ArrayList;
 import adt.ArrayQueue;
+import adt.ListInterface;
 import adt.QueueInterface;
 
 /**
@@ -55,6 +56,7 @@ public class Board {
     public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
 
+    private ListInterface<Player> playerList = new ArrayList<>();
     public QueueInterface<Player> playerQueue;
     public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
@@ -70,9 +72,12 @@ public class Board {
         this.winCount = winCount;
 
         currentPlayer = new Player(0,hedgehogCount);
+        playerList.add(currentPlayer);
         playerQueue = new ArrayQueue(playerCount);
         for(int i = 1 ; i < playerCount ; i++){
-            playerQueue.enqueue(new Player(i,hedgehogCount));
+            Player temp = new Player(i,hedgehogCount);
+            playerQueue.enqueue(temp);
+            playerList.add(temp);
         }
 
         ObstacleGridGenerator obstacleGen = new ObstacleGridGenerator();
@@ -143,10 +148,19 @@ public class Board {
             tempHedge.setRow(endRow);
             tempHedge.setColumn(endColumn);
             boardGrid[endRow][endColumn].pushHedgehog(tempHedge);
+
+            if(tempHedge.getColumn() == 7){
+                int finishedID = tempHedge.getId();
+                playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
+            }
             System.out.println(toString());
             return true;
         }
         return false;
+    }
+
+    public ListInterface<Player> getPlayerList() {
+        return playerList;
     }
 
     public boolean moveTokenUp(int startRow , int startColumn){
