@@ -6,6 +6,7 @@ import java.util.Scanner;
 import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
+import adt.*;
 
 public class Player implements Comparable<Player> {
 
@@ -92,9 +93,13 @@ public class Player implements Comparable<Player> {
         this.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int hedgehogNo, int row, int column) {
+    public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
+        Hedgehog temp = new Hedgehog();
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
+        temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
+        temp.setId(id);
+        playerMovement.push(temp);
     }
 
     public int getFinishedHedgehogs() {
