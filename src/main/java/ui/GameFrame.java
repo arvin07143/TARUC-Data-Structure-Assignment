@@ -28,6 +28,9 @@ public class GameFrame extends JFrame {
 
     private Board gameBoard;
     private int modeSelect;
+    private int columnAllowedHeight = 1;
+    private int columnHeightCounter = 0;
+    
 
     public GameFrame(int numPlayer, int numHedge, int winHedge, Integer modeSelect) {
         super("The Hedgehog Race");
@@ -157,11 +160,11 @@ public class GameFrame extends JFrame {
         });
 
     }
-
+    
     public void initPlayArea() {
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4, 8));
-
+        
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 8; j++) {
@@ -171,7 +174,8 @@ public class GameFrame extends JFrame {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             for (int i = 0; i < 4; i++) {
-                                if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT) {
+                                if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT &&
+                                    gameBoard.getBoardGrid()[i][0].getCellStackSize() < columnAllowedHeight) {
                                     setHiddenColor(i, 0);
                                     gameBoard.initPlacement(i, 0);
                                     playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
@@ -185,6 +189,10 @@ public class GameFrame extends JFrame {
                                         }
                                         System.out.println(gameBoard.toString());
                                         beginTurn();
+                                    }
+                                    columnHeightCounter++;
+                                    if (columnHeightCounter % 4 == 0){
+                                        columnAllowedHeight++;
                                     }
                                 }
                             }
