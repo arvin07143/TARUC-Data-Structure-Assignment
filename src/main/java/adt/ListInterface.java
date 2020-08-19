@@ -14,4 +14,5 @@ public interface ListInterface<T> {
 
     public T get(int index);
 
+    public void sortList();
 }

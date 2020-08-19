@@ -7,7 +7,7 @@ import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
 
-public class Player {
+public class Player implements Comparable<Player> {
 
     private int id;
     private boolean winnable ;
@@ -121,6 +121,11 @@ public class Player {
     
     public final void reset() {
     player.clear();
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        return o.getFinishedHedgehogs() - this.getFinishedHedgehogs();
     }
 
 }

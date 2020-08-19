@@ -444,6 +444,7 @@ public class GameFrame extends JFrame {
     
 
     private void setLeaderText() {
+        gameBoard.getPlayerList().sortList();
         ListInterface<Player> playerList = gameBoard.getPlayerList();
         String str = "";
         str += "    Player             Hedgehogs To Win \n";
