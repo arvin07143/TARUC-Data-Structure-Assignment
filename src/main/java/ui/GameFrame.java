@@ -294,7 +294,6 @@ public class GameFrame extends JFrame {
 
 
     public void beginTurn() {
-
         setLeaderText();
         drawCells();
         setCurrentDiceImage(gameBoard.getDiceNumber());
@@ -373,7 +372,7 @@ public class GameFrame extends JFrame {
     public void showFrontMoves(int diceNumber) {
         int invalidHedgehogs = 0;
 
-        statusBar.setText("\n\nPlease move the hedgehog on row " + (gameBoard.getDiceNumber()+1));
+        statusBar.setText("\n\nPlease move the hedgehog on row " + (gameBoard.getDiceNumber()));
         for (int i = 0; i < gameBoard.rowCount; i++) {
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[i][j].disableAllMoves();
