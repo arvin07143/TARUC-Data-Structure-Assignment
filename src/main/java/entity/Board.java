@@ -128,7 +128,7 @@ public class Board {
     }
 
     public void newDiceNumber() {
-        this.diceNumber = (int) (Math.random() * (rowCount - 1) + 1);
+        this.diceNumber = (int) (Math.random() * (rowCount) + 1);
     }
 
     public Cell[][] getBoardGrid() {
