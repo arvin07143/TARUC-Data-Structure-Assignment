@@ -10,7 +10,7 @@ public class Cell{
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //0.Normal 1.Wall 2.Pit 3.Blackhole
+    private int obstacleMode; //0.Normal 1.Wall 2.Pit 3.Blackhole
 
     //Constructors
     public Cell(){
@@ -70,6 +70,7 @@ public class Cell{
                     if (getCellStackSize() == 0){ 
                         pushingHedgehog.setStuck(true); //1st hedgehog that enters will get stuck
                     }
+                    System.out.println("STUCK YO MAMA");
                     break;
                     
                 case 3: //blackhole 
