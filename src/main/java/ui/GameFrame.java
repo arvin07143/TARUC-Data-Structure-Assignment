@@ -297,10 +297,10 @@ public class GameFrame extends JFrame {
         int col;
         
         for (int i = 0; i < playerHedgehogs.length; i++) {
-            if (!playerHedgehogs[i].isDisabled()) {
+            if (!playerHedgehogs[i].isDisabled() && !playerHedgehogs[i].isStuck()) {
                 row = playerHedgehogs[i].getRow();
                 col = playerHedgehogs[i].getColumn();
-                if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
+                if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && modeSelect == 1))) {
                     playBoard[row][col].enableMoveDown();
                     movable = true;
                     playBoard[row][col].revalidate();
@@ -371,7 +371,7 @@ public class GameFrame extends JFrame {
         Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
         if (hedgehogsInRow.length != 0) {
             for (int i = 0; i < hedgehogsInRow.length; i++) {
-                if (!(hedgehogsInRow[i].getColumn() == 7)){
+                if (hedgehogsInRow[i].getColumn() != 7 && !hedgehogsInRow[i].isStuck()){
                     if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
                         int cols = hedgehogsInRow[i].getColumn();
 

@@ -10,7 +10,7 @@ public class Cell{
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
-    private static int obstacleMode; //-1.Normal 0.Normal 1.Wall 2.Pit 3.Blackhole
+    private static int obstacleMode; //0.Normal 1.Wall 2.Pit 3.Blackhole
 
     //Constructors
     public Cell(){
@@ -58,12 +58,16 @@ public class Cell{
     
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
         if (this.obstacleEnabled == true) {
+            System.out.println(obstacleMode);
             switch (obstacleMode) {
-                case 1: //wall 
+                case 0: // just push the hedgehog normally
+                    break;
+                    
+                case 1: //wall (not supposed to be able to push into a wall)
                     return false;
                     
                 case 2: //pit 
-                    if (cellStack.getSize() == 0){ 
+                    if (getCellStackSize() == 0){ 
                         pushingHedgehog.setStuck(true); //1st hedgehog that enters will get stuck
                     }
                     break;
@@ -80,20 +84,9 @@ public class Cell{
         return true;
     }
     
-    public Hedgehog popHedgehog(Hedgehog poppingHedgehog){
+    public Hedgehog popHedgehog(){
         Hedgehog poppedHedgehog = null;
-        if (this.obstacleEnabled == true) {
-            switch (obstacleMode) {
-                case 2: //pit 
-                    if (!poppingHedgehog.isStuck()){
-                        poppedHedgehog = cellStack.pop();
-                    }     
-                    break;
-        
-                default: //case 1 just returns null; case 3 will not allow any hedgehog to leave, thus returning null also
-                    break;
-            }
-        } else {
+        if (!cellStack.peek().isStuck()) {
             poppedHedgehog = cellStack.pop();
         }
         return poppedHedgehog;

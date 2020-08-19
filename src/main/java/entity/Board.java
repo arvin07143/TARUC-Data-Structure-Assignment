@@ -81,7 +81,7 @@ public class Board {
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (obstacleGrid[i][j] && modeSelect != 0) {
-                    boardGrid[i][j] = new Cell(true, modeSelect); //true = pit
+                    boardGrid[i][j] = new Cell(true, modeSelect); //true = obstacles
                 } else {
                     boardGrid[i][j] = new Cell(); //default cell no obstacles
                 }
@@ -133,7 +133,7 @@ public class Board {
     public boolean moveToken(int startRow , int startColumn , int endRow , int endColumn){
         System.out.println(toString());
         if(boardGrid[startRow][startColumn].getCellStack().peek() != null && !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
-            Hedgehog tempHedge = boardGrid[startRow][startColumn].getCellStack().pop();
+            Hedgehog tempHedge = boardGrid[startRow][startColumn].popHedgehog();
             if(boardGrid[startRow][startColumn].getCellStack().getSize() >= 1){
                 boardGrid[startRow][startColumn].getCellStack().peek().setDisabled(false);
             }
@@ -142,7 +142,7 @@ public class Board {
             }
             tempHedge.setRow(endRow);
             tempHedge.setColumn(endColumn);
-            boardGrid[endRow][endColumn].getCellStack().push(tempHedge);
+            boardGrid[endRow][endColumn].pushHedgehog(tempHedge);
             System.out.println(toString());
             return true;
         }
