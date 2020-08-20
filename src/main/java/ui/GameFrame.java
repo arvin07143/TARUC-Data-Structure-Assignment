@@ -139,7 +139,7 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
               Hedgehog undoMovement = new Hedgehog();
-                JFrame frame = new JFrame("InputDialog Example #1");
+                JFrame frame = new JFrame("Invalid Undo");
                 if(gameBoard.isSideMoved()){
                     undoMovement = undoMovement.undo(gameBoard);
                     updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
