@@ -54,16 +54,12 @@ public class LinkedStack<T> implements StackInterface<T> {
     }
     
     public StackInterface<T> reverse(){
-        StackInterface<T> tempStack = new LinkedStack<T>();
         StackInterface<T> reversedStack = new LinkedStack<T>();
         if (!isEmpty()){
             Node currentNode = topNode;
             for (int i = 0; i < size; i++){
-                tempStack.push(currentNode.data);    
+                reversedStack.push(currentNode.data);    
                 currentNode = currentNode.next;
-            }
-            while (tempStack.getSize() != 0){
-                reversedStack.push(tempStack.pop());
             }
         }
         else 
