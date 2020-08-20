@@ -47,7 +47,6 @@ public class ArrayStack<T> implements StackInterface<T> {
         return topNum; // used to show the last movement of the player
     }
 
-
     public boolean isEmpty() {
         return topIndex < 0; // we assume topIndex as negative value when array is empty
     }

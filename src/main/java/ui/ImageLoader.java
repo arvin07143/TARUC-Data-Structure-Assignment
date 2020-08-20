@@ -12,7 +12,7 @@ public class ImageLoader {
 	 * @param iconName icon in the folder /images/ relative to the class path.
 	 * @return ImageIcon
 	 */
-	public static final ImageIcon loadIcon(String iconName) {
+	public static ImageIcon loadIcon(String iconName) {
 		try {
 			URL url = GameFrame.class.getResource("/images/" + iconName);
 			if (url != null) {

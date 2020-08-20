@@ -1,11 +1,10 @@
 package ui;
 
+import adt.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class CellView extends JPanel{
 
@@ -20,7 +19,7 @@ public class CellView extends JPanel{
     /** holds the hidden stack indicators */
     private JPanel leftPanel;
     /** hidden stack indicators */
-    private ArrayList<JPanel> hiddenColor;
+    private ListInterface<JPanel> hiddenColor;
 
     /** Movement buttons */
     private JButton upButton, downButton, forwardButton;
@@ -28,6 +27,7 @@ public class CellView extends JPanel{
     /** borders */
     private Border availableMoveBorder, stdBorder;
 
+    //Constructor
     public CellView(int obstacleMode) {
 
         super.setLayout(new BorderLayout());
@@ -43,7 +43,7 @@ public class CellView extends JPanel{
         leftPanel.setSize(new Dimension(12, 70));
         add(leftPanel, BorderLayout.WEST);
 
-        hiddenColor = new ArrayList<JPanel>();
+        hiddenColor = new ArrayList<>();
 
         upButton = new JButton("UP");
         downButton = new JButton("DOWN");
@@ -55,6 +55,22 @@ public class CellView extends JPanel{
         stdBorder = BorderFactory.createLineBorder(Color.black);
         setBorder(stdBorder);
     }
+
+    //Get
+
+    public JButton getUpButton() {
+        return upButton;
+    }
+
+    public JButton getDownButton() {
+        return downButton;
+    }
+
+    public JButton getForwardButton() {
+        return forwardButton;
+    }
+
+    //Set
 
     public void setBackgroundImage(int cellType) {
         if (cellType == -1) {
@@ -76,12 +92,6 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
-    public void disableAllMoves() { //disable moves buttons during placement
-        forwardButton.setVisible(false);
-        upButton.setVisible(false);
-        downButton.setVisible(false);
-    }
-
     public void setBorder(Color color) {
         availableMoveBorder = BorderFactory.createLineBorder(color, 3);
         setBorder(availableMoveBorder);
@@ -97,34 +107,35 @@ public class CellView extends JPanel{
         this.repaint();
     }
 
+    //Methods
+
+    public void disableAllMoves() { //disable moves buttons during placement
+        forwardButton.setVisible(false);
+        upButton.setVisible(false);
+        downButton.setVisible(false);
+    }
+
     public void removeTopHidden(){
         if (hiddenColor.size() >= 1) {
             leftPanel.remove(hiddenColor.get(hiddenColor.size() - 1));
             hiddenColor.remove(hiddenColor.size() - 1);
             this.repaint();
         }
-        System.out.println("ArrayList hiddenColor count: " + hiddenColor.size());
     }
 
-    public void enableMoveUp() {
+    public void enableMoveUp() { //show up button
         upButton.setVisible(true);
         setComponentZOrder(upButton, 0);
         repaint();
     }
 
-    /** Method enableMoveDown: <br />
-     * enables and makes visible the down button
-     */
-    public void enableMoveDown() {
+    public void enableMoveDown() { //show down button
         downButton.setVisible(true);
         setComponentZOrder(downButton, 0);
         this.repaint();
     }
 
-    /** Method enableMoveForward: <br />
-     * enables and makes visible the forward button
-     */
-    public void enableMoveForward() {
+    public void enableMoveForward() { //show forward button
         forwardButton.setVisible(true);
         setComponentZOrder(forwardButton, 0);
         this.repaint();
@@ -134,18 +145,5 @@ public class CellView extends JPanel{
         setBorder(stdBorder);
         this.repaint();
     }
-
-    public JButton getUpButton() {
-        return upButton;
-    }
-
-    public JButton getDownButton() {
-        return downButton;
-    }
-
-    public JButton getForwardButton() {
-        return forwardButton;
-    }
-
 
 }

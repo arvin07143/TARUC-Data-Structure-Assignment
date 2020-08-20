@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Flow;
 
 public class StartPanel extends JFrame{
     private JLabel playerCountLabel;
@@ -110,13 +109,13 @@ public class StartPanel extends JFrame{
         setVisible(true);
     }
 
-    private void startGame() {
-        GameFrame game = new GameFrame((Integer)playerCount.getSelectedItem(),(Integer)hedgehogCount.getSelectedItem()
-                ,(Integer)winningCount.getSelectedItem(), (Integer)modeSelect.getSelectedIndex());
-    }
-
     public static void main(String[] args){
         StartPanel panel = new StartPanel();
+    }
+
+    private void startGame() {
+        GameFrame game = new GameFrame((Integer)playerCount.getSelectedItem(),(Integer)hedgehogCount.getSelectedItem()
+                ,(Integer)winningCount.getSelectedItem(), modeSelect.getSelectedIndex());
     }
 
 

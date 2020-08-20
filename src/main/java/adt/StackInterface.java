@@ -2,17 +2,17 @@ package adt;
 
 public interface StackInterface<T> {
 
-    public void push(T newEntry);
+    void push(T newEntry);
 
-    public T pop();
+    T pop();
 
-    public T peek();
+    T peek();
     
-    public StackInterface<T> reverse();
+    StackInterface<T> reverse();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public void clear();
+    void clear();
     
-    public int getSize();
+    int getSize();
 }

@@ -128,7 +128,7 @@ public class GameFrame extends JFrame {
         passSideways.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (gameBoard.getStage() == gameBoard.PLAY && gameBoard.isSideMoved() != true) {
+                if (gameBoard.getStage() == gameBoard.PLAY && !gameBoard.isSideMoved()) {
                     gameBoard.setSideMoved(true);
                     showFrontMoves(gameBoard.diceNumber);
                 }
@@ -169,15 +169,6 @@ public class GameFrame extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
-            }
-        });
-
-    }
-    
     public void initPlayArea() {
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4, 8));
@@ -197,7 +188,7 @@ public class GameFrame extends JFrame {
                                     gameBoard.initPlacement(i, 0);
                                     updateCellStatus(0,0,i,0);
                                     gameBoard.newTurn();
-                                    setStatusBar();
+                                    setPlacementText();
                                     if (gameBoard.getStage() == gameBoard.PLAY) {
                                         for (int a = 0; a < gameBoard.rowCount; a++) {
                                             for (int b = 0; b < gameBoard.columnCount; b++) {
@@ -258,7 +249,7 @@ public class GameFrame extends JFrame {
 
         drawCells();
         add(playArea, BorderLayout.CENTER);
-        setStatusBar();
+        setPlacementText();
         pack();
         setVisible(true);
 
@@ -296,6 +287,12 @@ public class GameFrame extends JFrame {
 
     }
 
+    public void getTopColor(int targetRow, int targetCol) {
+        if (gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek() == null) topColor = null;
+        else
+            topColor = gameBoard.currentPlayer.colorOptions[gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek().getId()];
+    }
+
     private void setHiddenColor(int row, int col) {
         try {
             if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
@@ -307,7 +304,6 @@ public class GameFrame extends JFrame {
         }
         playBoard[row][col].repaint();
     }
-
 
     public void beginTurn() {
         setLeaderText();
@@ -378,12 +374,6 @@ public class GameFrame extends JFrame {
             showFrontMoves(gameBoard.diceNumber);
             JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
         }
-    }
-
-    public void getTopColor(int targetRow, int targetCol) {
-        if (gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek() == null) topColor = null;
-        else
-            topColor = gameBoard.currentPlayer.colorOptions[gameBoard.boardGrid[targetRow][targetCol].getCellStack().peek().getId()];
     }
 
     public void showFrontMoves(int diceNumber) {
@@ -467,27 +457,35 @@ public class GameFrame extends JFrame {
     }
 
     //Miscellaneous Setters
-    
 
     private void setLeaderText() {
         gameBoard.getPlayerList().sortList();
         ListInterface<Player> playerList = gameBoard.getPlayerList();
-        String str = "";
-        str += "    Player \tHedgehogs To Win \n";
+        StringBuilder str = new StringBuilder();
+        str.append("    Player \tHedgehogs To Win \n");
         for(int i = 0 ; i < gameBoard.playerCount ; i++){
             if(playerList.get(i).isWinnable()){
-                str += "    " + String.format("%-10s",playerList.get(i).getColorName()) + "\t" + String.format("%17d\n",(gameBoard.winCount - playerList.get(i).getFinishedHedgehogs()));
+                str.append("    ").append(String.format("%-10s", playerList.get(i).getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerList.get(i).getFinishedHedgehogs())));
             }
-            else str += "    " +String.format("%-10s",playerList.get(i).getColorName()) + "\t" + "Not Winnable" + "\n";
+            else str.append("    ").append(String.format("%-10s", playerList.get(i).getColorName())).append("\t").append("Not Winnable").append("\n");
         }
-        playerRemainingList.setText(str);
+        playerRemainingList.setText(str.toString());
     }
 
-    public void setStatusBar() {
+    public void setPlacementText() {
         statusBar.setText("\n\n" + "Player " + gameBoard.currentPlayer.getColorName() + " , Please place a hedgehog anywhere at the first column.");
     }
 
     public void setCurrentDiceImage(int x) {
         currentDice.setIcon(diceIcon[x - 1]);
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
+            }
+        });
+
     }
 }

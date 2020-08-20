@@ -1,8 +1,5 @@
 package entity;
 
-import adt.ArrayQueue;
-import adt.QueueInterface;
-import java.util.Scanner;
 import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
@@ -12,25 +9,19 @@ public class Player implements Comparable<Player> {
 
     private int id;
     private boolean winnable ;
-    public Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
-    private String[] colorNames = { "Red", "Green", "Blue", "Orange"};
-    private Color playerColor;
-    public String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
-    private ImageIcon playerImage;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
-    private QueueInterface<Player> player;
-    private static int MAX_PLAYER = 4;
     private int finishedHedgehogs = 0;
 
+    public final Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
+    private final String[] colorNames = { "Red", "Green", "Blue", "Orange"};
+    private Color playerColor;
+
+    public final String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
+    private ImageIcon playerImage;
+
     //Constructors
-    public Player() {
-        player = new ArrayQueue<Player>(MAX_PLAYER) {};
-        reset();
-    }
-
     public Player(int id, int hedgehogCount) {
-
         this.id = id;
         this.hedgehogCount = hedgehogCount;
         this.winnable = true;
@@ -45,11 +36,9 @@ public class Player implements Comparable<Player> {
     }
 
     //Get methods
-
     public Color getPlayerColor() {
         return playerColor;
     }
-
 
     public int getId() {
         return id;
@@ -71,26 +60,34 @@ public class Player implements Comparable<Player> {
         return winnable;
     }
 
-    public void setWinnable(boolean winnable) {
-        this.winnable = winnable;
-    }
-
-    //Set methods
-    public void SetPlayerColor(Color color) {
-        this.playerColor = color;
-    }
-
     public ImageIcon getPlayerImage() {
         return playerImage;
     }
 
+    public int getFinishedHedgehogs() {
+        return finishedHedgehogs;
+    }
+
     //Set methods
+
+    public void setWinnable(boolean winnable) {
+        this.winnable = winnable;
+    }
+
+    public void SetPlayerColor(Color color) {
+        this.playerColor = color;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public void setHedgehogCount(int hedgehogCount) {
         this.hedgehogCount = hedgehogCount;
+    }
+
+    public String getColorName(){
+        return colorNames[id];
     }
 
     public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
@@ -102,31 +99,21 @@ public class Player implements Comparable<Player> {
         playerMovement.push(temp);
     }
 
-    public int getFinishedHedgehogs() {
-        return finishedHedgehogs;
-    }
-
     public void setFinishedHedgehogs(int finishedHedgehogs) {
         this.finishedHedgehogs = finishedHedgehogs;
     }
 
-    public String getColorName(){
-        return colorNames[id];
-    }
     
     //toString
     @Override
     public String toString(){
-        String outputStr = "";
+        StringBuilder outputStr = new StringBuilder();
         for (int i = 0; i < hedgehogCount; i++) {
-            outputStr += "Hedgehog " + (i + 1) + ":" + hedgehogs[i] + "\n\n";
+            outputStr.append("Hedgehog ").append(i + 1).append(":").append(hedgehogs[i]).append("\n\n");
         }
-        return outputStr;
+        return outputStr.toString();
     }
-    
-    public final void reset() {
-    player.clear();
-    }
+
 
     @Override
     public int compareTo(Player o) {

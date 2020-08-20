@@ -2,17 +2,17 @@ package adt;
 
 public interface QueueInterface<T> {
 
-    public void enqueue(T newEntry);
+    void enqueue(T newEntry);
 
-    public T dequeue();
+    T dequeue();
 
-    public T peek();
+    T peek();
 
-    public void clear();
+    void clear();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public int getSize();
+    int getSize();
 
-    public int getFrontIndex();
+    int getFrontIndex();
 }

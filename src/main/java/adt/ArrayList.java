@@ -66,12 +66,8 @@ public class ArrayList<T> implements ListInterface<T> {
         }
     }
 
-    public int getArraySize() {
-        return arraySize;
-    }
-
     public T[] toArray() {
-        return (T[])currentArray;
+        return currentArray;
     }
 
     @Override
@@ -102,6 +98,11 @@ public class ArrayList<T> implements ListInterface<T> {
 
     public void sortList(){
         Arrays.sort(currentArray);
+    }
+
+    @Override
+    public int size() {
+        return arraySize;
     }
 
     @Override

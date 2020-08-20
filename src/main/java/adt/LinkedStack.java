@@ -1,10 +1,5 @@
 package adt;
-import entity.*;
 
-/**
- *
- * @author GV62 7RC
- */
 public class LinkedStack<T> implements StackInterface<T> {
 
     //Properties
@@ -80,18 +75,13 @@ public class LinkedStack<T> implements StackInterface<T> {
     
     //toString
     public String toString() {
-        String outputStr = "";
+        StringBuilder outputStr = new StringBuilder();
         Node currentNode = topNode;
         for (int i = 0; i < size; i++) {
-            /*
-            if (currentNode.data.getClass().equals(Player.class)){
-                outputStr += "Player " + (i+1) + "\n";
-            }
-            */
-            outputStr += currentNode.data + "\n";;
+            outputStr.append(currentNode.data).append("\n");
             currentNode = currentNode.next;
         }
-        return outputStr;
+        return outputStr.toString();
     }
 
     //Private node class

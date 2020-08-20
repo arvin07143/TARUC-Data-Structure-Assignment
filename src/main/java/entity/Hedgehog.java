@@ -3,21 +3,20 @@ package entity;
 import entity.*;
 import adt.*;
 import java.util.Scanner;
-/**
- *
- * @author Arvin Ng
- */
+
 public class Hedgehog {
 
+    private int id;
     private int row;
     private int column;
+
     private boolean stuck;
     private boolean disabled;
-    private int id;
     StackInterface<Hedgehog> tempTest = new ArrayStack<>();
 
-    public Hedgehog(){}
-    
+    public Hedgehog() {
+    }
+
     public Hedgehog(int id) {
         this.row = -1;
         this.column = -1;
@@ -108,12 +107,11 @@ public class Hedgehog {
      
         boolean checkObstacle = boardGrid[x-1][y].isObstacleEnabled();
         boolean obstacle = boardGrid[x-1][y].pushHedgehog(temp.getHedgehogs(i));
-        if(checkObstacle == true){
-            if (obstacle == true){
+        if(checkObstacle){
+            if (obstacle){
                 store = store.chg(player.getHedgehogs(i), i);
                 player.setHedgeHog(player.getId(), i, x, (y+1),playerMovement);
             }
-            else{}
         }
         else{
             store = store.chg(player.getHedgehogs(i), i);
@@ -141,7 +139,7 @@ public class Hedgehog {
             System.out.print("Move up or down (1.Up , 2.Down) : ");
             int movement = sc.nextInt();
             boolean check = false;
-            while (check == false)
+            while (!check)
                 if (movement == 1){
                         store = store.moveUp(i,x,y,temp,player,boardGrid,playerMovement,store);
                         check = true;
@@ -164,12 +162,11 @@ public class Hedgehog {
         temp.setHedgeHog(0, i, (x-1), y, tempTest);
         boolean checkObstacle = boardGrid[x-2][y-1].isObstacleEnabled();
         boolean obstacle = boardGrid[x-2][y-1].pushHedgehog(temp.getHedgehogs(i));
-        if(checkObstacle == true){
-            if (obstacle == true){
+        if(checkObstacle){
+            if (obstacle){
                 store = store.chg(player.getHedgehogs(i), i);
                 player.setHedgeHog(player.getId(), i, (x-1), y, playerMovement);
             }
-            else{}
         }
         else{
             store = store.chg(player.getHedgehogs(i), i);
@@ -182,12 +179,11 @@ public class Hedgehog {
         temp.setHedgeHog(0, i, (x+1), y, tempTest); // 2+1
         boolean checkObstacle = boardGrid[x][y-1].isObstacleEnabled();
         boolean obstacle = boardGrid[x][y-1].pushHedgehog(temp.getHedgehogs(i));
-        if(checkObstacle == true){
-            if (obstacle == true){
+        if(checkObstacle){
+            if (obstacle){
                 store = store.chg(player.getHedgehogs(i), i);
                 player.setHedgeHog(player.getId(), i, (x+1), y, playerMovement);
             }
-            else{}
         }
         else{
             store = store.chg(player.getHedgehogs(i), i);
