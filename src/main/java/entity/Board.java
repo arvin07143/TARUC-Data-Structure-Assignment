@@ -189,5 +189,12 @@ public class Board {
     public void skipSideways(){
         sideMoved = true;
     }
+    
+    public void endGame(){
+        
+        for (int i = 0; i < playerQueue.getSize(); i++){
+            
+        }
+    }
 
 }
