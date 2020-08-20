@@ -129,8 +129,8 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (gameBoard.getStage() == gameBoard.PLAY && gameBoard.isSideMoved() != true) {
-                    showFrontMoves(gameBoard.diceNumber);
                     gameBoard.setSideMoved(true);
+                    showFrontMoves(gameBoard.diceNumber);
                 }
             }
         });
