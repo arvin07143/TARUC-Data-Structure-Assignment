@@ -10,7 +10,7 @@ public class Player implements Comparable<Player> {
     private int id;
     private boolean winnable ;
     private static int hedgehogCount;
-    private Hedgehog[] hedgehogs;
+    private ListInterface<Hedgehog> hedgehogs;
     private int finishedHedgehogs = 0;
 
     public final Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
@@ -29,9 +29,9 @@ public class Player implements Comparable<Player> {
         playerColor = colorOptions[id]; //setting color based on id
         playerImage = ImageLoader.loadIcon(playerImageName[id]);
 
-        hedgehogs = new Hedgehog[hedgehogCount];
+        hedgehogs = new ArrayList<>();
         for (int i = 0; i < hedgehogCount; i++) {
-            hedgehogs[i] = new Hedgehog(id);
+            hedgehogs.add(new Hedgehog(id));
         }
     }
 
@@ -48,12 +48,12 @@ public class Player implements Comparable<Player> {
         return hedgehogCount;
     }
 
-    public Hedgehog[] getHedgehogs() {
+    public ListInterface<Hedgehog> getHedgehogs() {
         return hedgehogs;
     }
 
     public Hedgehog getHedgehogs(int hedgehogNo){
-        return hedgehogs[hedgehogNo-1];
+        return hedgehogs.get(hedgehogNo-1);
     }
 
     public boolean isWinnable() {
@@ -92,9 +92,9 @@ public class Player implements Comparable<Player> {
 
     public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
         Hedgehog temp = new Hedgehog();
-        hedgehogs[hedgehogNo-1].setRow(row);
-        hedgehogs[hedgehogNo-1].setColumn(column);
-        temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
+        hedgehogs.get(hedgehogNo-1).setRow(row);
+        hedgehogs.get(hedgehogNo-1).setColumn(column);
+        temp = temp.chg(hedgehogs.get(hedgehogNo-1), hedgehogNo);
         temp.setId(id);
         playerMovement.push(temp);
     }
@@ -109,7 +109,7 @@ public class Player implements Comparable<Player> {
     public String toString(){
         StringBuilder outputStr = new StringBuilder();
         for (int i = 0; i < hedgehogCount; i++) {
-            outputStr.append("Hedgehog ").append(i + 1).append(":").append(hedgehogs[i]).append("\n\n");
+            outputStr.append("Hedgehog ").append(i + 1).append(":").append(hedgehogs.get(i)).append("\n\n");
         }
         return outputStr.toString();
     }
