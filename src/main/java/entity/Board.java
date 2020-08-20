@@ -1,16 +1,7 @@
 package entity;
 
-import adt.ArrayList;
-import adt.ArrayQueue;
-import adt.ListInterface;
-import adt.QueueInterface;
-import adt.ArrayStack;
-import adt.StackInterface;
+import adt.*;
 
-/**
- *
- * @author Arvin Ng
- */
 public class Board {
 
     public final int PLACEMENT = 0;
@@ -39,7 +30,7 @@ public class Board {
     public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
 
-    private ListInterface<Player> playerList = new ArrayList<>();
+    private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
     public StackInterface<Hedgehog> playerMovement = new ArrayStack();
     public Hedgehog previousMovement = new Hedgehog();
@@ -57,6 +48,7 @@ public class Board {
         this.winCount = winCount;
 
         currentPlayer = new Player(0,hedgehogCount); //generate player queue
+        playerList = new ArrayList<>();
         playerList.add(currentPlayer);
         playerQueue = new ArrayQueue(playerCount);
         for(int i = 1 ; i < playerCount ; i++){
@@ -107,20 +99,14 @@ public class Board {
         return playerList;
     }
 
-    public Hedgehog[] getHedgehogInRow(int row){
+    public ArrayList<Hedgehog> getHedgehogInRow(int row){
         ArrayList<Hedgehog> hedgehogList = new ArrayList();
         for(int j = 0 ; j < columnCount ; j++){
             if(boardGrid[row][j].cellStack.peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck()) && !(boardGrid[row][j].getCellStack().peek().isDisabled())){
                 hedgehogList.add(boardGrid[row][j].cellStack.peek());
             }
         }
-
-        Hedgehog[] returnArray = new Hedgehog[hedgehogList.size()];
-        for(int i = 0 ; i < hedgehogList.size() ; i++){
-            returnArray[i] = hedgehogList.get(i);
-        }
-
-        return returnArray;
+        return hedgehogList;
     }
 
     //Set
@@ -159,9 +145,9 @@ public class Board {
         if(boardGrid[row][col].getCellStack().peek() != null){
             boardGrid[row][col].getCellStack().peek().setDisabled(true);
         }
-        boardGrid[row][col].pushHedgehog(currentPlayer.getHedgehogs()[currentHedge]);
-        currentPlayer.getHedgehogs()[currentHedge].setRow(row);
-        currentPlayer.getHedgehogs()[currentHedge].setColumn(col);
+        boardGrid[row][col].pushHedgehog(currentPlayer.getHedgehogs().get(currentHedge));
+        currentPlayer.getHedgehogs().get(currentHedge).setRow(row);
+        currentPlayer.getHedgehogs().get(currentHedge).setColumn(col);
     }
 
     public boolean moveTokenUp(int startRow , int startColumn){
@@ -192,7 +178,8 @@ public class Board {
         System.out.println(toString());
         previousMovement.setRow(startRow);
         previousMovement.setColumn(startColumn);
-        if(boardGrid[startRow][startColumn].getCellStack().peek() != null && !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
+        if(boardGrid[startRow][startColumn].getCellStack().peek() != null &&
+                !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
             Hedgehog tempHedge = boardGrid[startRow][startColumn].popHedgehog();
             if(boardGrid[startRow][startColumn].getCellStack().getSize() >= 1){
                 boardGrid[startRow][startColumn].getCellStack().peek().setDisabled(false);

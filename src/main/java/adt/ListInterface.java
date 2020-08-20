@@ -14,9 +14,9 @@ public interface ListInterface<T> {
 
     T get(int index);
 
-    T[] toArray();
+    int size();
 
     void sortList();
 
-    int size();
+    boolean isEmpty();
 }

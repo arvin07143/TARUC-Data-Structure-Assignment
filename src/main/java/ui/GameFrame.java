@@ -332,16 +332,16 @@ public class GameFrame extends JFrame {
     }
 
     public void showUpDownButtons() {
-        Hedgehog[] playerHedgehogs = gameBoard.currentPlayer.getHedgehogs();
+        ListInterface<Hedgehog> playerHedgehogs = gameBoard.currentPlayer.getHedgehogs();
         boolean movable = false;
         int row;
         int col;
         statusBar.setText("\n" + "Player " + gameBoard.currentPlayer.getColorName() + ", please move your pieces sideways or\nclick 'Pass Sideways Move' to skip your move.");
         
-        for (int i = 0; i < playerHedgehogs.length; i++) {
-            if (!playerHedgehogs[i].isDisabled() && !playerHedgehogs[i].isStuck()) {
-                row = playerHedgehogs[i].getRow();
-                col = playerHedgehogs[i].getColumn();
+        for (int i = 0; i < playerHedgehogs.size(); i++) {
+            if (!playerHedgehogs.get(i).isDisabled() && !playerHedgehogs.get(i).isStuck()) {
+                row = playerHedgehogs.get(i).getRow();
+                col = playerHedgehogs.get(i).getColumn();
                 if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && modeSelect == 1))) {
                     playBoard[row][col].enableMoveDown();
                     movable = true;
@@ -365,7 +365,7 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
-                if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row-1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs[i].isStuck())))) {
+                if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row-1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs.get(i).isStuck())))) {
                     playBoard[row][col].enableMoveUp();
                     movable = true;
                     if (playBoard[row][col].getUpButton().getActionListeners().length == 0) {
@@ -405,12 +405,12 @@ public class GameFrame extends JFrame {
             }
         }
 
-        Hedgehog[] hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
-        if (hedgehogsInRow.length != 0) {
-            for (int i = 0; i < hedgehogsInRow.length; i++) {
-                if (hedgehogsInRow[i].getColumn() != 7 && !hedgehogsInRow[i].isStuck()){
-                    if (!(gameBoard.getBoardGrid()[hedgehogsInRow[i].getRow()][hedgehogsInRow[i].getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
-                        int cols = hedgehogsInRow[i].getColumn();
+        ListInterface<Hedgehog> hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
+        if (hedgehogsInRow.size() != 0) {
+            for (int i = 0; i < hedgehogsInRow.size(); i++) {
+                if (hedgehogsInRow.get(i).getColumn() != 7 && !hedgehogsInRow.get(i).isStuck()){
+                    if (!(gameBoard.getBoardGrid()[hedgehogsInRow.get(i).getRow()][hedgehogsInRow.get(i).getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
+                        int cols = hedgehogsInRow.get(i).getColumn();
 
                         playBoard[diceNumber - 1][cols].enableMoveForward();
                         if (playBoard[diceNumber - 1][cols].getForwardButton().getActionListeners().length == 0) {
@@ -450,7 +450,7 @@ public class GameFrame extends JFrame {
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
             }
-            if (invalidHedgehogs == hedgehogsInRow.length){
+            if (invalidHedgehogs == hedgehogsInRow.size()){
                 JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
                 gameBoard.setForwardMoved(true);
                 gameBoard.newTurn();

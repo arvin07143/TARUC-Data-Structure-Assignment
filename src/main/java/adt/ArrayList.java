@@ -66,10 +66,6 @@ public class ArrayList<T> implements ListInterface<T> {
         }
     }
 
-    public T[] toArray() {
-        return currentArray;
-    }
-
     @Override
     public T get(int index) {
         return currentArray[index];
