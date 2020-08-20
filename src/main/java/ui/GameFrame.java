@@ -193,9 +193,9 @@ public class GameFrame extends JFrame {
                             for (int i = 0; i < 4; i++) {
                                 if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT &&
                                     gameBoard.getBoardGrid()[i][0].getCellStackSize() < columnAllowedHeight) {
-                                    setHiddenColor(i, 0);
+                                    getTopColor(i,0);
                                     gameBoard.initPlacement(i, 0);
-                                    playBoard[i][0].setCellImage(gameBoard.currentPlayer.getPlayerImage());
+                                    updateCellStatus(0,0,i,0);
                                     gameBoard.newTurn();
                                     setStatusBar();
                                     if (gameBoard.getStage() == gameBoard.PLAY) {
@@ -285,9 +285,10 @@ public class GameFrame extends JFrame {
         } else {
             playBoard[iniRow][iniCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getId()]));
         }
-        playBoard[iniRow][iniCol].removeTopHidden();
-        playBoard[iniRow][iniCol].repaint();
-
+        if(gameBoard.getStage() != gameBoard.PLACEMENT) {
+            playBoard[iniRow][iniCol].removeTopHidden();
+            playBoard[iniRow][iniCol].repaint();
+        }
         playBoard[finalRow][finalCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[finalRow][finalCol].getCellStack().peek().getId()]));
 
         setHiddenColor(finalRow, finalCol);
