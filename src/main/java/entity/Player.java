@@ -6,24 +6,26 @@ import java.util.Scanner;
 import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
-import adt.StackInterface;
+import adt.*;
 
-public class Player {
+public class Player implements Comparable<Player> {
 
     private int id;
-    private Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
+    private boolean winnable ;
+    public Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
     private String[] colorNames = { "Red", "Green", "Blue", "Orange"};
     private Color playerColor;
-    private String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
+    public String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
     private ImageIcon playerImage;
     private static int hedgehogCount;
     private Hedgehog[] hedgehogs;
-    private QueueInterface<Player> playerQueue;
+    private QueueInterface<Player> player;
     private static int MAX_PLAYER = 4;
+    private int finishedHedgehogs = 0;
 
     //Constructors
     public Player() {
-        playerQueue = new ArrayQueue<Player>(MAX_PLAYER);
+        player = new ArrayQueue<Player>(MAX_PLAYER) {};
         reset();
     }
 
@@ -31,6 +33,7 @@ public class Player {
 
         this.id = id;
         this.hedgehogCount = hedgehogCount;
+        this.winnable = true;
 
         playerColor = colorOptions[id]; //setting color based on id
         playerImage = ImageLoader.loadIcon(playerImageName[id]);
@@ -64,7 +67,14 @@ public class Player {
         return hedgehogs[hedgehogNo-1];
     }
 
-    
+    public boolean isWinnable() {
+        return winnable;
+    }
+
+    public void setWinnable(boolean winnable) {
+        this.winnable = winnable;
+    }
+
     //Set methods
     public void SetPlayerColor(Color color) {
         this.playerColor = color;
@@ -80,15 +90,24 @@ public class Player {
     }
 
     public void setHedgehogCount(int hedgehogCount) {
-        Player.hedgehogCount = hedgehogCount;
+        this.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
+    public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
         Hedgehog temp = new Hedgehog();
         hedgehogs[hedgehogNo-1].setRow(row);
         hedgehogs[hedgehogNo-1].setColumn(column);
         temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
+        temp.setId(id);
         playerMovement.push(temp);
+    }
+
+    public int getFinishedHedgehogs() {
+        return finishedHedgehogs;
+    }
+
+    public void setFinishedHedgehogs(int finishedHedgehogs) {
+        this.finishedHedgehogs = finishedHedgehogs;
     }
 
     public String getColorName(){
@@ -100,60 +119,18 @@ public class Player {
     public String toString(){
         String outputStr = "";
         for (int i = 0; i < hedgehogCount; i++) {
-            
             outputStr += "Hedgehog " + (i + 1) + ":" + hedgehogs[i] + "\n\n";
         }
         return outputStr;
     }
     
-    public void pass(Player currentPlayer,QueueInterface<Player> player){
-        currentPlayer = player.peek();
-        boolean isPass = true;
-        System.out.println("Pls choose ur movement");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        switch(choice){
-            case 1 : 
-                 isPass = true;
-                 System.out.println("You have pass ur movement.");
-                 break;
-            case 2 : 
-                isPass = false; 
-                System.out.println("Pls choose ur next movement");
-                break;
-        }
-    }
-    
-    public void afterLastMovement(Player currentPlayer,Player nextPlayer,QueueInterface<Player> player){
-        player.enqueue(currentPlayer); 
-        player.enqueue(nextPlayer); 
-        Player p1 = player.peek();
-        System.out.print(p1);
-        boolean isWon = true;
-        if (!isWon){
-        player.dequeue();
-        player.enqueue(player.dequeue());
-        }
-        else{
-            player.dequeue();
-        }
-    }
-    
-    public void leftLastPlayer(QueueInterface<Player> player){
-       if(player.getSize() == 1){
-           reset();
-        }
-       
-    }
-    
-    public void addPlayer(Player playerArr[]){
-        for (int i = 0; i < playerQueue.getSize();i++){
-            playerQueue.enqueue(playerArr[i]);
-        }
-    }
-    
     public final void reset() {
-    playerQueue.clear();
+    player.clear();
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        return o.getFinishedHedgehogs() - this.getFinishedHedgehogs();
     }
 
 }

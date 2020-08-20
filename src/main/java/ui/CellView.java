@@ -98,16 +98,18 @@ public class CellView extends JPanel{
     }
 
     public void removeTopHidden(){
-        if (hiddenColor.size() >= 1){
-            leftPanel.remove(hiddenColor.get(hiddenColor.size()-1));
-            hiddenColor.remove(hiddenColor.size()-1);
+        if (hiddenColor.size() >= 1) {
+            leftPanel.remove(hiddenColor.get(hiddenColor.size() - 1));
+            hiddenColor.remove(hiddenColor.size() - 1);
             this.repaint();
         }
+        System.out.println("ArrayList hiddenColor count: " + hiddenColor.size());
     }
 
     public void enableMoveUp() {
         upButton.setVisible(true);
         setComponentZOrder(upButton, 0);
+        repaint();
     }
 
     /** Method enableMoveDown: <br />
@@ -116,6 +118,7 @@ public class CellView extends JPanel{
     public void enableMoveDown() {
         downButton.setVisible(true);
         setComponentZOrder(downButton, 0);
+        this.repaint();
     }
 
     /** Method enableMoveForward: <br />
@@ -124,6 +127,7 @@ public class CellView extends JPanel{
     public void enableMoveForward() {
         forwardButton.setVisible(true);
         setComponentZOrder(forwardButton, 0);
+        this.repaint();
     }
 
     public void resetBorder() {

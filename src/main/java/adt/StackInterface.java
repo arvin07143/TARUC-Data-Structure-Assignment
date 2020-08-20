@@ -7,6 +7,8 @@ public interface StackInterface<T> {
     public T pop();
 
     public T peek();
+    
+    public StackInterface<T> reverse();
 
     public boolean isEmpty();
 

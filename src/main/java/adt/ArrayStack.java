@@ -1,11 +1,10 @@
 package adt;
-import entity.Player;
-import entity.Hedgehog;
+
 public class ArrayStack<T> implements StackInterface<T> {
 
+    private static final int DEFAULT_CAPACITY = 100;
     private T[] array;
     private int topIndex; // index of top entry
-    private static final int DEFAULT_CAPACITY = 100;
 
     public ArrayStack() {
         this(DEFAULT_CAPACITY);
@@ -48,30 +47,21 @@ public class ArrayStack<T> implements StackInterface<T> {
         return topNum; // used to show the last movement of the player
     }
 
+
     public boolean isEmpty() {
         return topIndex < 0; // we assume topIndex as negative value when array is empty
     }
 
     public void clear() {
         topIndex = -1; //assign to negative value and clear it.
-    }    
-    public void undoX(Player playerID, int i){
-        pop();
-        Hedgehog[] x ;
-        x = playerID.getHedgehogs(); 
-        x[i].setRow((int)array[topIndex]);       
-    }
-    
-    public void undoY(Player playerID, int i){
-        pop();
-        Hedgehog[] y ;
-        y = playerID.getHedgehogs(); 
-        y[i].setRow((int)array[topIndex]);       
     }
 
-    public int getSize(){
-        return topIndex;
-
+    public int getSize() {
+        return topIndex + 1;
     }
 
+    @Override
+    public StackInterface<T> reverse() {
+        return null;
+    }
 }

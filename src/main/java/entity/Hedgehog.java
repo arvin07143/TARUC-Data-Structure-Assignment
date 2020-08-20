@@ -1,7 +1,7 @@
 package entity;
 
-import adt.ArrayStack;
-import adt.StackInterface;
+import entity.*;
+import adt.*;
 import java.util.Scanner;
 /**
  *
@@ -12,16 +12,17 @@ public class Hedgehog {
     private int row;
     private int column;
     private boolean stuck;
+    private boolean disabled;
     private int id;
-
     StackInterface<Hedgehog> tempTest = new ArrayStack<>();
-    
-    public Hedgehog() {}
 
+    public Hedgehog(){}
+    
     public Hedgehog(int id) {
         this.row = -1;
         this.column = -1;
         this.stuck = false;
+        this.disabled = false;
         this.id = id;
     }
     
@@ -41,8 +42,15 @@ public class Hedgehog {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
     //Getters
     public int getRow() {
         return row;
@@ -62,43 +70,33 @@ public class Hedgehog {
     
     
     //toString
-    @Override
     public String toString(){
-        return "\nRow: " + row + "\nColumn: " + column;
+        return "\nRow: " + row + "\nColumn: " + column + "\nDisabled: " + isDisabled() + "\nID" + id;
     }
     
     public void undo (Player player, int i, Hedgehog store, StackInterface<Hedgehog> playerMovement){
         playerMovement.pop();
         int x = store.getRow();
         int y = store.getColumn();
-        player.setHedgeHog(i, x, y,playerMovement);
+        player.setHedgeHog(player.getId(), i, x, y,playerMovement);
     }
     
-
-    public Hedgehog chg(Player player, int hedgehog){
-        Hedgehog newHedgehog = new Hedgehog();
-        newHedgehog.setRow(player.getHedgehogs(hedgehog).getRow());
-        newHedgehog.setColumn(player.getHedgehogs(hedgehog).getColumn());       
-        return newHedgehog;
-
-    }
-	
-    public Hedgehog chg(Hedgehog hedgehog, int hedgehogNo){
+    public Hedgehog chg(Hedgehog hedgehog, int hedgehogNo ){
         Hedgehog newHedgehog = new Hedgehog();
         newHedgehog.setRow(hedgehog.getRow());
         newHedgehog.setColumn(hedgehog.getColumn());       
+       
         return newHedgehog;
-
     }
     
     public void viewAllMovement(StackInterface<Hedgehog> playerMovement){
-        for(int i = playerMovement.getSize() ; i >= 0 ; i--){
+        for(int i = playerMovement.getSize()-1 ; i >= 0 ; i--){
             System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());
         }
     }
     
     public void showPreviousMovement(StackInterface<Hedgehog> playerMovement){
-        System.out.print("Move " + (playerMovement.getSize()+1));
+        System.out.print("Move " + playerMovement.getSize());
         System.out.println(playerMovement.peek());
     }
     
@@ -106,40 +104,37 @@ public class Hedgehog {
         int x = player.getHedgehogs(i).getRow();
         int y = player.getHedgehogs(i).getColumn();
         Player temp = new Player(1,i);
-        temp.setHedgeHog(i, x, (y+1),tempTest);
+        temp.setHedgeHog(1,i, x, (y+1),tempTest);
      
         boolean checkObstacle = boardGrid[x-1][y].isObstacleEnabled();
         boolean obstacle = boardGrid[x-1][y].pushHedgehog(temp.getHedgehogs(i));
         if(checkObstacle == true){
             if (obstacle == true){
-                store = store.chg(player, i);
-                player.setHedgeHog(i, x, (y+1),playerMovement);
+                store = store.chg(player.getHedgehogs(i), i);
+                player.setHedgeHog(player.getId(), i, x, (y+1),playerMovement);
             }
             else{}
         }
         else{
-            store = store.chg(player, i);
-            player.setHedgeHog(i, x, (y+1),playerMovement);
+            store = store.chg(player.getHedgehogs(i), i);
+            player.setHedgeHog(player.getId(), i, x, (y+1),playerMovement);
         }
-        
+       
         return store;
     }
     
     public Hedgehog moveVertical(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid, Hedgehog store){
-        boolean checkObstacle;
-        boolean obstacle;
+        int x = player.getHedgehogs(i).getRow();
+        int y = player.getHedgehogs(i).getColumn();
         Scanner sc = new Scanner(System.in);
-        Hedgehog move = new Hedgehog(player.getHedgehogs()[i].getId());
-        int x = player.getHedgehogs(i).getRow(); // 
-        int y = player.getHedgehogs(i).getColumn(); 
-        Player temp = new Player(1,i);
+        Player temp = new Player(0,i);
         
         if (x == 4){
-            store = move.moveUp(i,x,y,temp,player,boardGrid,playerMovement,store);   
+            store = store.moveUp(i,x,y,temp,player,boardGrid,playerMovement,store);   
         }
         
         else if (x == 1){
-            store = move.moveDown(i,x,y,temp,player,boardGrid,playerMovement,store);  
+            store = store.moveDown(i,x,y,temp,player,boardGrid,playerMovement,store);  
         }
         
         else if (x == 2 || x == 3){
@@ -148,57 +143,56 @@ public class Hedgehog {
             boolean check = false;
             while (check == false)
                 if (movement == 1){
-                        store = move.moveUp(i,x,y,temp,player,boardGrid,playerMovement,store);
+                        store = store.moveUp(i,x,y,temp,player,boardGrid,playerMovement,store);
                         check = true;
                 }
                 else if (movement == 2){
-                        store = move.moveDown(i,x,y,temp,player,boardGrid,playerMovement,store);
+                        store = store.moveDown(i,x,y,temp,player,boardGrid,playerMovement,store);
                         check = true;
                 }
                 else{
                         System.out.println("Invalid Input!! Please Enter 1 or 2");
                         System.out.print("Move up or down (1.Up , 2.Down) : ");
                         movement = sc.nextInt();
+                        break;
                 }
             }
-       
         return store;
     }
-    
+ 
     public Hedgehog moveUp(int i, int x, int y, Player temp,Player player, Cell[][] boardGrid, StackInterface<Hedgehog> playerMovement, Hedgehog store){
-        temp.setHedgeHog(i, (x-1), y, tempTest);
+        temp.setHedgeHog(0, i, (x-1), y, tempTest);
         boolean checkObstacle = boardGrid[x-2][y-1].isObstacleEnabled();
         boolean obstacle = boardGrid[x-2][y-1].pushHedgehog(temp.getHedgehogs(i));
         if(checkObstacle == true){
             if (obstacle == true){
-                store = store.chg(player, i);
-                player.setHedgeHog(i, (x-1), y, playerMovement);
+                store = store.chg(player.getHedgehogs(i), i);
+                player.setHedgeHog(player.getId(), i, (x-1), y, playerMovement);
             }
             else{}
         }
         else{
-            store = store.chg(player, i);
-            player.setHedgeHog(i, (x-1), y, playerMovement);
+            store = store.chg(player.getHedgehogs(i), i);
+            player.setHedgeHog(player.getId(), i, (x-1), y, playerMovement);
         }
         return store;
     }
     
     public Hedgehog moveDown(int i, int x, int y, Player temp,Player player, Cell[][] boardGrid, StackInterface<Hedgehog> playerMovement, Hedgehog store){
-        temp.setHedgeHog(i, (x+1), y, tempTest); // 2+1
+        temp.setHedgeHog(0, i, (x+1), y, tempTest); // 2+1
         boolean checkObstacle = boardGrid[x][y-1].isObstacleEnabled();
         boolean obstacle = boardGrid[x][y-1].pushHedgehog(temp.getHedgehogs(i));
         if(checkObstacle == true){
             if (obstacle == true){
-                store = store.chg(player, i);
-                player.setHedgeHog(i, (x+1), y, playerMovement);
+                store = store.chg(player.getHedgehogs(i), i);
+                player.setHedgeHog(player.getId(), i, (x+1), y, playerMovement);
             }
             else{}
         }
         else{
-            store = store.chg(player, i);
-            player.setHedgeHog(i, (x+1), y, playerMovement);
+            store = store.chg(player.getHedgehogs(i), i);
+            player.setHedgeHog(player.getId(), i, (x+1), y, playerMovement);
         }
         return store;
     }
-    
 }

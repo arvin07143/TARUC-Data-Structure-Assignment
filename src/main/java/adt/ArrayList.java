@@ -1,5 +1,7 @@
 package adt;
 
+import java.util.Arrays;
+
 public class ArrayList<T> implements ListInterface<T> {
 
     private T[] currentArray;
@@ -68,8 +70,8 @@ public class ArrayList<T> implements ListInterface<T> {
         return arraySize;
     }
 
-    public T[] getCurrentArray() {
-        return currentArray;
+    public T[] toArray() {
+        return (T[])currentArray;
     }
 
     @Override
@@ -96,6 +98,10 @@ public class ArrayList<T> implements ListInterface<T> {
         currentArray = tempArray;
 
         arraySize --;
+    }
+
+    public void sortList(){
+        Arrays.sort(currentArray);
     }
 
     @Override
