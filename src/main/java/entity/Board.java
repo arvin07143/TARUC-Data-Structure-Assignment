@@ -1,7 +1,21 @@
 package entity;
 
+<<<<<<< HEAD
 import adt.*;
 
+=======
+import adt.ArrayList;
+import adt.ArrayQueue;
+import adt.ListInterface;
+import adt.QueueInterface;
+import adt.ArrayStack;
+import adt.StackInterface;
+
+/**
+ *
+ * @author Arvin Ng
+ */
+>>>>>>> dae9561b5b8426740ff117665ba4ba55660c8016
 public class Board {
 
     public final int PLACEMENT = 0;
@@ -32,6 +46,8 @@ public class Board {
 
     private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
+    public StackInterface<Hedgehog> playerMovement = new ArrayStack();
+    public Hedgehog previousMovement = new Hedgehog();
     public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
@@ -174,8 +190,14 @@ public class Board {
 
     public boolean moveToken(int startRow , int startColumn , int endRow , int endColumn){
         System.out.println(toString());
+<<<<<<< HEAD
         if(boardGrid[startRow][startColumn].getCellStack().peek() != null &&
                 !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
+=======
+        previousMovement.setRow(startRow);
+        previousMovement.setColumn(startColumn);
+        if(boardGrid[startRow][startColumn].getCellStack().peek() != null && !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
+>>>>>>> dae9561b5b8426740ff117665ba4ba55660c8016
             Hedgehog tempHedge = boardGrid[startRow][startColumn].popHedgehog();
             if(boardGrid[startRow][startColumn].getCellStack().getSize() >= 1){
                 boardGrid[startRow][startColumn].getCellStack().peek().setDisabled(false);
@@ -192,6 +214,8 @@ public class Board {
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
             System.out.println(toString());
+            System.out.println(tempHedge.getId());
+            playerMovement.push(tempHedge);
             return true;
         }
         return false;
