@@ -58,7 +58,7 @@ public class ArrayStack<T> implements StackInterface<T> {
     }    
 
     public int getSize(){
-        return topIndex;
+        return topIndex+1;
 
     }
 
