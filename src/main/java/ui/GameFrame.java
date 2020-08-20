@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
 
     String ruleListing =
             "Rules of the HedgeHog Race:" +
-                    "\n\nBeginning Stage:" +
+                    "\n\nPlacement Stage:" +
                     "\n   Each player places a hedgehog in the first column until all their hedgehogs are placed." +
                     "\n   Hedgehogs can't be stacked until all other rows are filled." +
 
@@ -321,7 +321,7 @@ public class GameFrame extends JFrame {
         boolean movable = false;
         int row;
         int col;
-        statusBar.setText("\n" + "Player " + gameBoard.currentPlayer.getColorName() + " , please move your pieces sideways or\nclick 'Pass Sideways Move' to skip your move.");
+        statusBar.setText("\n" + "Player " + gameBoard.currentPlayer.getColorName() + ", please move your pieces sideways or\nclick 'Pass Sideways Move' to skip your move.");
         
         for (int i = 0; i < playerHedgehogs.length; i++) {
             if (!playerHedgehogs[i].isDisabled() && !playerHedgehogs[i].isStuck()) {
