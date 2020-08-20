@@ -98,7 +98,7 @@ public class GameFrame extends JFrame {
                         "\n                     : Loke Kit Yao" +
                         "\n                     : Cham Chiang Hang" +
                         "\n Version: 1.0" +
-                        "\n Release Date: 15 / 8 / 2020" +
+                        "\n Release Date: 20 / 8 / 2020" +
                         "\n Description: " +
                         "\n    Project created for BACS2063 Assignment of TARUC" +
                         "\n    This game is about the furious battle of hedgehogs" +
@@ -321,6 +321,7 @@ public class GameFrame extends JFrame {
         boolean movable = false;
         int row;
         int col;
+        statusBar.setText("\n" + "Player " + gameBoard.currentPlayer.getColorName() + " , please move your pieces sideways or\nclick 'Pass Sideways Move' to skip your move.");
         
         for (int i = 0; i < playerHedgehogs.length; i++) {
             if (!playerHedgehogs[i].isDisabled() && !playerHedgehogs[i].isStuck()) {
