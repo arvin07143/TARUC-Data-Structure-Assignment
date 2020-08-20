@@ -32,6 +32,8 @@ public class Board {
 
     private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
+    public StackInterface<Hedgehog> playerMovement = new ArrayStack();
+    public Hedgehog previousMovement = new Hedgehog();
     public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
@@ -174,6 +176,8 @@ public class Board {
 
     public boolean moveToken(int startRow , int startColumn , int endRow , int endColumn){
         System.out.println(toString());
+        previousMovement.setRow(startRow);
+        previousMovement.setColumn(startColumn);
         if(boardGrid[startRow][startColumn].getCellStack().peek() != null &&
                 !(boardGrid[startRow][startColumn].getCellStack().peek().isDisabled())){
             Hedgehog tempHedge = boardGrid[startRow][startColumn].popHedgehog();
@@ -192,6 +196,8 @@ public class Board {
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
             System.out.println(toString());
+            System.out.println(tempHedge.getId());
+            playerMovement.push(tempHedge);
             return true;
         }
         return false;
