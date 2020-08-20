@@ -98,6 +98,9 @@ public class Board {
     }
 
     public void initPlacement(int row , int col){
+        if(boardGrid[row][col].getCellStack().peek() != null){
+            boardGrid[row][col].getCellStack().peek().setDisabled(true);
+        }
         boardGrid[row][col].pushHedgehog(currentPlayer.getHedgehogs()[currentHedge]);
         currentPlayer.getHedgehogs()[currentHedge].setRow(row);
         currentPlayer.getHedgehogs()[currentHedge].setColumn(col);
@@ -202,8 +205,6 @@ public class Board {
             forwardMoved = false;
             newDiceNumber();
         }
-
-        //System.out.println("Current Turn : " + turnCounter + "Current Player : " + currentPlayer.getId() + "Dice : " + getDiceNumber());
     }
 
     public Hedgehog[] getHedgehogInRow(int row){
