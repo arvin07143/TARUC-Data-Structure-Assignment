@@ -37,20 +37,20 @@ public class GameFrame extends JFrame {
     String ruleListing =
             "Rules of the HedgeHog Race:" +
                     "\n\nBeginning Stage:" +
-                    "\n   Each player places a hedgehog in the first row until all their hedgehogs are placed." +
+                    "\n   Each player places a hedgehog in the first column until all their hedgehogs are placed." +
                     "\n   Hedgehogs can't be stacked until all other rows are filled." +
 
                     "\n\nMovement Stage:" +
                     "\n   Each player has the opportunity to make a sideways move before moving a hedgehog forward." +
                     "\n   A hedgehog in the highlighted row MUST move forward, even if it doesn't belong to the current player." +
-                    "\n   If you don't want to move sideways, move a token forward or click the 'Skip Sideways Move' button." +
-                    "\n   The goal is to reach the cake, but watch out for obstacles!" +
+                    "\n   If you don't want to move sideways, just click the 'Skip Sideways Move' button." +
+                    "\n   The goal is to reach the finish line, but watch out for obstacles!" +
 
                     "\n\nObstacles:" +
-                    "\n   None : hedgehogs can just run through this green field . " +
-                    "\n   Wall : hedgehogs cant pass them . No , hedgehogs can't climb walls" +
-                    "\n   Pits : the first hedgehog that enters the pit is stuck forever . Subsequent hedgehogs can pass normally" +
-                    "\n   Black Holes: a hedgehog in a black hole is stuck there forever.  Be extra careful around them." +
+                    "\n   None : hedgehogs can just run through this green field. " +
+                    "\n   Wall : hedgehogs can't go through them. No, hedgehogs can't climb walls" +
+                    "\n   Pits : the first hedgehog that enters the pit is stuck FOREVER, subsequent hedgehogs can pass through them normally." +
+                    "\n   Black Holes : a hedgehog in a black hole is stuck there FOREVER. Be EXTRA careful around them." +
                     "\n\nHave Fun!";
     
 
