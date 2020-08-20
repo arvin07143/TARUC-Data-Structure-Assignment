@@ -48,10 +48,6 @@ public class ArrayStack<T> implements StackInterface<T> {
         return topNum; // used to show the last movement of the player
     }
 
-    @Override
-    public T find(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public boolean isEmpty() {
         return topIndex < 0; // we assume topIndex as negative value when array is empty

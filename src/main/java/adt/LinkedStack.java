@@ -11,7 +11,7 @@ public class LinkedStack<T> implements StackInterface<T> {
     private Node topNode;
     private int size;
 
-    //Constructors
+    //Constructor
     public LinkedStack() {
         this.topNode = null;
         this.size = 0;
@@ -53,16 +53,22 @@ public class LinkedStack<T> implements StackInterface<T> {
         return top;
     }
     
-    public T find(int index){ //index 0 = top, index 1 = 2nd top, index 2 = 3rd top......
-        Node currentNode = topNode;
-        T data = null;
-        if (!isEmpty() && index < size){
-            for (int i = 0; i < index; i++){
-                data = currentNode.data;
+    public StackInterface<T> reverse(){
+        StackInterface<T> tempStack = new LinkedStack<T>();
+        StackInterface<T> reversedStack = new LinkedStack<T>();
+        if (!isEmpty()){
+            Node currentNode = topNode;
+            for (int i = 0; i < size; i++){
+                tempStack.push(currentNode.data);    
                 currentNode = currentNode.next;
             }
+            while (tempStack.getSize() != 0){
+                reversedStack.push(tempStack.pop());
+            }
         }
-        return data;
+        else 
+            return null;
+        return reversedStack;
     }
 
     @Override

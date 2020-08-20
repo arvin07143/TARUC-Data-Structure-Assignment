@@ -45,15 +45,11 @@ public class Cell{
        
     //methods
     public int getCellStackSize(){
-        return cellStack.getSize();
+        return this.cellStack.getSize();
     }
     
     public StackInterface<Hedgehog> getReversedCellStack(){
-        StackInterface<Hedgehog> reversedCellStack = new LinkedStack<>();
-        for (int i = getCellStackSize() - 1; i >= 0; i--){
-            reversedCellStack.push(this.cellStack.find(i));        
-        }
-        return reversedCellStack;
+        return this.cellStack.reverse();
     }
     
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {

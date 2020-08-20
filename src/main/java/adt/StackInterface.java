@@ -8,7 +8,7 @@ public interface StackInterface<T> {
 
     public T peek();
     
-    public T find(int index);
+    public StackInterface<T> reverse();
 
     public boolean isEmpty();
 
