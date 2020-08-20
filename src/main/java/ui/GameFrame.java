@@ -138,7 +138,26 @@ public class GameFrame extends JFrame {
         undoBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+              Hedgehog undoMovement = new Hedgehog();
+                JFrame frame = new JFrame("InputDialog Example #1");
+                if(gameBoard.isSideMoved()){
+                    undoMovement = undoMovement.undo(gameBoard);
+                    updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
+                    gameBoard.setSideMoved(false);
+                    for (int i = 0; i < gameBoard.rowCount; i++) {
+                        for (int j = 0; j < gameBoard.columnCount; j++) {
+                            playBoard[i][j].getForwardButton().setVisible(false);
+                        }
+                    }
+                    for (int a = 0; a < gameBoard.columnCount; a++) {
+                        playBoard[gameBoard.diceNumber-1][a].resetBorder();
+                    }
+                    repaint();
+                    showUpDownButtons();
+                }
+                else{
+                    JOptionPane.showMessageDialog(frame,"You are not able to undo in this stage.");
+                }
             }
         });
         currentDice = new JLabel(ImageLoader.loadIcon("dice1.png"));

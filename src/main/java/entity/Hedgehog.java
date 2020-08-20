@@ -70,14 +70,23 @@ public class Hedgehog {
     
     //toString
     public String toString(){
-        return "\nRow: " + row + "\nColumn: " + column + "\nDisabled: " + isDisabled() + "\nID" + id;
+        return "\nID" + id + "\nRow: " + row + "\nColumn: " + column + "\nDisabled: " + isDisabled();
     }
     
-    public void undo (Player player, int i, Hedgehog store, StackInterface<Hedgehog> playerMovement){
-        playerMovement.pop();
-        int x = store.getRow();
-        int y = store.getColumn();
-        player.setHedgeHog(player.getId(), i, x, y,playerMovement);
+    public Hedgehog undo (Board gameBoard){
+        Hedgehog newCoor = new Hedgehog();
+        int initRow = gameBoard.playerMovement.peek().getRow();
+        int initColumn = gameBoard.playerMovement.peek().getColumn();
+        gameBoard.playerMovement.pop();
+
+        int finalRow = gameBoard.previousMovement.getRow();
+        int finalColumn = gameBoard.previousMovement.getColumn();
+        newCoor.setColumn(finalColumn);
+        newCoor.setRow(finalRow);
+        newCoor.setStuck(false);
+        gameBoard.moveToken(initRow, initColumn, finalRow, finalColumn);
+
+        return newCoor;
     }
     
     public Hedgehog chg(Hedgehog hedgehog, int hedgehogNo ){
