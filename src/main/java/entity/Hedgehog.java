@@ -90,13 +90,13 @@ public class Hedgehog {
     }
     
     public void viewAllMovement(StackInterface<Hedgehog> playerMovement){
-        for(int i = playerMovement.getSize() ; i >= 0 ; i--){
+        for(int i = playerMovement.getSize()-1 ; i >= 0 ; i--){
             System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());
         }
     }
     
     public void showPreviousMovement(StackInterface<Hedgehog> playerMovement){
-        System.out.print("Move " + (playerMovement.getSize()+1));
+        System.out.print("Move " + playerMovement.getSize());
         System.out.println(playerMovement.peek());
     }
     
