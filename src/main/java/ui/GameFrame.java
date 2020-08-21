@@ -501,15 +501,42 @@ public class GameFrame extends JFrame {
     //Miscellaneous Setters
 
     private void setLeaderText() {
-        gameBoard.getPlayerList().sortList();
         ListInterface<Player> playerList = gameBoard.getPlayerList();
+        Player[]playerArray = new Player[playerList.size()];
+
+        for(int i = 0 ; i < playerList.size() ; i++){
+            playerArray[i] = playerList.get(i);
+        }
+
+        Player temp;
+        boolean swapped;
+        for (int i = 0; i < playerArray.length-1; i++)
+        {
+            swapped = false;
+            for (int j = 0; j < playerArray.length - i - 1; j++)
+            {
+                if (playerArray[j].compareTo(playerArray[j + 1]) > 0)
+                {
+                    System.out.println("swapped");
+                    temp = playerArray[j];
+                    playerArray[j] = playerArray[j + 1];
+                    playerArray[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            // IF no two elements were
+            // swapped by inner loop, then break
+            if (swapped == false)
+                break;
+        }
         StringBuilder str = new StringBuilder();
         str.append("    Player \tHedgehogs To Win \n");
         for(int i = 0 ; i < gameBoard.playerCount ; i++){
-            if(playerList.get(i).isWinnable()){
-                str.append("    ").append(String.format("%-10s", playerList.get(i).getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerList.get(i).getFinishedHedgehogs())));
+            if(playerArray[i].isWinnable()){
+                str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerArray[i].getFinishedHedgehogs())));
             }
-            else str.append("    ").append(String.format("%-10s", playerList.get(i).getColorName())).append("\t").append("Not Winnable").append("\n");
+            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("Not Winnable").append("\n");
         }
         playerRemainingList.setText(str.toString());
     }

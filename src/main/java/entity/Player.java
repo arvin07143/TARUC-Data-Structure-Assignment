@@ -117,7 +117,9 @@ public class Player implements Comparable<Player> {
 
     @Override
     public int compareTo(Player o) {
-        return o.getFinishedHedgehogs() - this.getFinishedHedgehogs();
+        if(o.getFinishedHedgehogs() == this.getFinishedHedgehogs()) return 0;
+        else if(o.getFinishedHedgehogs() < this.getFinishedHedgehogs()) return -1;
+        else return 1;
     }
 
 }

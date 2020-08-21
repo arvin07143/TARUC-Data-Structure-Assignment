@@ -219,6 +219,7 @@ public class Board {
         }
     }
 
+
     public String toString(){
         StringBuilder str = new StringBuilder();
         for(int i = 0 ; i < rowCount ; i++){

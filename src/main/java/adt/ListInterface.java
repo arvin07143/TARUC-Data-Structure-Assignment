@@ -16,7 +16,5 @@ public interface ListInterface<T> {
 
     int size();
 
-    void sortList();
-
     boolean isEmpty();
 }
