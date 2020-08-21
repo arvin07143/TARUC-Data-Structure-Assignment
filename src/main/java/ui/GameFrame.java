@@ -34,6 +34,7 @@ public class GameFrame extends JFrame {
     private int modeSelect;
     private int columnAllowedHeight = 1;
     private int columnHeightCounter = 0;
+    private boolean pass = false;
 
     String ruleListing =
             "Rules of the HedgeHog Race:" +
@@ -131,6 +132,7 @@ public class GameFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (gameBoard.getStage() == gameBoard.PLAY && !gameBoard.isSideMoved()) {
                     gameBoard.setSideMoved(true);
+                    pass = true;
                     showFrontMoves(gameBoard.diceNumber);
                 }
             }
@@ -142,7 +144,7 @@ public class GameFrame extends JFrame {
               Hedgehog undoMovement = new Hedgehog();
                 JFrame frame = new JFrame("Invalid Undo");
                 if(gameBoard.isSideMoved()){
-                    if(gameBoard.playerMovement.peek().getRow() > gameBoard.previousMovement.getRow()){
+                    if (pass == false)
                         undoMovement = undoMovement.undo(gameBoard);
                         updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
                         gameBoard.setSideMoved(false);
@@ -156,21 +158,9 @@ public class GameFrame extends JFrame {
                         }
                         repaint();
                         showUpDownButtons();
-                    }
-                    else{
-                        gameBoard.setSideMoved(false);
-                        for (int i = 0; i < gameBoard.rowCount; i++) {
-                            for (int j = 0; j < gameBoard.columnCount; j++) {
-                                playBoard[i][j].getForwardButton().setVisible(false);
-                            }
-                        }
-                        for (int a = 0; a < gameBoard.columnCount; a++) {
-                            playBoard[gameBoard.diceNumber-1][a].resetBorder();
-                        }
-                        repaint();
-                        showUpDownButtons();
-                    }
+                    
                 }
+                
                 else{
                     JOptionPane.showMessageDialog(frame,"You are not able to undo in this stage.");
                 }
@@ -448,6 +438,7 @@ public class GameFrame extends JFrame {
                                                     playBoard[diceNumber - 1][a].resetBorder();
                                                     playBoard[diceNumber - 1][a].disableAllMoves();
                                                 }
+                                                pass = false;
                                                 gameBoard.endGame();
                                                 gameOverWindow();
                                                 gameBoard.newTurn();
