@@ -70,7 +70,7 @@ public class Hedgehog {
     
     //toString
     public String toString(){
-        return "\nID" + id + "\nRow: " + row + "\nColumn: " + column + "\nDisabled: " + isDisabled();
+        return "\nHedgehog Owner: Player " + (id+1) + "\nRow: " + row + "\nColumn: " + column + "\nDisabled: " + isDisabled();
     }
     
     public Hedgehog undo (Board gameBoard){
@@ -97,15 +97,15 @@ public class Hedgehog {
         return newHedgehog;
     }
     
-    public void viewAllMovement(StackInterface<Hedgehog> playerMovement){
-        for(int i = playerMovement.getSize()-1 ; i >= 0 ; i--){
-            System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());
+    public void viewAllMovement(Board gameBoard){
+        for(int i = gameBoard.playerMovement.getSize()-1 ; i >= 0 ; i--){
+            System.out.println("\n--------------\nMove " + (i+1) + " " + gameBoard.playerMovement.pop());
         }
     }
     
-    public void showPreviousMovement(StackInterface<Hedgehog> playerMovement){
-        System.out.print("Move " + playerMovement.getSize());
-        System.out.println(playerMovement.peek());
+    public void showPreviousMovement(Board gameBoard){
+        System.out.print("Move " + gameBoard.playerMovement.getSize());
+        System.out.println(gameBoard.playerMovement.peek());
     }
     
     public Hedgehog moveForward(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid, Hedgehog store){
