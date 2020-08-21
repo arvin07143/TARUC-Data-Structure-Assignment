@@ -41,6 +41,7 @@ public class Board {
 
     private int currentHedge = 0;
     private int turnCounter ;
+    
 
     public Board(int playerCount, int hedgehogCount, int winCount , int modeSelect) {
         this.playerCount = playerCount;
@@ -203,6 +204,7 @@ public class Board {
     }
 
     public void newTurn(){
+        endGame();
         turnCounter++;
         if(stage == PLACEMENT || forwardMoved){
             if(turnCounter % playerCount == 0){
@@ -218,6 +220,29 @@ public class Board {
             newDiceNumber();
         }
     }
+    
+    public void endGame(){
+    int stuckCounter = 0;
+    Hedgehog hedgehog = new Hedgehog();
+    Player[] plaArr = new Player[playerCount];
+    for (int i = 0;i < playerQueue.getSize();i++){
+        plaArr[i] = playerQueue.dequeue();
+        }
+    
+    for (int i = 0; i < playerCount;i ++){
+        if (plaArr[i].getFinishedHedgehogs() == winCount){
+          stage = GAME_OVER;      
+        }
+    }
+    if (hedgehog.isStuck()){
+        stuckCounter ++;
+        if (stuckCounter == (hedgehogCount * playerQueue.getSize()) - 1){
+            stage = GAME_OVER;
+        }
+    }
+    
+    }
+    
 
 
     public String toString(){
