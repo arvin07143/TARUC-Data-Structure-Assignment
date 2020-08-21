@@ -222,6 +222,8 @@ public class Board {
     }
     
     public void endGame(){
+    int stuckCounter = 0;
+    Hedgehog hedgehog = new Hedgehog();
     Player[] plaArr = new Player[playerCount];
     for (int i = 0;i < playerQueue.getSize();i++){
         plaArr[i] = playerQueue.dequeue();
@@ -230,6 +232,12 @@ public class Board {
     for (int i = 0; i < playerCount;i ++){
         if (plaArr[i].getFinishedHedgehogs() == winCount){
           stage = GAME_OVER;      
+        }
+    }
+    if (hedgehog.isStuck()){
+        stuckCounter ++;
+        if (stuckCounter == (hedgehogCount * playerQueue.getSize()) - 1){
+            stage = GAME_OVER;
         }
     }
     
