@@ -14,7 +14,7 @@ public interface ListInterface<T> {
 
     T get(int index);
 
-    int size();
-
     boolean isEmpty();
+
+    int size();
 }
