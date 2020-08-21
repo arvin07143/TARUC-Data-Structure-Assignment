@@ -73,5 +73,14 @@ public class ArrayQueue<T> implements QueueInterface<T> {
     public int getFrontIndex(){
         return frontIndex;
     }
+    
+    
+    public String toString (){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0 ; i < getSize(); i++){
+           str.append(i ).append(". ").append(array[i]).append("\n");
+        }
+        return str.toString();
+    }
 
 }
