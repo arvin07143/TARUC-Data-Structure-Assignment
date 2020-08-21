@@ -1,5 +1,6 @@
 package entity;
 
+import javax.swing.*;
 import entity.*;
 import adt.*;
 import java.util.Scanner;
@@ -78,7 +79,7 @@ public class Hedgehog {
         int initRow = gameBoard.playerMovement.peek().getRow();
         int initColumn = gameBoard.playerMovement.peek().getColumn();
         gameBoard.playerMovement.pop();
-
+        
         int finalRow = gameBoard.previousMovement.getRow();
         int finalColumn = gameBoard.previousMovement.getColumn();
         newCoor.setColumn(finalColumn);
@@ -103,9 +104,10 @@ public class Hedgehog {
         }
     }
     
-    public void showPreviousMovement(Board gameBoard){
-        System.out.print("Move " + gameBoard.playerMovement.getSize());
-        System.out.println(gameBoard.playerMovement.peek());
+    public void showPreviousMovement(Board gameBoard, JTextArea hedgehogMovement){
+        hedgehogMovement.append("Move " + (gameBoard.playerMovement.getSize()) + "\n" + "Hedgehog Owner: Player " + (gameBoard.playerMovement.peek().getId()+1) + 
+                "\nRow\t   : " + (gameBoard.playerMovement.peek().getRow()+1) + "\nColumn\t   : " + (gameBoard.playerMovement.peek().getColumn()+1) + 
+                "\n----------------------------------------------------------\n");
     }
     
     public Hedgehog moveForward(Player player, int i ,StackInterface<Hedgehog> playerMovement, Cell[][] boardGrid, Hedgehog store){

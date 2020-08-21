@@ -19,7 +19,7 @@ public class GameFrame extends JFrame {
     private CellView[][] playBoard;
     private JTextArea statusBar;
     private JTextArea playerRemainingList;
-    private JTextArea hedgehogMovement = new JTextArea(40, 22);  
+    private JTextArea hedgehogMovement = new JTextArea(15, 22);  
 
     private Color topColor;
 
@@ -485,7 +485,7 @@ public class GameFrame extends JFrame {
         final JFrame frame = new JFrame("Hedgehogs Movements");  
   
         // Display the window.  
-        frame.setSize(300, 700);  
+        frame.setSize(300, 300);  
         frame.setVisible(true);  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
   
@@ -550,9 +550,8 @@ public class GameFrame extends JFrame {
     }
     
     public void setCurrentHedgehogMovement(){
-        hedgehogMovement.append("Move " + (gameBoard.playerMovement.getSize()) + "\n" + "Hedgehog Owner: Player " + (gameBoard.playerMovement.peek().getId()+1) + 
-                "\nRow\t   : " + (gameBoard.playerMovement.peek().getRow()+1) + "\nColumn\t   : " + (gameBoard.playerMovement.peek().getColumn()+1) + 
-                "\n----------------------------------------------------------\n");
+        Hedgehog hedgehogMovements = new Hedgehog();
+        hedgehogMovements.showPreviousMovement(gameBoard, hedgehogMovement);
     }
     
     public static void main(String[] args) {
