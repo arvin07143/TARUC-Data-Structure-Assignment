@@ -196,7 +196,6 @@ public class Board {
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
             System.out.println(toString());
-            System.out.println(tempHedge.getId());
             playerMovement.push(tempHedge);
             return true;
         }
