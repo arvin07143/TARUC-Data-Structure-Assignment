@@ -226,15 +226,15 @@ public class Board {
     }
     
     public void endGame(){
-    for (int i = 0; i < playerCount;i ++){
-        /*if (playerArr[i].getFinishedHedgehogs() == winCount){
-          stage = GAME_OVER;      
-        }*/
-        System.out.print("lol" + playerArr[i]);
-    }
-    
-    
-    
+        for (int i = 0; i < playerCount;i ++){
+            for(int j = 1 ; j <= hedgehogCount ; j++){
+                if(playerList.get(i).getHedgehogs(j).getColumn() == 7){
+                    if (playerList.get(i).getFinishedHedgehogs() == winCount){
+                        stage = GAME_OVER;
+                    }
+                }
+            }
+        }
     }
     
 

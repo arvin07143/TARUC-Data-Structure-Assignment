@@ -434,6 +434,7 @@ public class GameFrame extends JFrame {
                                                     playBoard[diceNumber - 1][a].disableAllMoves();
                                                 }
                                                 gameBoard.endGame();
+                                                gameOverWindow();
                                                 gameBoard.newTurn();
                                                 setCurrentHedgehogMovement();
                                                 beginTurn();
@@ -498,6 +499,11 @@ public class GameFrame extends JFrame {
         
         scrollableHedgehogMovement.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
         frame.getContentPane().add(scrollableHedgehogMovement);  
+    }
+    
+    public void gameOverWindow(){
+        if(gameBoard.getStage() == gameBoard.GAME_OVER){
+        JOptionPane.showMessageDialog(null, "Game Over");}
     }
     //Miscellaneous Setters
 
