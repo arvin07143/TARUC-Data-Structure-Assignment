@@ -116,6 +116,7 @@ public class StartPanel extends JFrame{
     private void startGame() {
         GameFrame game = new GameFrame((Integer)playerCount.getSelectedItem(),(Integer)hedgehogCount.getSelectedItem()
                 ,(Integer)winningCount.getSelectedItem(), modeSelect.getSelectedIndex());
+        game.hedgehogMovementWindow();
     }
 
 

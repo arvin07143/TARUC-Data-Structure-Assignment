@@ -19,6 +19,7 @@ public class GameFrame extends JFrame {
     private CellView[][] playBoard;
     private JTextArea statusBar;
     private JTextArea playerRemainingList;
+    private JTextArea hedgehogMovement = new JTextArea(40, 22);  
 
     private Color topColor;
 
@@ -357,6 +358,7 @@ public class GameFrame extends JFrame {
                                             if (gameBoard.moveTokenDown(i, j)) System.out.println("CALLED");
                                             updateCellStatus(i, j, i + 1, j);
                                             gameBoard.setSideMoved(true);
+                                            setCurrentHedgehogMovement();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -379,6 +381,7 @@ public class GameFrame extends JFrame {
                                             if (gameBoard.moveTokenUp(i, j)) System.out.println("CALLED");
                                             updateCellStatus(i, j, i - 1, j);
                                             gameBoard.setSideMoved(true);
+                                            setCurrentHedgehogMovement();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -431,6 +434,7 @@ public class GameFrame extends JFrame {
                                                     playBoard[diceNumber - 1][a].disableAllMoves();
                                                 }
                                                 gameBoard.newTurn();
+                                                setCurrentHedgehogMovement();
                                                 beginTurn();
                                             }
                                         }
@@ -474,7 +478,26 @@ public class GameFrame extends JFrame {
         }
         playArea.repaint();
     }
-
+    
+    public void hedgehogMovementWindow() {  
+  
+        // Create and set up the window.  
+        final JFrame frame = new JFrame("Hedgehogs Movements");  
+  
+        // Display the window.  
+        frame.setSize(300, 700);  
+        frame.setVisible(true);  
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+  
+        // set flow layout for the frame  
+        frame.getContentPane().setLayout(new FlowLayout());  
+   
+        hedgehogMovement.setEditable(false);
+        JScrollPane scrollableHedgehogMovement = new JScrollPane(hedgehogMovement);  
+        
+        scrollableHedgehogMovement.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+        frame.getContentPane().add(scrollableHedgehogMovement);  
+    }
     //Miscellaneous Setters
 
     private void setLeaderText() {
@@ -525,11 +548,18 @@ public class GameFrame extends JFrame {
     public void setCurrentDiceImage(int x) {
         currentDice.setIcon(diceIcon[x - 1]);
     }
-
+    
+    public void setCurrentHedgehogMovement(){
+        hedgehogMovement.append("Move " + (gameBoard.playerMovement.getSize()) + "\n" + "Hedgehog Owner: Player " + (gameBoard.playerMovement.peek().getId()+1) + 
+                "\nRow\t   : " + (gameBoard.playerMovement.peek().getRow()+1) + "\nColumn\t   : " + (gameBoard.playerMovement.peek().getColumn()+1) + 
+                "\n----------------------------------------------------------\n");
+    }
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
+                game.hedgehogMovementWindow();
             }
         });
 
