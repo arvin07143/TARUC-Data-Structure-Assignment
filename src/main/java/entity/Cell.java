@@ -87,4 +87,13 @@ public class Cell{
         }
         return poppedHedgehog;
     }
+    
+    public boolean equals(Cell cellEntry){
+        if (cellEntry.getCellStack() == this.getCellStack()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
