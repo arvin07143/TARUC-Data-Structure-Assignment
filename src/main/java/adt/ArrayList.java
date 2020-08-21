@@ -27,14 +27,16 @@ public class ArrayList<T> implements ListInterface<T> {
 
         else if (index > -1 && index < arraySize) {
             makeSpace();
-
             T[] tempArray = (T[]) new Object[arraySize]; //arraySize already incremented in makeSpace()
-            System.arraycopy(currentArray, 0, tempArray, 0, index); //copy content before index
-            System.arraycopy(currentArray, index, tempArray, index + 1, arraySize - index - 1); //copy content after index
+            for(int i = 0 ; i < index ; i++){
+                tempArray[i] = currentArray[i];//copy content before index
+            }
+            for(int j = index+1 ; j < arraySize ; j++){
+                tempArray[j] = currentArray[j-1];
+            }
             tempArray[index] = newObject;
 
             currentArray = tempArray;
-
         }
     }
 
@@ -74,7 +76,9 @@ public class ArrayList<T> implements ListInterface<T> {
 
     public void makeSpace() {
         T[] tempArray = (T[]) new Object[arraySize + 1];
-        System.arraycopy(currentArray, 0, tempArray, 0, arraySize);
+        for(int i = 0 ; i < arraySize ; i++){
+            tempArray[i] = currentArray[i];
+        }
 
         currentArray = tempArray;
         arraySize++;
@@ -82,8 +86,13 @@ public class ArrayList<T> implements ListInterface<T> {
 
     public void reduceSpace(int startPos) {
         T[] tempArray = (T[]) new Object[arraySize - 1];
-        System.arraycopy(currentArray, 0, tempArray, 0, startPos);
-        System.arraycopy(currentArray, startPos + 1, tempArray, startPos, arraySize - 1 - startPos);
+        for(int i = 0 ; i < startPos ; i++){
+            tempArray[i] = currentArray[i];
+        }
+
+        for(int j = startPos+1 ; j < arraySize ; j++){
+            tempArray[j-1] = currentArray[j];
+        }
         currentArray = tempArray;
 
         arraySize--;
