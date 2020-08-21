@@ -74,7 +74,7 @@ public class ArrayList<T> implements ListInterface<T> {
         return arraySize == 0;
     }
 
-    public void makeSpace() {
+    private void makeSpace() {
         T[] tempArray = (T[]) new Object[arraySize + 1];
         for(int i = 0 ; i < arraySize ; i++){
             tempArray[i] = currentArray[i];
@@ -84,7 +84,7 @@ public class ArrayList<T> implements ListInterface<T> {
         arraySize++;
     }
 
-    public void reduceSpace(int startPos) {
+    private void reduceSpace(int startPos) {
         T[] tempArray = (T[]) new Object[arraySize - 1];
         for(int i = 0 ; i < startPos ; i++){
             tempArray[i] = currentArray[i];
