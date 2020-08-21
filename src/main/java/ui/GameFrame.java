@@ -504,7 +504,6 @@ public class GameFrame extends JFrame {
     public void gameOverWindow(){
         if(gameBoard.getStage() == gameBoard.GAME_OVER){
         JOptionPane.showMessageDialog(null, "Game Over");}
-        System.exit(0);
     }
     //Miscellaneous Setters
 
