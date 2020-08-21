@@ -77,7 +77,7 @@ public class ObstacleGridGenerator {
                     if (row == 0){
                         for (int x = row; x < row + 2; x++){
                             for (int y = col - 1; y < col + 2; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }
@@ -86,7 +86,7 @@ public class ObstacleGridGenerator {
                     else if (row == rows - 1){
                         for (int x = row - 1; x < row + 1; x++){
                             for (int y = col - 1; y < col + 2; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }
@@ -95,7 +95,7 @@ public class ObstacleGridGenerator {
                     else if (row == 1 || row == 2){
                         for (int x = row - 1; x < row + 2; x++){
                             for (int y = col - 1; y < col + 2; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }
@@ -106,7 +106,7 @@ public class ObstacleGridGenerator {
                     if (row == 0){
                         for (int x = row; x < row + 2; x++){
                             for (int y = col - 1; y < col + 1; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }
@@ -115,7 +115,7 @@ public class ObstacleGridGenerator {
                     else if (row == rows - 1){
                         for (int x = row - 1; x < row + 1; x++){
                             for (int y = col - 1; y < col + 1; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }
@@ -124,7 +124,7 @@ public class ObstacleGridGenerator {
                     else if (row == 1 || row == 2){
                         for (int x = row - 1; x < row + 2; x++){
                             for (int y = col - 1; y < col + 1; y++){
-                                if (obstacleGrid[x][y] == true){
+                                if (obstacleGrid[x][y]){
                                     return true;
                                 }
                             }

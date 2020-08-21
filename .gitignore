@@ -2,3 +2,5 @@
 /.idea/
 src/main/java/entity/Test.java
 src/main/java/entity/PitTest.java
+pom.xml
+Assignment.iml

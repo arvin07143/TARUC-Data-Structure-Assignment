@@ -1,8 +1,5 @@
 package entity;
 
-import adt.ArrayQueue;
-import adt.QueueInterface;
-import java.util.Scanner;
 import ui.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
@@ -12,25 +9,19 @@ public class Player implements Comparable<Player> {
 
     private int id;
     private boolean winnable ;
-    public Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
-    private String[] colorNames = { "Red", "Green", "Blue", "Orange"};
-    private Color playerColor;
-    public String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
-    private ImageIcon playerImage;
     private static int hedgehogCount;
-    private Hedgehog[] hedgehogs;
-    private QueueInterface<Player> player;
-    private static int MAX_PLAYER = 4;
+    private ListInterface<Hedgehog> hedgehogs;
     private int finishedHedgehogs = 0;
 
+    public final Color[] colorOptions = { Color.red, Color.green, Color.blue, Color.orange};
+    private final String[] colorNames = { "Red", "Green", "Blue", "Orange"};
+    private Color playerColor;
+
+    public final String[] playerImageName = {"pI1.png", "pI2.png", "pI3.png", "pI4.png"};
+    private ImageIcon playerImage;
+
     //Constructors
-    public Player() {
-        player = new ArrayQueue<Player>(MAX_PLAYER) {};
-        reset();
-    }
-
     public Player(int id, int hedgehogCount) {
-
         this.id = id;
         this.hedgehogCount = hedgehogCount;
         this.winnable = true;
@@ -38,18 +29,16 @@ public class Player implements Comparable<Player> {
         playerColor = colorOptions[id]; //setting color based on id
         playerImage = ImageLoader.loadIcon(playerImageName[id]);
 
-        hedgehogs = new Hedgehog[hedgehogCount];
+        hedgehogs = new ArrayList<>();
         for (int i = 0; i < hedgehogCount; i++) {
-            hedgehogs[i] = new Hedgehog(id);
+            hedgehogs.add(new Hedgehog(id));
         }
     }
 
     //Get methods
-
     public Color getPlayerColor() {
         return playerColor;
     }
-
 
     public int getId() {
         return id;
@@ -59,32 +48,36 @@ public class Player implements Comparable<Player> {
         return hedgehogCount;
     }
 
-    public Hedgehog[] getHedgehogs() {
+    public ListInterface<Hedgehog> getHedgehogs() {
         return hedgehogs;
     }
 
     public Hedgehog getHedgehogs(int hedgehogNo){
-        return hedgehogs[hedgehogNo-1];
+        return hedgehogs.get(hedgehogNo-1);
     }
 
     public boolean isWinnable() {
         return winnable;
     }
 
-    public void setWinnable(boolean winnable) {
-        this.winnable = winnable;
-    }
-
-    //Set methods
-    public void SetPlayerColor(Color color) {
-        this.playerColor = color;
-    }
-
     public ImageIcon getPlayerImage() {
         return playerImage;
     }
 
+    public int getFinishedHedgehogs() {
+        return finishedHedgehogs;
+    }
+
     //Set methods
+
+    public void setWinnable(boolean winnable) {
+        this.winnable = winnable;
+    }
+
+    public void SetPlayerColor(Color color) {
+        this.playerColor = color;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -93,40 +86,34 @@ public class Player implements Comparable<Player> {
         this.hedgehogCount = hedgehogCount;
     }
 
-    public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
-        Hedgehog temp = new Hedgehog();
-        hedgehogs[hedgehogNo-1].setRow(row);
-        hedgehogs[hedgehogNo-1].setColumn(column);
-        temp = temp.chg(hedgehogs[hedgehogNo-1], hedgehogNo);
-        temp.setId(id);
-        playerMovement.push(temp);
+    public String getColorName(){
+        return colorNames[id];
     }
 
-    public int getFinishedHedgehogs() {
-        return finishedHedgehogs;
+    public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
+        Hedgehog temp = new Hedgehog();
+        hedgehogs.get(hedgehogNo-1).setRow(row);
+        hedgehogs.get(hedgehogNo-1).setColumn(column);
+        temp = temp.chg(hedgehogs.get(hedgehogNo-1), hedgehogNo);
+        temp.setId(id);
+        playerMovement.push(temp);
     }
 
     public void setFinishedHedgehogs(int finishedHedgehogs) {
         this.finishedHedgehogs = finishedHedgehogs;
     }
 
-    public String getColorName(){
-        return colorNames[id];
-    }
     
     //toString
     @Override
     public String toString(){
-        String outputStr = "";
+        StringBuilder outputStr = new StringBuilder();
         for (int i = 0; i < hedgehogCount; i++) {
-            outputStr += "Hedgehog " + (i + 1) + ":" + hedgehogs[i] + "\n\n";
+            outputStr.append("Hedgehog ").append(i + 1).append(":").append(hedgehogs.get(i)).append("\n\n");
         }
-        return outputStr;
+        return outputStr.toString();
     }
-    
-    public final void reset() {
-    player.clear();
-    }
+
 
     @Override
     public int compareTo(Player o) {

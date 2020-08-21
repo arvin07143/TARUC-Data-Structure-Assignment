@@ -1,6 +1,5 @@
 package entity;
 import adt.*;
-import java.util.Random;
 
 /**
  *
@@ -53,7 +52,7 @@ public class Cell{
     }
     
     public boolean pushHedgehog(Hedgehog pushingHedgehog) {
-        if (this.obstacleEnabled == true) {
+        if (this.obstacleEnabled) {
             System.out.println(obstacleMode);
             switch (obstacleMode) {
                 case 0: // just push the hedgehog normally

@@ -47,7 +47,6 @@ public class ArrayStack<T> implements StackInterface<T> {
         return topNum; // used to show the last movement of the player
     }
 
-
     public boolean isEmpty() {
         return topIndex < 0; // we assume topIndex as negative value when array is empty
     }
@@ -62,6 +61,16 @@ public class ArrayStack<T> implements StackInterface<T> {
 
     @Override
     public StackInterface<T> reverse() {
-        return null;
+        StackInterface<T> reverseStack = new ArrayStack<>();
+        if(topIndex >0 ){
+            for (int i = topIndex+1 ; i >= 0 ; i--){
+                reverseStack.push(array[i]);
+            }
+        }
+        else
+            return null;
+        return reverseStack;
     }
+    
+    
 }
