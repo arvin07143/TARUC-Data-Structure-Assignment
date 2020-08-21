@@ -79,6 +79,7 @@ public class Hedgehog {
         int initRow = gameBoard.playerMovement.peek().getRow();
         int initColumn = gameBoard.playerMovement.peek().getColumn();
         gameBoard.playerMovement.pop();
+        gameBoard.playerMovement.pop();
         
         int finalRow = gameBoard.previousMovement.getRow();
         int finalColumn = gameBoard.previousMovement.getColumn();
