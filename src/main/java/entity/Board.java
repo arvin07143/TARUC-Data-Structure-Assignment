@@ -30,6 +30,7 @@ public class Board {
 
     public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
+    public Player losePlayer;
 
     private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
@@ -42,6 +43,7 @@ public class Board {
 
     private int currentHedge = 0;
     private int turnCounter ;
+    
     
 
     public Board(int playerCount, int hedgehogCount, int winCount , int modeSelect) {
@@ -226,6 +228,23 @@ public class Board {
     }
     
     public void endGame(){
+        int counter = 0;
+        for (int i = 0; i < playerCount;i ++){
+            for(int j = 1 ; j <= hedgehogCount ; j++){
+                if(playerList.get(i).getHedgehogs(j).isStuck()){
+                         int unwinnablePlayer = 0;
+                         counter++;
+                         if (counter > winCount){
+                               playerList.get(i).setWinnable(false);
+                               unwinnablePlayer++;
+                               if (playerCount - unwinnablePlayer == 1){
+                                    stage = GAME_OVER;
+                         }
+                    }
+                }
+            }
+        }
+        
         for (int i = 0; i < playerCount;i ++){
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).getColumn() == 7){
@@ -237,8 +256,27 @@ public class Board {
         }
     }
     
-
-
+    public void lose(){
+        
+        int counter = 0;
+        int unwinnablePlayer = 0;
+        for (int i = 0; i < playerCount;i ++){
+            for(int j = 1 ; j <= hedgehogCount ; j++){
+                if(playerList.get(i).getHedgehogs(j).isStuck()){
+                         counter++;
+                         if (counter > winCount){
+                               playerList.get(i).setWinnable(false);
+                               unwinnablePlayer++;
+                         }
+                    }
+                }
+            }
+        if (playerCount - unwinnablePlayer == 1){
+            stage = GAME_OVER;
+        }
+                
+    }
+    
     public String toString(){
         StringBuilder str = new StringBuilder();
         for(int i = 0 ; i < rowCount ; i++){
