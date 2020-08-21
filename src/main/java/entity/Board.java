@@ -26,6 +26,7 @@ public class Board {
     public int playerCount;
     public int hedgehogCount;
     public int winCount;
+    public Player [] playerArr;
 
     public Cell[][] boardGrid = new Cell[rowCount][columnCount];
     public Player currentPlayer;
@@ -47,6 +48,7 @@ public class Board {
         this.playerCount = playerCount;
         this.hedgehogCount = hedgehogCount;
         this.winCount = winCount;
+        playerArr = new Player[playerCount];
 
         currentPlayer = new Player(0,hedgehogCount); //generate player queue
         playerList = new ArrayList<>();
@@ -56,7 +58,10 @@ public class Board {
             Player temp = new Player(i,hedgehogCount);
             playerQueue.enqueue(temp);
             playerList.add(temp);
+            playerArr[i-1] = temp;
         }
+    
+        
 
         ObstacleGridGenerator obstacleGen = new ObstacleGridGenerator(); //generate obstacle grids
         boolean[][] obstacleGrid = obstacleGen.obstacleGridGeneration(rowCount, columnCount);
@@ -204,7 +209,6 @@ public class Board {
     }
 
     public void newTurn(){
-        endGame();
         turnCounter++;
         if(stage == PLACEMENT || forwardMoved){
             if(turnCounter % playerCount == 0){
@@ -222,24 +226,14 @@ public class Board {
     }
     
     public void endGame(){
-    int stuckCounter = 0;
-    Hedgehog hedgehog = new Hedgehog();
-    Player[] plaArr = new Player[playerCount];
-    for (int i = 0;i < playerQueue.getSize();i++){
-        plaArr[i] = playerQueue.dequeue();
-        }
-    
     for (int i = 0; i < playerCount;i ++){
-        if (plaArr[i].getFinishedHedgehogs() == winCount){
+        /*if (playerArr[i].getFinishedHedgehogs() == winCount){
           stage = GAME_OVER;      
-        }
+        }*/
+        System.out.print("lol" + playerArr[i]);
     }
-    if (hedgehog.isStuck()){
-        stuckCounter ++;
-        if (stuckCounter == (hedgehogCount * playerQueue.getSize()) - 1){
-            stage = GAME_OVER;
-        }
-    }
+    
+    
     
     }
     

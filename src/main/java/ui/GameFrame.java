@@ -433,6 +433,7 @@ public class GameFrame extends JFrame {
                                                     playBoard[diceNumber - 1][a].resetBorder();
                                                     playBoard[diceNumber - 1][a].disableAllMoves();
                                                 }
+                                                gameBoard.endGame();
                                                 gameBoard.newTurn();
                                                 setCurrentHedgehogMovement();
                                                 beginTurn();
