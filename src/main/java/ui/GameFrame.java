@@ -529,7 +529,7 @@ public class GameFrame extends JFrame {
     public void gameOverWindow(){
         if(gameBoard.getStage() == gameBoard.GAME_OVER){
             String color = gameBoard.color;
-        JOptionPane.showMessageDialog(null, "Game Over.Player" + color);
+        JOptionPane.showMessageDialog(null, "Game Over.Player " + color + " has won!");
         System.exit(0);
         }
     }

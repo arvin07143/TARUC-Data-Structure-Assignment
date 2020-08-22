@@ -241,14 +241,14 @@ public class Board {
                                unwinnablePlayer++;
                                if (playerCount - unwinnablePlayer == 1){
                                     stage = GAME_OVER;
-                                if(playerList.get(i).isWinnable() == true){
-                                    color = playerList.get(i).getColorName();
                                 }
-                         }
+                            }
+                        }
                     }
-                }
+            if (playerList.get(i).isWinnable() == true){
+                color = playerList.get(i).getColorName();
             }
-        }
+                }
         
         for (int i = 0; i < playerCount;i ++){
             for(int j = 1 ; j <= hedgehogCount ; j++){
@@ -262,6 +262,7 @@ public class Board {
         }
         return color;
     }
+    
     
     public String toString(){
         StringBuilder str = new StringBuilder();
