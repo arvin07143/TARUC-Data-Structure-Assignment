@@ -508,7 +508,7 @@ public class GameFrame extends JFrame {
         // Display the window.  
         frame.setSize(300, 300);  
         frame.setVisible(true);  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  
   
         // set flow layout for the frame  
         frame.getContentPane().setLayout(new FlowLayout());  
