@@ -3,7 +3,7 @@ import adt.*;
 
 public class Cell{
     //Attributes
-    StackInterface<Hedgehog> cellStack = new LinkedStack<>();
+    private StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
     private int obstacleMode; //0.Normal 1.Wall 2.Pit 3.Blackhole
 
@@ -91,5 +91,25 @@ public class Cell{
         else{
             return false;
         }
+    }
+    
+    //toString
+    public String toString(){
+        String str = "\nCell Stack: " + cellStack.toString() + "\nObstacle Enabled: " + (obstacleEnabled ? "Yes" : "No") + "\nObstacle Mode: ";
+        switch(obstacleMode){
+            case 0:
+                str += "None";
+                break;
+            case 1:
+                str += "Walls";
+                break;
+            case 2:
+                str += "Pits";
+                break;
+            case 3:
+                str += "Black Holes";
+                break;            
+        }
+        return str;
     }
 }
