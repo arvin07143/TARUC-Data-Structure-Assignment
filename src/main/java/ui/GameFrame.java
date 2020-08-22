@@ -170,6 +170,7 @@ public class GameFrame extends JFrame {
                             playBoard[gameBoard.diceNumber-1][a].resetBorder();
                         }
                         repaint();
+                        pass = false;
                         showUpDownButtons();
                     }
                 }

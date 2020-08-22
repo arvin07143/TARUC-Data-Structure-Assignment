@@ -13,7 +13,7 @@ public class Hedgehog {
 
     private boolean stuck;
     private boolean disabled;
-    StackInterface<Hedgehog> tempTest = new ArrayStack<>();
+    private StackInterface<Hedgehog> tempTest = new ArrayStack<>();
 
     public Hedgehog() {
     }
