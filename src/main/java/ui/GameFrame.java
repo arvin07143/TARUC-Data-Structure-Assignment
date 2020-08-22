@@ -483,6 +483,8 @@ public class GameFrame extends JFrame {
                 playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
             }
             if (invalidHedgehogs == hedgehogsInRow.size()){
+                gameBoard.endGame();
+                gameOverWindow();
                 JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
                 gameBoard.setForwardMoved(true);
                 gameBoard.newTurn();
@@ -494,6 +496,8 @@ public class GameFrame extends JFrame {
                 beginTurn();
             }
         } else {
+            gameBoard.endGame();
+            gameOverWindow();
             JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
             gameBoard.setForwardMoved(true);
             gameBoard.newTurn();
