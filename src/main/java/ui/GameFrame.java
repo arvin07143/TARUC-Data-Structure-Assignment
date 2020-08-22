@@ -144,7 +144,7 @@ public class GameFrame extends JFrame {
               Hedgehog undoMovement = new Hedgehog();
                 JFrame frame = new JFrame("Invalid Undo");
                 if(gameBoard.isSideMoved()){
-                    if (pass == false)
+                    if (pass == false){
                         undoMovement = undoMovement.undo(gameBoard);
                         updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
                         gameBoard.setSideMoved(false);
@@ -158,7 +158,20 @@ public class GameFrame extends JFrame {
                         }
                         repaint();
                         showUpDownButtons();
-                    
+                        
+                    }
+                    if (pass == true){
+                        for (int i = 0; i < gameBoard.rowCount; i++) {
+                            for (int j = 0; j < gameBoard.columnCount; j++) {
+                                playBoard[i][j].getForwardButton().setVisible(false);
+                            }
+                        }
+                        for (int a = 0; a < gameBoard.columnCount; a++) {
+                            playBoard[gameBoard.diceNumber-1][a].resetBorder();
+                        }
+                        repaint();
+                        showUpDownButtons();
+                    }
                 }
                 
                 else{
