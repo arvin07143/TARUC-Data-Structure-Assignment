@@ -530,7 +530,6 @@ public class GameFrame extends JFrame {
             {
                 if (playerArray[j].compareTo(playerArray[j + 1]) > 0)
                 {
-                    System.out.println("swapped");
                     temp = playerArray[j];
                     playerArray[j] = playerArray[j + 1];
                     playerArray[j + 1] = temp;
