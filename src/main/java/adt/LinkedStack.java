@@ -1,8 +1,7 @@
 package adt;
 
 public class LinkedStack<T> implements StackInterface<T> {
-
-    //Properties
+    //Attributes
     private Node topNode;
     private int size;
 

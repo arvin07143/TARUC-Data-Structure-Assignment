@@ -1,10 +1,6 @@
 package entity;
 import adt.*;
 
-/**
- *
- * @author GV62 7RC
- */
 public class Cell{
     //Attributes
     StackInterface<Hedgehog> cellStack = new LinkedStack<>();
@@ -20,7 +16,7 @@ public class Cell{
         this.obstacleMode = obstacleMode;
     }
    
-    //Setter
+    //Setters
     public void setCellStack(StackInterface<Hedgehog> cellStack) {
         this.cellStack = cellStack;
     }
@@ -31,7 +27,7 @@ public class Cell{
         this.obstacleMode = obstacleMode;
     }
     
-    //Getter
+    //Getters
     public StackInterface<Hedgehog> getCellStack() {
         return cellStack;
     }
