@@ -1,6 +1,7 @@
 package entity;
 
 import adt.*;
+import java.awt.Color;
 
 public class Board {
 
@@ -34,13 +35,14 @@ public class Board {
 
     private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
-    public StackInterface<Hedgehog> playerMovement = new ArrayStack();
+    public Hedgehog playerMovement = new Hedgehog();
     public Hedgehog previousMovement = new Hedgehog();
     public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
     private int stage;					//placement, play, or game over
-
+    public String color;
+    
     private int currentHedge = 0;
     private int turnCounter ;
     
@@ -204,7 +206,7 @@ public class Board {
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
             System.out.println(toString());
-            playerMovement.push(tempHedge);
+            playerMovement.pushHedgehog(tempHedge);
             return true;
         }
         return false;
@@ -227,9 +229,9 @@ public class Board {
         }
     }
     
-    public void endGame(){
-        int counter = 0;
+    public String endGame(){
         for (int i = 0; i < playerCount;i ++){
+            int counter = 0;
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).isStuck()){
                          int unwinnablePlayer = 0;
@@ -239,43 +241,28 @@ public class Board {
                                unwinnablePlayer++;
                                if (playerCount - unwinnablePlayer == 1){
                                     stage = GAME_OVER;
-                         }
+                                }
+                            }
+                        }
                     }
-                }
+            if (playerList.get(i).isWinnable() == true){
+                color = playerList.get(i).getColorName();
             }
-        }
+                }
         
         for (int i = 0; i < playerCount;i ++){
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).getColumn() == 7){
                     if (playerList.get(i).getFinishedHedgehogs() == winCount){
                         stage = GAME_OVER;
+                        color = playerList.get(i).getColorName();
                     }
                 }
             }
         }
+        return color;
     }
     
-    public void lose(){
-        
-        int counter = 0;
-        int unwinnablePlayer = 0;
-        for (int i = 0; i < playerCount;i ++){
-            for(int j = 1 ; j <= hedgehogCount ; j++){
-                if(playerList.get(i).getHedgehogs(j).isStuck()){
-                         counter++;
-                         if (counter > winCount){
-                               playerList.get(i).setWinnable(false);
-                               unwinnablePlayer++;
-                         }
-                    }
-                }
-            }
-        if (playerCount - unwinnablePlayer == 1){
-            stage = GAME_OVER;
-        }
-                
-    }
     
     public String toString(){
         StringBuilder str = new StringBuilder();

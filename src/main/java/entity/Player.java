@@ -91,12 +91,8 @@ public class Player implements Comparable<Player> {
     }
 
     public void setHedgeHog(int id, int hedgehogNo, int row, int column, StackInterface<Hedgehog> playerMovement) {
-        Hedgehog temp = new Hedgehog();
         hedgehogs.get(hedgehogNo-1).setRow(row);
         hedgehogs.get(hedgehogNo-1).setColumn(column);
-        temp = temp.chg(hedgehogs.get(hedgehogNo-1), hedgehogNo);
-        temp.setId(id);
-        playerMovement.push(temp);
     }
 
     public void setFinishedHedgehogs(int finishedHedgehogs) {

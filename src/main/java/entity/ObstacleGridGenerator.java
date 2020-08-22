@@ -10,8 +10,8 @@ public class ObstacleGridGenerator {
 
     private static Random random = new Random();
 
-    int obstacleCount = 0;
-    int maxInvalidCounter = 0;
+    public int obstacleCount = 0;
+    public int maxInvalidCounter = 0;
 
     //true = pit
     public boolean[][] obstacleGridGeneration(int rows, int columns) {

@@ -141,11 +141,11 @@ public class GameFrame extends JFrame {
         undoBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              Hedgehog undoMovement = new Hedgehog();
+                Hedgehog undoMovement = new Hedgehog();
                 JFrame frame = new JFrame("Invalid Undo");
                 if(gameBoard.isSideMoved()){
-                    if (pass == false)
-                        undoMovement = undoMovement.undo(gameBoard);
+                    if (pass == false){
+                        undoMovement = gameBoard.playerMovement.undo(gameBoard);
                         updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
                         gameBoard.setSideMoved(false);
                         for (int i = 0; i < gameBoard.rowCount; i++) {
@@ -158,7 +158,21 @@ public class GameFrame extends JFrame {
                         }
                         repaint();
                         showUpDownButtons();
-                    
+                        
+                    }
+                    if (pass == true){
+                        for (int i = 0; i < gameBoard.rowCount; i++) {
+                            for (int j = 0; j < gameBoard.columnCount; j++) {
+                                playBoard[i][j].getForwardButton().setVisible(false);
+                            }
+                        }
+                        for (int a = 0; a < gameBoard.columnCount; a++) {
+                            playBoard[gameBoard.diceNumber-1][a].resetBorder();
+                        }
+                        repaint();
+                        pass = false;
+                        showUpDownButtons();
+                    }
                 }
                 
                 else{
@@ -364,6 +378,8 @@ public class GameFrame extends JFrame {
                                             updateCellStatus(i, j, i + 1, j);
                                             gameBoard.setSideMoved(true);
                                             setCurrentHedgehogMovement();
+                                            gameBoard.endGame();
+                                            gameOverWindow();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -387,6 +403,8 @@ public class GameFrame extends JFrame {
                                             updateCellStatus(i, j, i - 1, j);
                                             gameBoard.setSideMoved(true);
                                             setCurrentHedgehogMovement();
+                                            gameBoard.endGame();
+                                            gameOverWindow();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -398,6 +416,8 @@ public class GameFrame extends JFrame {
             }
         }
         if (!movable){
+            gameBoard.endGame();
+            gameOverWindow();
             showFrontMoves(gameBoard.diceNumber);
             JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
         }
@@ -495,7 +515,7 @@ public class GameFrame extends JFrame {
         // Display the window.  
         frame.setSize(300, 300);  
         frame.setVisible(true);  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  
   
         // set flow layout for the frame  
         frame.getContentPane().setLayout(new FlowLayout());  
@@ -509,7 +529,10 @@ public class GameFrame extends JFrame {
     
     public void gameOverWindow(){
         if(gameBoard.getStage() == gameBoard.GAME_OVER){
-        JOptionPane.showMessageDialog(null, "Game Over");}
+            String color = gameBoard.color;
+        JOptionPane.showMessageDialog(null, "Game Over.Player " + color + " has won!");
+        System.exit(0);
+        }
     }
     //Miscellaneous Setters
 
@@ -548,7 +571,7 @@ public class GameFrame extends JFrame {
             if(playerArray[i].isWinnable()){
                 str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerArray[i].getFinishedHedgehogs())));
             }
-            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("Not Winnable").append("\n");
+            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("      Not Winnable").append("\n");
         }
         playerRemainingList.setText(str.toString());
     }
@@ -562,8 +585,7 @@ public class GameFrame extends JFrame {
     }
     
     public void setCurrentHedgehogMovement(){
-        Hedgehog hedgehogMovements = new Hedgehog();
-        hedgehogMovements.showPreviousMovement(gameBoard, hedgehogMovement);
+        gameBoard.playerMovement.showPreviousMovement(hedgehogMovement);
     }
     
     public static void main(String[] args) {
