@@ -572,7 +572,7 @@ public class GameFrame extends JFrame {
             if(playerArray[i].isWinnable()){
                 str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerArray[i].getFinishedHedgehogs())));
             }
-            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("Not Winnable").append("\n");
+            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("      Not Winnable").append("\n");
         }
         playerRemainingList.setText(str.toString());
     }
