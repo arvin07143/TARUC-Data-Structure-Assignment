@@ -228,8 +228,8 @@ public class Board {
     }
     
     public void endGame(){
-        int counter = 0;
         for (int i = 0; i < playerCount;i ++){
+            int counter = 0;
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).isStuck()){
                          int unwinnablePlayer = 0;
