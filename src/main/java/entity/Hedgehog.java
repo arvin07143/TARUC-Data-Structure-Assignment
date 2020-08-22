@@ -91,14 +91,6 @@ public class Hedgehog {
         return newCoor;
     }
     
-    public Hedgehog chg(Hedgehog hedgehog, int hedgehogNo ){
-        Hedgehog newHedgehog = new Hedgehog();
-        newHedgehog.setRow(hedgehog.getRow());
-        newHedgehog.setColumn(hedgehog.getColumn());       
-       
-        return newHedgehog;
-    }
-    
     public void viewAllMovement(){
         for(int i = playerMovement.getSize()-1 ; i >= 0 ; i--){
             System.out.println("\n--------------\nMove " + (i+1) + " " + playerMovement.pop());
