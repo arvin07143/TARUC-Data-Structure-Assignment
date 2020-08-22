@@ -35,7 +35,7 @@ public class Board {
 
     private ListInterface<Player> playerList;
     public QueueInterface<Player> playerQueue;
-    public StackInterface<Hedgehog> playerMovement = new ArrayStack();
+    public Hedgehog playerMovement = new Hedgehog();
     public Hedgehog previousMovement = new Hedgehog();
     public int diceNumber = 1;
     private boolean sideMoved;			//indicates whether a side move has been made
@@ -206,7 +206,7 @@ public class Board {
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
             System.out.println(toString());
-            playerMovement.push(tempHedge);
+            playerMovement.pushHedgehog(tempHedge);
             return true;
         }
         return false;

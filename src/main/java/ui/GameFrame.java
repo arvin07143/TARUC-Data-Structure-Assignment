@@ -141,11 +141,11 @@ public class GameFrame extends JFrame {
         undoBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              Hedgehog undoMovement = new Hedgehog();
+                Hedgehog undoMovement = new Hedgehog();
                 JFrame frame = new JFrame("Invalid Undo");
                 if(gameBoard.isSideMoved()){
                     if (pass == false){
-                        undoMovement = undoMovement.undo(gameBoard);
+                        undoMovement = gameBoard.playerMovement.undo(gameBoard);
                         updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
                         gameBoard.setSideMoved(false);
                         for (int i = 0; i < gameBoard.rowCount; i++) {
@@ -586,8 +586,7 @@ public class GameFrame extends JFrame {
     }
     
     public void setCurrentHedgehogMovement(){
-        Hedgehog hedgehogMovements = new Hedgehog();
-        hedgehogMovements.showPreviousMovement(gameBoard, hedgehogMovement);
+        gameBoard.playerMovement.showPreviousMovement(hedgehogMovement);
     }
     
     public static void main(String[] args) {
