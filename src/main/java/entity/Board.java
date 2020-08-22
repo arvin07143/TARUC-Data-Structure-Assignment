@@ -232,11 +232,11 @@ public class Board {
     public String endGame(){
         int unwinnablePlayer = 0;
         for (int i = 0; i < playerCount;i ++){ // sets the players that cant win
-            int counter = 0;
+            int stuckCounter = 0;
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).isStuck()){
-                    counter++;
-                    if (counter > hedgehogCount - winCount){
+                    stuckCounter++;
+                    if (stuckCounter > hedgehogCount - winCount){
                         playerList.get(i).setWinnable(false);
                         unwinnablePlayer++;
                     }
