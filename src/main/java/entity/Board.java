@@ -1,6 +1,7 @@
 package entity;
 
 import adt.*;
+import java.awt.Color;
 
 public class Board {
 
@@ -40,7 +41,8 @@ public class Board {
     private boolean sideMoved;			//indicates whether a side move has been made
     private boolean forwardMoved;		//indicates whether a forward move has been made
     private int stage;					//placement, play, or game over
-
+    public String color;
+    
     private int currentHedge = 0;
     private int turnCounter ;
     
@@ -227,7 +229,7 @@ public class Board {
         }
     }
     
-    public void endGame(){
+    public String endGame(){
         for (int i = 0; i < playerCount;i ++){
             int counter = 0;
             for(int j = 1 ; j <= hedgehogCount ; j++){
@@ -239,6 +241,9 @@ public class Board {
                                unwinnablePlayer++;
                                if (playerCount - unwinnablePlayer == 1){
                                     stage = GAME_OVER;
+                                if(playerList.get(i).isWinnable() == true){
+                                    color = playerList.get(i).getColorName();
+                                }
                          }
                     }
                 }
@@ -250,31 +255,12 @@ public class Board {
                 if(playerList.get(i).getHedgehogs(j).getColumn() == 7){
                     if (playerList.get(i).getFinishedHedgehogs() == winCount){
                         stage = GAME_OVER;
+                        color = playerList.get(i).getColorName();
                     }
                 }
             }
         }
-    }
-    
-    public void lose(){
-        
-        int counter = 0;
-        int unwinnablePlayer = 0;
-        for (int i = 0; i < playerCount;i ++){
-            for(int j = 1 ; j <= hedgehogCount ; j++){
-                if(playerList.get(i).getHedgehogs(j).isStuck()){
-                         counter++;
-                         if (counter > winCount){
-                               playerList.get(i).setWinnable(false);
-                               unwinnablePlayer++;
-                         }
-                    }
-                }
-            }
-        if (playerCount - unwinnablePlayer == 1){
-            stage = GAME_OVER;
-        }
-                
+        return color;
     }
     
     public String toString(){

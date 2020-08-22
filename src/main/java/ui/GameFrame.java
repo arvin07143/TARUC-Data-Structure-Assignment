@@ -377,6 +377,8 @@ public class GameFrame extends JFrame {
                                             updateCellStatus(i, j, i + 1, j);
                                             gameBoard.setSideMoved(true);
                                             setCurrentHedgehogMovement();
+                                            gameBoard.endGame();
+                                            gameOverWindow();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -400,6 +402,8 @@ public class GameFrame extends JFrame {
                                             updateCellStatus(i, j, i - 1, j);
                                             gameBoard.setSideMoved(true);
                                             setCurrentHedgehogMovement();
+                                            gameBoard.endGame();
+                                            gameOverWindow();
                                             showFrontMoves(gameBoard.diceNumber);
                                         }
                                     }
@@ -411,6 +415,8 @@ public class GameFrame extends JFrame {
             }
         }
         if (!movable){
+            gameBoard.endGame();
+            gameOverWindow();
             showFrontMoves(gameBoard.diceNumber);
             JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
         }
@@ -522,7 +528,10 @@ public class GameFrame extends JFrame {
     
     public void gameOverWindow(){
         if(gameBoard.getStage() == gameBoard.GAME_OVER){
-        JOptionPane.showMessageDialog(null, "Game Over");}
+            String color = gameBoard.color;
+        JOptionPane.showMessageDialog(null, "Game Over.Player" + color);
+        System.exit(0);
+        }
     }
     //Miscellaneous Setters
 
