@@ -83,10 +83,6 @@ public class Cell{
         return poppedHedgehog;
     }
     
-    public boolean equals(Cell cellEntry){
-        return cellEntry.getCellStack() == this.getCellStack();
-    }
-    
     //toString
     public String toString(){
         String str = "\nCell Stack: " + cellStack.toString() + "\nObstacle Enabled: " + (obstacleEnabled ? "Yes" : "No") + "\nObstacle Mode: ";
