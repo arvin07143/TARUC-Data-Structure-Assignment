@@ -4,6 +4,7 @@ import adt.ListInterface;
 import entity.Board;
 import entity.Hedgehog;
 import entity.Player;
+import util.ImageLoader;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

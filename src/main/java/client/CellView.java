@@ -1,6 +1,7 @@
 package client;
 
 import adt.*;
+import util.ImageLoader;
 
 import javax.swing.*;
 import javax.swing.border.Border;

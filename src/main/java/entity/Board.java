@@ -1,6 +1,7 @@
 package entity;
 
 import adt.*;
+import util.ObstacleGridGenerator;
 
 public class Board {
 

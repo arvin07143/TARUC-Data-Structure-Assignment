@@ -1,7 +1,8 @@
-package client;
+package util;
 
 import javax.swing.*;
 import java.awt.*;
+import client.GameFrame;
 
 import javax.imageio.ImageIO;
 import java.net.*;
