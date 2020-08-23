@@ -57,15 +57,14 @@ public class Cell{
                 case 1: //wall (not supposed to be able to push into a wall)
                     return false;
                     
-                case 2: //pit 
+                case 2: //pit 1st hedgehog that enters will get stuck
                     if (getCellStackSize() == 0){ 
-                        pushingHedgehog.setStuck(true); //1st hedgehog that enters will get stuck
+                        pushingHedgehog.setStuck(true);
                     }
-                    System.out.println("STUCK YO MAMA");
                     break;
                     
-                case 3: //blackhole 
-;                   pushingHedgehog.setStuck(true); //all hedgehogs that enter will get stuck
+                case 3: //blackhole all hedgehogs that enter will get stuck
+;                   pushingHedgehog.setStuck(true);
                     break;
                       
                 default:
@@ -85,12 +84,7 @@ public class Cell{
     }
     
     public boolean equals(Cell cellEntry){
-        if (cellEntry.getCellStack() == this.getCellStack()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return cellEntry.getCellStack() == this.getCellStack();
     }
     
     //toString
