@@ -72,7 +72,12 @@ public class StartPanel extends JFrame{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startGame();
+                if ((Integer)winningCount.getSelectedItem() > (Integer)hedgehogCount.getSelectedItem()){
+                    JOptionPane.showMessageDialog(null, "\"Hedgehogs to Win\" can't be larger than \"Hedgehogs per Player\"");
+                    StartPanel newPanel = new StartPanel();
+                }
+                else
+                    startGame();
                 setVisible(false);
             }
         });

@@ -1,8 +1,7 @@
 package adt;
 
 public class LinkedStack<T> implements StackInterface<T> {
-
-    //Properties
+    //Attributes
     private Node topNode;
     private int size;
 
@@ -49,7 +48,7 @@ public class LinkedStack<T> implements StackInterface<T> {
     }
     
     public StackInterface<T> reverse(){
-        StackInterface<T> reversedStack = new LinkedStack<T>();
+        StackInterface<T> reversedStack = new LinkedStack<>();
         if (!isEmpty()){
             Node currentNode = topNode;
             for (int i = 0; i < size; i++){

@@ -62,15 +62,14 @@ public class ArrayStack<T> implements StackInterface<T> {
     @Override
     public StackInterface<T> reverse() {
         StackInterface<T> reverseStack = new ArrayStack<>();
-        if(topIndex >0 ){
-            for (int i = topIndex+1 ; i >= 0 ; i--){
+        if (topIndex >= 0) {
+            for (int i = topIndex + 1; i >= 0; i--) {
                 reverseStack.push(array[i]);
             }
-        }
-        else
+        } else {
             return null;
+        }
         return reverseStack;
     }
-    
-    
+
 }

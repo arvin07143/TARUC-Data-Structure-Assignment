@@ -483,6 +483,8 @@ public class GameFrame extends JFrame {
                 playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
             }
             if (invalidHedgehogs == hedgehogsInRow.size()){
+                gameBoard.endGame();
+                gameOverWindow();
                 JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
                 gameBoard.setForwardMoved(true);
                 gameBoard.newTurn();
@@ -494,6 +496,8 @@ public class GameFrame extends JFrame {
                 beginTurn();
             }
         } else {
+            gameBoard.endGame();
+            gameOverWindow();
             JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
             gameBoard.setForwardMoved(true);
             gameBoard.newTurn();
@@ -530,8 +534,8 @@ public class GameFrame extends JFrame {
     public void gameOverWindow(){
         if(gameBoard.getStage() == gameBoard.GAME_OVER){
             String color = gameBoard.color;
-        JOptionPane.showMessageDialog(null, "Game Over.Player " + color + " has won!");
-        System.exit(0);
+            JOptionPane.showMessageDialog(this, "Game Over. Player " + color + " has won!");
+            System.exit(0);
         }
     }
     //Miscellaneous Setters

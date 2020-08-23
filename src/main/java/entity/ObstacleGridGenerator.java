@@ -1,19 +1,44 @@
 package entity;
-
 import java.util.Random;
 
-/**
- *
- * @author Arvin Ng
- */
 public class ObstacleGridGenerator {
-
+    //Attributes
     private static Random random = new Random();
+    private int obstacleCount;
+    private int maxInvalidCounter;
 
-    public int obstacleCount = 0;
-    public int maxInvalidCounter = 0;
+    //Constructors
+    public ObstacleGridGenerator(){
+        this(0,0);
+    }
+    public ObstacleGridGenerator(int obstacleCount, int maxInvalidCounter){
+        this.obstacleCount = obstacleCount;
+        this.maxInvalidCounter = maxInvalidCounter;
+    }
+    
+    //Setters
+    public void setObstacleCount(int obstacleCount) {
+        this.obstacleCount = obstacleCount;
+    }
+    public void setMaxInvalidCounter(int maxInvalidCounter) {
+        this.maxInvalidCounter = maxInvalidCounter;
+    }
+    public static void setRandom(Random random) {
+        ObstacleGridGenerator.random = random;
+    }
+    
+    //Getters
+    public int getObstacleCount() {    
+        return obstacleCount;
+    }
+    public int getMaxInvalidCounter() {    
+        return maxInvalidCounter;
+    }
+    public static Random getRandom() {
+        return random;
+    }
 
-    //true = pit
+    //methods
     public boolean[][] obstacleGridGeneration(int rows, int columns) {
         boolean[][] obstacleGrid = new boolean[rows][columns];
 

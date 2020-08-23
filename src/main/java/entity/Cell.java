@@ -1,13 +1,9 @@
 package entity;
 import adt.*;
 
-/**
- *
- * @author GV62 7RC
- */
 public class Cell{
     //Attributes
-    StackInterface<Hedgehog> cellStack = new LinkedStack<>();
+    private StackInterface<Hedgehog> cellStack = new LinkedStack<>();
     private boolean obstacleEnabled; //true when current cell is obstacle
     private int obstacleMode; //0.Normal 1.Wall 2.Pit 3.Blackhole
 
@@ -20,7 +16,7 @@ public class Cell{
         this.obstacleMode = obstacleMode;
     }
    
-    //Setter
+    //Setters
     public void setCellStack(StackInterface<Hedgehog> cellStack) {
         this.cellStack = cellStack;
     }
@@ -31,7 +27,7 @@ public class Cell{
         this.obstacleMode = obstacleMode;
     }
     
-    //Getter
+    //Getters
     public StackInterface<Hedgehog> getCellStack() {
         return cellStack;
     }
@@ -61,15 +57,14 @@ public class Cell{
                 case 1: //wall (not supposed to be able to push into a wall)
                     return false;
                     
-                case 2: //pit 
+                case 2: //pit 1st hedgehog that enters will get stuck
                     if (getCellStackSize() == 0){ 
-                        pushingHedgehog.setStuck(true); //1st hedgehog that enters will get stuck
+                        pushingHedgehog.setStuck(true);
                     }
-                    System.out.println("STUCK YO MAMA");
                     break;
                     
-                case 3: //blackhole 
-;                   pushingHedgehog.setStuck(true); //all hedgehogs that enter will get stuck
+                case 3: //blackhole all hedgehogs that enter will get stuck
+;                   pushingHedgehog.setStuck(true);
                     break;
                       
                 default:
@@ -89,11 +84,26 @@ public class Cell{
     }
     
     public boolean equals(Cell cellEntry){
-        if (cellEntry.getCellStack() == this.getCellStack()){
-            return true;
+        return cellEntry.getCellStack() == this.getCellStack();
+    }
+    
+    //toString
+    public String toString(){
+        String str = "\nCell Stack: " + cellStack.toString() + "\nObstacle Enabled: " + (obstacleEnabled ? "Yes" : "No") + "\nObstacle Mode: ";
+        switch(obstacleMode){
+            case 0:
+                str += "None";
+                break;
+            case 1:
+                str += "Walls";
+                break;
+            case 2:
+                str += "Pits";
+                break;
+            case 3:
+                str += "Black Holes";
+                break;            
         }
-        else{
-            return false;
-        }
+        return str;
     }
 }

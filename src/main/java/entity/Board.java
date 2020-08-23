@@ -112,8 +112,8 @@ public class Board {
     public ArrayList<Hedgehog> getHedgehogInRow(int row){
         ArrayList<Hedgehog> hedgehogList = new ArrayList();
         for(int j = 0 ; j < columnCount ; j++){
-            if(boardGrid[row][j].cellStack.peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck()) && !(boardGrid[row][j].getCellStack().peek().isDisabled())){
-                hedgehogList.add(boardGrid[row][j].cellStack.peek());
+            if(boardGrid[row][j].getCellStack().peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck()) && !(boardGrid[row][j].getCellStack().peek().isDisabled())){
+                hedgehogList.add(boardGrid[row][j].getCellStack().peek());
             }
         }
         return hedgehogList;
@@ -201,7 +201,7 @@ public class Board {
             tempHedge.setColumn(endColumn);
             boardGrid[endRow][endColumn].pushHedgehog(tempHedge);
 
-            if(tempHedge.getColumn() == 7){
+            if(tempHedge.getColumn() == columnCount - 1){
                 int finishedID = tempHedge.getId();
                 playerList.get(finishedID).setFinishedHedgehogs(playerList.get(finishedID).getFinishedHedgehogs()+1);
             }
@@ -230,34 +230,29 @@ public class Board {
     }
     
     public String endGame(){
-        for (int i = 0; i < playerCount;i ++){
-            int counter = 0;
+        int unwinnablePlayer = 0;
+        for (int i = 0; i < playerCount;i ++){ // sets the players that cant win
+            int stuckCounter = 0;
             for(int j = 1 ; j <= hedgehogCount ; j++){
                 if(playerList.get(i).getHedgehogs(j).isStuck()){
-                         int unwinnablePlayer = 0;
-                         counter++;
-                         if (counter > winCount){
-                               playerList.get(i).setWinnable(false);
-                               unwinnablePlayer++;
-                               if (playerCount - unwinnablePlayer == 1){
-                                    stage = GAME_OVER;
-                                }
-                            }
-                        }
+                    stuckCounter++;
+                    if (stuckCounter > hedgehogCount - winCount){
+                        playerList.get(i).setWinnable(false);
+                        unwinnablePlayer++;
                     }
-            if (playerList.get(i).isWinnable() == true){
+                }
+            }
+            if (playerList.get(i).isWinnable() == true){ // check if there are any winnable players
                 color = playerList.get(i).getColorName();
             }
-                }
-        
-        for (int i = 0; i < playerCount;i ++){
-            for(int j = 1 ; j <= hedgehogCount ; j++){
-                if(playerList.get(i).getHedgehogs(j).getColumn() == 7){
-                    if (playerList.get(i).getFinishedHedgehogs() == winCount){
-                        stage = GAME_OVER;
-                        color = playerList.get(i).getColorName();
-                    }
-                }
+        }
+        if (playerCount - unwinnablePlayer == 1){ // check if it's the last player
+            stage = GAME_OVER;
+        }
+        for (int i = 0; i < playerCount;i ++){ // check if the players are eligible to win
+            if (playerList.get(i).getFinishedHedgehogs() == winCount){
+                stage = GAME_OVER;
+                color = playerList.get(i).getColorName();
             }
         }
         return color;
