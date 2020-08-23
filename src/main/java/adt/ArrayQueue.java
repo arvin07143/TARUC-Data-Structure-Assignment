@@ -69,10 +69,6 @@ public class ArrayQueue<T> implements QueueInterface<T> {
         return (backIndex + 1);
     }
     
-    @Override
-    public int getFrontIndex(){
-        return frontIndex;
-    }
     
     
     public String toString (){
