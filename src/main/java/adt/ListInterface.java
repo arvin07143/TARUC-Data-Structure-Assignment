@@ -14,7 +14,15 @@ public interface ListInterface<T> {
 
     T get(int index);
 
+    T get(T getObject);
+
+    int search(T searchObject);
+
+    void removeDuplicate();
+
     boolean isEmpty();
 
     int size();
+
+
 }

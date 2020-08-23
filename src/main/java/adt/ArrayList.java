@@ -70,6 +70,14 @@ public class ArrayList<T> implements ListInterface<T> {
         return currentArray[index];
     }
 
+    @Override
+    public T get(T getObject) {
+        for(int i = 0 ; i < arraySize ; i++){
+            if(currentArray[i].equals(getObject)) return (T)currentArray[i];
+        }
+        return null;
+    }
+
     public boolean isEmpty() {
         return arraySize == 0;
     }
@@ -101,6 +109,28 @@ public class ArrayList<T> implements ListInterface<T> {
     @Override
     public int size() {
         return arraySize;
+    }
+
+    @Override
+    public int search(T searchObject) {
+        for(int i = 0 ; i < arraySize ; i++){
+            if(currentArray[i].equals(searchObject)) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public void removeDuplicate() {
+        T tempObject;
+        for(int i = 0 ; i < arraySize ; i++){
+            tempObject = currentArray[i];
+            int tempIndex = i;
+            for(int j = tempIndex+1 ; j < arraySize ; j++){
+                if(currentArray[j].equals(tempObject)){
+                    remove(j);
+                }
+            }
+        }
     }
 
     @Override
