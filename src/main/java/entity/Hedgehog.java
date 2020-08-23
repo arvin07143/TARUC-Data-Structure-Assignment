@@ -81,8 +81,8 @@ public class Hedgehog {
         playerMovement.pop();
         playerMovement.pop();
         
-        int finalRow = gameBoard.previousMovement.getRow();
-        int finalColumn = gameBoard.previousMovement.getColumn();
+        int finalRow = gameBoard.getPreviousMovement().getRow();
+        int finalColumn = gameBoard.getPreviousMovement().getColumn();
         newCoor.setColumn(finalColumn);
         newCoor.setRow(finalRow);
         newCoor.setStuck(false);

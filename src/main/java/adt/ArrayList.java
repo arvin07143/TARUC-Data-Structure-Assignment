@@ -78,8 +78,35 @@ public class ArrayList<T> implements ListInterface<T> {
         return null;
     }
 
+    @Override
+    public int search(T searchObject) {
+        for(int i = 0 ; i < arraySize ; i++){
+            if(currentArray[i].equals(searchObject)) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public void removeDuplicate() {
+        T tempObject;
+        for(int i = 0 ; i < arraySize ; i++){
+            tempObject = currentArray[i];
+            int tempIndex = i;
+            for(int j = tempIndex+1 ; j < arraySize ; j++){
+                if(currentArray[j].equals(tempObject)){
+                    remove(j);
+                }
+            }
+        }
+    }
+
     public boolean isEmpty() {
         return arraySize == 0;
+    }
+
+    @Override
+    public int size() {
+        return arraySize;
     }
 
     private void makeSpace() {
@@ -104,33 +131,6 @@ public class ArrayList<T> implements ListInterface<T> {
         currentArray = tempArray;
 
         arraySize--;
-    }
-
-    @Override
-    public int size() {
-        return arraySize;
-    }
-
-    @Override
-    public int search(T searchObject) {
-        for(int i = 0 ; i < arraySize ; i++){
-            if(currentArray[i].equals(searchObject)) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public void removeDuplicate() {
-        T tempObject;
-        for(int i = 0 ; i < arraySize ; i++){
-            tempObject = currentArray[i];
-            int tempIndex = i;
-            for(int j = tempIndex+1 ; j < arraySize ; j++){
-                if(currentArray[j].equals(tempObject)){
-                    remove(j);
-                }
-            }
-        }
     }
 
     @Override

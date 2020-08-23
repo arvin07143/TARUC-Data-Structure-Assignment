@@ -23,6 +23,4 @@ public interface ListInterface<T> {
     boolean isEmpty();
 
     int size();
-
-
 }
