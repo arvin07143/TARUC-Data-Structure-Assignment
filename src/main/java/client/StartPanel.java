@@ -1,4 +1,4 @@
-package ui;
+package client;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

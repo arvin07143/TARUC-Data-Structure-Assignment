@@ -1,6 +1,6 @@
 package entity;
 
-import ui.ImageLoader;
+import client.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
 import adt.*;

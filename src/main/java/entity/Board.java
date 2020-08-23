@@ -155,7 +155,8 @@ public class Board {
     public ArrayList<Hedgehog> getHedgehogInRow(int row) {
         ArrayList<Hedgehog> hedgehogList = new ArrayList();
         for (int j = 0; j < columnCount; j++) {
-            if (boardGrid[row][j].getCellStack().peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck()) && !(boardGrid[row][j].getCellStack().peek().isDisabled())) {
+            if (boardGrid[row][j].getCellStack().peek() != null && !(boardGrid[row][j].getCellStack().peek().isStuck())
+                    && !(boardGrid[row][j].getCellStack().peek().isDisabled())) {
                 hedgehogList.add(boardGrid[row][j].getCellStack().peek());
             }
         }
