@@ -15,27 +15,6 @@ import java.awt.event.MouseListener;
 
 public class GameFrame extends JFrame {
 
-    private JPanel playArea;
-    private CellView[][] playBoard;
-    private JTextArea statusBar;
-    private JTextArea playerRemainingList;
-    private JTextArea hedgehogMovement = new JTextArea(15, 22);  
-
-    private Color topColor;
-
-    private ImageIcon[] diceIcon = {ImageLoader.loadIcon("dice1.png"), ImageLoader.loadIcon("dice2.png")
-            , ImageLoader.loadIcon("dice3.png"), ImageLoader.loadIcon("dice4.png")};
-
-    private JLabel currentDice;
-    private JButton passSideways;
-    private JButton undoBtn;
-
-    private Board gameBoard;
-    private int modeSelect;
-    private int columnAllowedHeight = 1;
-    private int columnHeightCounter = 0;
-    private boolean pass = false;
-
     String ruleListing =
             "Rules of the HedgeHog Race:" +
                     "\n\nPlacement Stage:" +
@@ -54,7 +33,23 @@ public class GameFrame extends JFrame {
                     "\n   Pits : the first hedgehog that enters the pit is stuck FOREVER, subsequent hedgehogs can pass through them normally." +
                     "\n   Black Holes : a hedgehog in a black hole is stuck there FOREVER. Be EXTRA careful around them." +
                     "\n\nHave Fun!";
-    
+    private JPanel playArea;
+    private CellView[][] playBoard;
+    private JTextArea statusBar;
+    private JTextArea playerRemainingList;
+    private JTextArea hedgehogMovement = new JTextArea(15, 22);
+    private Color topColor;
+    private ImageIcon[] diceIcon = {ImageLoader.loadIcon("dice1.png"), ImageLoader.loadIcon("dice2.png")
+            , ImageLoader.loadIcon("dice3.png"), ImageLoader.loadIcon("dice4.png")};
+    private JLabel currentDice;
+    private JButton passSideways;
+    private JButton undoBtn;
+    private Board gameBoard;
+    private int modeSelect;
+    private int columnAllowedHeight = 1;
+    private int columnHeightCounter = 0;
+    private boolean pass = false;
+
 
     public GameFrame(int numPlayer, int numHedge, int winHedge, Integer modeSelect) {
         super("The Hedgehog Race");
@@ -143,10 +138,10 @@ public class GameFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Hedgehog undoMovement = new Hedgehog();
                 JFrame frame = new JFrame("Invalid Undo");
-                if(gameBoard.isSideMoved()){
-                    if (pass == false){
+                if (gameBoard.isSideMoved()) {
+                    if (pass == false) {
                         undoMovement = gameBoard.playerMovement.undo(gameBoard);
-                        updateCellStatus(gameBoard.previousMovement.getRow(),gameBoard.previousMovement.getColumn(),undoMovement.getRow(),undoMovement.getColumn());
+                        updateCellStatus(gameBoard.previousMovement.getRow(), gameBoard.previousMovement.getColumn(), undoMovement.getRow(), undoMovement.getColumn());
                         gameBoard.setSideMoved(false);
                         for (int i = 0; i < gameBoard.rowCount; i++) {
                             for (int j = 0; j < gameBoard.columnCount; j++) {
@@ -154,29 +149,27 @@ public class GameFrame extends JFrame {
                             }
                         }
                         for (int a = 0; a < gameBoard.columnCount; a++) {
-                            playBoard[gameBoard.diceNumber-1][a].resetBorder();
+                            playBoard[gameBoard.diceNumber - 1][a].resetBorder();
                         }
                         repaint();
                         showUpDownButtons();
-                        
+
                     }
-                    if (pass == true){
+                    if (pass == true) {
                         for (int i = 0; i < gameBoard.rowCount; i++) {
                             for (int j = 0; j < gameBoard.columnCount; j++) {
                                 playBoard[i][j].getForwardButton().setVisible(false);
                             }
                         }
                         for (int a = 0; a < gameBoard.columnCount; a++) {
-                            playBoard[gameBoard.diceNumber-1][a].resetBorder();
+                            playBoard[gameBoard.diceNumber - 1][a].resetBorder();
                         }
                         repaint();
                         pass = false;
                         showUpDownButtons();
                     }
-                }
-                
-                else{
-                    JOptionPane.showMessageDialog(frame,"You are not able to undo in this stage.");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "You are not able to undo in this stage.");
                 }
             }
         });
@@ -193,9 +186,9 @@ public class GameFrame extends JFrame {
         playerRemainingList.setBorder(new LineBorder(Color.black, 1));
         playerRemainingList.setPreferredSize(new Dimension(200, 80));
 
-        btnPanel.add(passSideways,BorderLayout.NORTH);
-        btnPanel.add(Box.createRigidArea(new Dimension(0,20)),BorderLayout.CENTER);
-        btnPanel.add(undoBtn,BorderLayout.SOUTH);
+        btnPanel.add(passSideways, BorderLayout.NORTH);
+        btnPanel.add(Box.createRigidArea(new Dimension(0, 20)), BorderLayout.CENTER);
+        btnPanel.add(undoBtn, BorderLayout.SOUTH);
 
         infoPanel.add(btnPanel);
         infoPanel.add(statusBar);
@@ -211,7 +204,7 @@ public class GameFrame extends JFrame {
     public void initPlayArea() {
         playBoard = new CellView[4][8];
         playArea.setLayout(new GridLayout(4, 8));
-        
+
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 8; j++) {
@@ -222,10 +215,10 @@ public class GameFrame extends JFrame {
                         public void mouseClicked(MouseEvent e) {
                             for (int i = 0; i < 4; i++) {
                                 if (e.getSource() == playBoard[i][0] && gameBoard.getStage() == gameBoard.PLACEMENT &&
-                                    gameBoard.getBoardGrid()[i][0].getCellStackSize() < columnAllowedHeight) {
-                                    getTopColor(i,0);
+                                        gameBoard.getBoardGrid()[i][0].getCellStackSize() < columnAllowedHeight) {
+                                    getTopColor(i, 0);
                                     gameBoard.initPlacement(i, 0);
-                                    updateCellStatus(0,0,i,0);
+                                    updateCellStatus(0, 0, i, 0);
                                     gameBoard.newTurn();
                                     setPlacementText();
                                     if (gameBoard.getStage() == gameBoard.PLAY) {
@@ -238,7 +231,7 @@ public class GameFrame extends JFrame {
                                         beginTurn();
                                     }
                                     columnHeightCounter++;
-                                    if (columnHeightCounter % 4 == 0){
+                                    if (columnHeightCounter % 4 == 0) {
                                         columnAllowedHeight++;
                                     }
                                 }
@@ -315,7 +308,7 @@ public class GameFrame extends JFrame {
         } else {
             playBoard[iniRow][iniCol].setCellImage(ImageLoader.loadIcon(gameBoard.currentPlayer.playerImageName[gameBoard.getBoardGrid()[iniRow][iniCol].getCellStack().peek().getId()]));
         }
-        if(gameBoard.getStage() != gameBoard.PLACEMENT) {
+        if (gameBoard.getStage() != gameBoard.PLACEMENT) {
             playBoard[iniRow][iniCol].removeTopHidden();
             playBoard[iniRow][iniCol].repaint();
         }
@@ -337,8 +330,7 @@ public class GameFrame extends JFrame {
             if (gameBoard.getBoardGrid()[row][col].getCellStackSize() > 1) {
                 playBoard[row][col].setHiddenColor(topColor);
             }
-        }
-        catch (Exception dse) {
+        } catch (Exception dse) {
             playBoard[row][col].setHiddenColor(Color.lightGray);
         }
         playBoard[row][col].repaint();
@@ -357,16 +349,16 @@ public class GameFrame extends JFrame {
         int row;
         int col;
         statusBar.setText("\n" + "Player " + gameBoard.currentPlayer.getColorName() + ", please move your pieces sideways or\nclick 'Pass Sideways Move' to skip your move.");
-        
+
         for (int i = 0; i < playerHedgehogs.size(); i++) {
             if (!playerHedgehogs.get(i).isDisabled() && !playerHedgehogs.get(i).isStuck()) {
                 row = playerHedgehogs.get(i).getRow();
                 col = playerHedgehogs.get(i).getColumn();
-                if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row+1][col].isObstacleEnabled() && modeSelect == 1))) {
+                if (row < gameBoard.rowCount - 1 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row + 1][col].isObstacleEnabled() && modeSelect == 1))) {
                     playBoard[row][col].enableMoveDown();
                     movable = true;
                     playBoard[row][col].revalidate();
-                    if(playBoard[row][col].getDownButton().getActionListeners().length == 0) {
+                    if (playBoard[row][col].getDownButton().getActionListeners().length == 0) {
                         playBoard[row][col].getDownButton().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -388,7 +380,7 @@ public class GameFrame extends JFrame {
                         });
                     }
                 }
-                if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row-1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs.get(i).isStuck())))) {
+                if (row > 0 && col != gameBoard.getColumnCount() - 1 && (!(gameBoard.getBoardGrid()[row - 1][col].isObstacleEnabled() && (modeSelect == 1 || playerHedgehogs.get(i).isStuck())))) {
                     playBoard[row][col].enableMoveUp();
                     movable = true;
                     if (playBoard[row][col].getUpButton().getActionListeners().length == 0) {
@@ -415,11 +407,11 @@ public class GameFrame extends JFrame {
                 }
             }
         }
-        if (!movable){
+        if (!movable) {
             gameBoard.endGame();
             gameOverWindow();
             showFrontMoves(gameBoard.diceNumber);
-            JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
+            JOptionPane.showMessageDialog(this, "No available moves ! Turn automatically skipped");
         }
     }
 
@@ -436,7 +428,7 @@ public class GameFrame extends JFrame {
         ListInterface<Hedgehog> hedgehogsInRow = gameBoard.getHedgehogInRow(diceNumber - 1);
         if (hedgehogsInRow.size() != 0) {
             for (int i = 0; i < hedgehogsInRow.size(); i++) {
-                if (hedgehogsInRow.get(i).getColumn() != 7 && !hedgehogsInRow.get(i).isStuck()){
+                if (hedgehogsInRow.get(i).getColumn() != 7 && !hedgehogsInRow.get(i).isStuck()) {
                     if (!(gameBoard.getBoardGrid()[hedgehogsInRow.get(i).getRow()][hedgehogsInRow.get(i).getColumn() + 1].isObstacleEnabled() && modeSelect == 1)) {
                         int cols = hedgehogsInRow.get(i).getColumn();
 
@@ -470,22 +462,20 @@ public class GameFrame extends JFrame {
                                 }
                             });
                         }
-                    }
-                    else {
+                    } else {
                         invalidHedgehogs++;
                     }
-                }
-                else {
+                } else {
                     invalidHedgehogs++;
                 }
             }
             for (int j = 0; j < gameBoard.columnCount; j++) {
                 playBoard[diceNumber - 1][j].setBorder(gameBoard.currentPlayer.getPlayerColor());
             }
-            if (invalidHedgehogs == hedgehogsInRow.size()){
+            if (invalidHedgehogs == hedgehogsInRow.size()) {
                 gameBoard.endGame();
                 gameOverWindow();
-                JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
+                JOptionPane.showMessageDialog(this, "No available moves ! Turn automatically skipped");
                 gameBoard.setForwardMoved(true);
                 gameBoard.newTurn();
                 for (int i = 0; i < gameBoard.rowCount; i++) {
@@ -498,7 +488,7 @@ public class GameFrame extends JFrame {
         } else {
             gameBoard.endGame();
             gameOverWindow();
-            JOptionPane.showMessageDialog(this,"No available moves ! Turn automatically skipped");
+            JOptionPane.showMessageDialog(this, "No available moves ! Turn automatically skipped");
             gameBoard.setForwardMoved(true);
             gameBoard.newTurn();
             for (int i = 0; i < gameBoard.rowCount; i++) {
@@ -510,29 +500,29 @@ public class GameFrame extends JFrame {
         }
         playArea.repaint();
     }
-    
-    public void hedgehogMovementWindow() {  
-  
+
+    public void hedgehogMovementWindow() {
+
         // Create and set up the window.  
-        final JFrame frame = new JFrame("Hedgehogs Movements");  
-  
+        final JFrame frame = new JFrame("Hedgehogs Movements");
+
         // Display the window.  
-        frame.setSize(300, 300);  
-        frame.setVisible(true);  
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  
-  
+        frame.setSize(300, 300);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
         // set flow layout for the frame  
-        frame.getContentPane().setLayout(new FlowLayout());  
-   
+        frame.getContentPane().setLayout(new FlowLayout());
+
         hedgehogMovement.setEditable(false);
-        JScrollPane scrollableHedgehogMovement = new JScrollPane(hedgehogMovement);  
-        
-        scrollableHedgehogMovement.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-        frame.getContentPane().add(scrollableHedgehogMovement);  
+        JScrollPane scrollableHedgehogMovement = new JScrollPane(hedgehogMovement);
+
+        scrollableHedgehogMovement.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        frame.getContentPane().add(scrollableHedgehogMovement);
     }
-    
-    public void gameOverWindow(){
-        if(gameBoard.getStage() == gameBoard.GAME_OVER){
+
+    public void gameOverWindow() {
+        if (gameBoard.getStage() == gameBoard.GAME_OVER) {
             String color = gameBoard.color;
             JOptionPane.showMessageDialog(this, "Game Over. Player " + color + " has won!");
             System.exit(0);
@@ -542,21 +532,18 @@ public class GameFrame extends JFrame {
 
     private void setLeaderText() {
         ListInterface<Player> playerList = gameBoard.getPlayerList();
-        Player[]playerArray = new Player[playerList.size()];
+        Player[] playerArray = new Player[playerList.size()];
 
-        for(int i = 0 ; i < playerList.size() ; i++){
+        for (int i = 0; i < playerList.size(); i++) {
             playerArray[i] = playerList.get(i);
         }
 
         Player temp;
         boolean swapped;
-        for (int i = 0; i < playerArray.length-1; i++)
-        {
+        for (int i = 0; i < playerArray.length - 1; i++) {
             swapped = false;
-            for (int j = 0; j < playerArray.length - i - 1; j++)
-            {
-                if (playerArray[j].compareTo(playerArray[j + 1]) > 0)
-                {
+            for (int j = 0; j < playerArray.length - i - 1; j++) {
+                if (playerArray[j].compareTo(playerArray[j + 1]) > 0) {
                     temp = playerArray[j];
                     playerArray[j] = playerArray[j + 1];
                     playerArray[j + 1] = temp;
@@ -571,11 +558,11 @@ public class GameFrame extends JFrame {
         }
         StringBuilder str = new StringBuilder();
         str.append("    Player \tHedgehogs To Win \n");
-        for(int i = 0 ; i < gameBoard.playerCount ; i++){
-            if(playerArray[i].isWinnable()){
+        for (int i = 0; i < gameBoard.playerCount; i++) {
+            if (playerArray[i].isWinnable()) {
                 str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append(String.format("%17d\n", (gameBoard.winCount - playerArray[i].getFinishedHedgehogs())));
-            }
-            else str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("      Not Winnable").append("\n");
+            } else
+                str.append("    ").append(String.format("%-10s", playerArray[i].getColorName())).append("\t").append("      Not Winnable").append("\n");
         }
         playerRemainingList.setText(str.toString());
     }
@@ -587,18 +574,9 @@ public class GameFrame extends JFrame {
     public void setCurrentDiceImage(int x) {
         currentDice.setIcon(diceIcon[x - 1]);
     }
-    
-    public void setCurrentHedgehogMovement(){
+
+    public void setCurrentHedgehogMovement() {
         gameBoard.playerMovement.showPreviousMovement(hedgehogMovement);
     }
-    
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                GameFrame game = new GameFrame(2, 2, 2, 0); //testing conditions
-                game.hedgehogMovementWindow();
-            }
-        });
 
-    }
 }
