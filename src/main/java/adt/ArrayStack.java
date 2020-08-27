@@ -2,7 +2,7 @@ package adt;
 
 public class ArrayStack<T> implements StackInterface<T> {
 
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 100;
     private T[] array;
     private int topIndex; // index of top entry
 
