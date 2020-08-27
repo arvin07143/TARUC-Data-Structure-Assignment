@@ -2,7 +2,7 @@ package adt;
 
 public class ArrayStack<T> implements StackInterface<T> {
 
-    private static final int DEFAULT_CAPACITY = 100;
+    private static final int DEFAULT_CAPACITY = 10;
     private T[] array;
     private int topIndex; // index of top entry
 
@@ -16,6 +16,8 @@ public class ArrayStack<T> implements StackInterface<T> {
     }
 
     public void push(T newEntry) {
+        if (isFull())
+            doubleArray();
         if (!isEmpty()) {
             topIndex++;
             array[topIndex] = newEntry;
@@ -70,6 +72,23 @@ public class ArrayStack<T> implements StackInterface<T> {
             return null;
         }
         return reverseStack;
+    }
+    
+    public boolean isFull(){
+        return topIndex == (array.length-1);
+    }
+    
+    public T[] doubleArray(){
+        T[] oldList = array;
+        int oldSize = oldList.length;
+
+        array = (T[]) new Object[2 * oldSize];
+
+        for (int index = 0; index < oldSize; index++) {
+            array[index] = oldList[index];
+        }
+        
+        return array;
     }
 
 }
